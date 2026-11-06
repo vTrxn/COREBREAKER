@@ -13,6 +13,11 @@ signal cambio_xp(actual: float, maxima: float, lvl: int)
 @export var col_shape: CollisionShape3D
 @export var raycast: RayCast3D
 @export var sis_eventos: SistemaEventos
+@export var audio_disparo: AudioStreamPlayer
+@export var audio_salto: AudioStreamPlayer
+@export var audio_dash: AudioStreamPlayer
+@export var audio_pasos: AudioStreamPlayer
+@export var audio_respiracion: AudioStreamPlayer
 var hp: float = 100.0
 var t_quieto: float = 0.0
 var en_slide: bool = false
@@ -37,6 +42,16 @@ func _ready() -> void:
 		raycast = find_child("RayCast3D") as RayCast3D
 	if not sis_eventos:
 		sis_eventos = get_tree().get_first_node_in_group("sistema_eventos") as SistemaEventos
+	if not audio_disparo:
+		audio_disparo = find_child("AudioDisparo") as AudioStreamPlayer
+	if not audio_salto:
+		audio_salto = find_child("AudioSalto") as AudioStreamPlayer
+	if not audio_dash:
+		audio_dash = find_child("AudioDash") as AudioStreamPlayer
+	if not audio_pasos:
+		audio_pasos = find_child("AudioPasos") as AudioStreamPlayer
+	if not audio_respiracion:
+		audio_respiracion = find_child("AudioRespiracion") as AudioStreamPlayer
 	cambio_xp.emit(xp, xp_max, nivel)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -58,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	if sangrando:
 		hp = maxf(0.0, hp - 2.0 * delta)
 		cambio_salud.emit(hp, hp_max)
+	_procesar_audio_salud()
 	if cd_dash > 0.0:
 		cd_dash = maxf(0.0, cd_dash - delta)
 	if timer_disparo > 0.0:
@@ -69,6 +85,8 @@ func _physics_process(delta: float) -> void:
 		var dir_d := dir if dir.length_squared() > 0.01 else -transform.basis.z
 		velocity.x = dir_d.x * 14.0
 		velocity.z = dir_d.z * 14.0
+		if audio_dash:
+			audio_dash.play()
 	var presiona_slide := Input.is_action_pressed("deslizar")
 	if presiona_slide and is_on_floor() and not en_slide:
 		en_slide = true
@@ -98,11 +116,35 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0.0, delta * 20.0)
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = fuerza_salto
+		if audio_salto:
+			audio_salto.play()
+	_procesar_audio_pasos(dir)
 	if Input.is_action_pressed("disparo_primario") and timer_disparo <= 0.0:
 		disparar()
 		timer_disparo = 0.25
 	move_and_slide()
+func _procesar_audio_pasos(dir: Vector3) -> void:
+	if not audio_pasos:
+		return
+	var moviendo := is_on_floor() and dir.length_squared() > 0.01 and Vector2(velocity.x, velocity.z).length() > 0.5 and not en_slide
+	if moviendo:
+		if not audio_pasos.playing:
+			audio_pasos.play()
+	else:
+		if audio_pasos.playing:
+			audio_pasos.stop()
+func _procesar_audio_salud() -> void:
+	if not audio_respiracion:
+		return
+	if hp < hp_max * 0.5 and hp > 0.0:
+		if not audio_respiracion.playing:
+			audio_respiracion.play()
+	else:
+		if audio_respiracion.playing:
+			audio_respiracion.stop()
 func disparar() -> void:
+	if audio_disparo:
+		audio_disparo.play()
 	if not raycast:
 		return
 	raycast.target_position = Vector3(0.0, 0.0, -15.0)

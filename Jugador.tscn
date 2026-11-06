@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/jugador.gd" id="1_jug"]
 [ext_resource type="Script" path="res://scripts/luz_jugador.gd" id="2_luz"]
+[ext_resource type="AudioStream" path="res://audio/disparo.mp3" id="3_disp"]
+[ext_resource type="AudioStream" path="res://audio/salto.mp3" id="4_salt"]
+[ext_resource type="AudioStream" path="res://audio/dash.mp3" id="5_dash"]
+[ext_resource type="AudioStream" path="res://audio/pasos.mp3" id="6_paso"]
+[ext_resource type="AudioStream" path="res://audio/respiracion_baja_vida.mp3" id="7_resp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -33,3 +38,18 @@ collision_mask = 17
 
 [node name="LuzJugador" type="SpotLight3D" parent="Camera3D"]
 script = ExtResource("2_luz")
+
+[node name="AudioDisparo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_disp")
+
+[node name="AudioSalto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_salt")
+
+[node name="AudioDash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dash")
+
+[node name="AudioPasos" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_paso")
+
+[node name="AudioRespiracion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_resp")
