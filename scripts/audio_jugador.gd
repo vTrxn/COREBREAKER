@@ -4,6 +4,7 @@ extends Node
 @onready var a_dash: AudioStreamPlayer = get_node("../AudioDash") as AudioStreamPlayer
 @onready var a_pasos: AudioStreamPlayer = get_node("../AudioPasos") as AudioStreamPlayer
 @onready var a_resp: AudioStreamPlayer = get_node("../AudioRespiracion") as AudioStreamPlayer
+@onready var a_dano: AudioStreamPlayer = get_node("../AudioDano") as AudioStreamPlayer
 var p: CharacterBody3D = null
 func _ready() -> void:
 	p = get_parent() as CharacterBody3D
@@ -21,6 +22,9 @@ func salto() -> void:
 func dash() -> void:
 	if a_dash:
 		a_dash.play()
+func dano() -> void:
+	if a_dano:
+		a_dano.play()
 func actualizar(moviendo: bool, hp: float, hp_max: float) -> void:
 	if a_pasos:
 		if moviendo and not a_pasos.playing:

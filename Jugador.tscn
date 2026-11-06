@@ -7,8 +7,13 @@
 [ext_resource type="AudioStream" uid="uid://bhnkdf3o0bkae" path="res://audio/dash.mp3" id="5_dash"]
 [ext_resource type="AudioStream" uid="uid://cngkp1q1ye8wc" path="res://audio/pasos.mp3" id="6_paso"]
 [ext_resource type="AudioStream" uid="uid://bm8p5ggwajljf" path="res://audio/respiracion_baja_vida.mp3" id="7_resp"]
-[ext_resource type="Script" path="res://scripts/arma_jugador.gd" id="8_arma"]
-[ext_resource type="Script" path="res://scripts/audio_jugador.gd" id="9_audj"]
+[ext_resource type="Script" uid="uid://bedc1wu0qen2e" path="res://scripts/arma_jugador.gd" id="8_arma"]
+[ext_resource type="Script" uid="uid://toa0a276feyx" path="res://scripts/audio_jugador.gd" id="9_audj"]
+[ext_resource type="AudioStream" uid="uid://yw8vwml6bk2x" path="res://audio/dano_jugador.mp3" id="10_dan"]
+[ext_resource type="Script" uid="uid://bwaub8q537xs5" path="res://scripts/brazo_parry.gd" id="11_parr"]
+[ext_resource type="AudioStream" uid="uid://ds0ognd2hrxan" path="res://audio/impacto_golpe.mp3" id="12_golp"]
+[ext_resource type="PackedScene" uid="uid://blf3bv7hpp8e0" path="res://modelos/cyber-x-handgun-alpha.glb" id="13_pist"]
+[ext_resource type="AudioStream" uid="uid://nu04togyipf3" path="res://audio/recarga.mp3" id="14_rec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -18,14 +23,30 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[sub_resource type="BoxMesh" id="BoxMesh_arma"]
-size = Vector3(0.12, 0.12, 0.32075197)
+[sub_resource type="BoxMesh" id="BoxMesh_antebrazo"]
+size = Vector3(0.09, 0.09, 0.32)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1h6a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brazo"]
+albedo_color = Color(0.2, 0.22, 0.25, 1)
+metallic = 0.7
+roughness = 0.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arma"]
-albedo_color = Color(0.22, 0.24, 0.28, 1)
-emission_energy_multiplier = 5.4
+[sub_resource type="BoxMesh" id="BoxMesh_guantelete"]
+size = Vector3(0.12, 0.12, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_placa_parry"]
+size = Vector3(0.04, 0.10590942, 0.06444824)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_placa"]
+albedo_color = Color(0.16, 0.18, 0.2, 1)
+metallic = 0.85
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.1, 0.85, 1, 1)
+emission_energy_multiplier = 1.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_parry"]
+size = Vector3(0.6, 0.6, 0.5)
 
 [node name="Jugador" type="CharacterBody3D" unique_id=469313503 groups=["jugador"]]
 collision_layer = 8
@@ -50,35 +71,67 @@ collision_mask = 17
 [node name="LuzJugador" type="SpotLight3D" parent="Camera3D" unique_id=1579210230]
 script = ExtResource("2_luz")
 
-[node name="Arma" type="MeshInstance3D" parent="Camera3D" unique_id=1130254928]
+[node name="Arma" type="Node3D" parent="Camera3D" unique_id=1130254928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
-mesh = SubResource("BoxMesh_arma")
-surface_material_override/0 = SubResource("StandardMaterial3D_v1h6a")
 script = ExtResource("8_arma")
 
-[node name="Arma3" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=802650950]
-transform = Transform3D(-0.00089443306, 0, -0.199998, 0, 0.2, 0, 0.199998, 0, -0.00089443306, -0.031807303, 0.0048906803, -0.08712727)
-mesh = SubResource("BoxMesh_arma")
-skeleton = NodePath("../Arma")
-surface_material_override/0 = SubResource("StandardMaterial3D_arma")
-
-[node name="Arma2" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=46061042]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.010767683, 0.07263148, -0.08087534)
-mesh = SubResource("BoxMesh_arma")
-skeleton = NodePath("../Arma")
-surface_material_override/0 = SubResource("StandardMaterial3D_arma")
-
-[node name="Arma" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=262039185]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.02038303, 0.013396502, -0.23926044)
-mesh = SubResource("BoxMesh_arma")
-surface_material_override/0 = SubResource("StandardMaterial3D_arma")
-metadata/_edit_group_ = true
+[node name="cyber-x-handgun-alpha" parent="Camera3D/Arma" unique_id=475263781 instance=ExtResource("13_pist")]
+transform = Transform3D(-0.19966649, 0, -0.011545386, 0, 0.19999999, 0, 0.011545386, 0, -0.19966649, 0, -0.10257363, 0)
 
 [node name="LuzDisparo" type="OmniLight3D" parent="Camera3D" unique_id=1401295889]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.7)
 light_color = Color(1, 0.717647, 0.0117647, 1)
 light_energy = 0.0
 omni_range = 3.0
+
+[node name="BrazoParry" type="Node3D" parent="Camera3D" unique_id=1982736450]
+transform = Transform3D(0.7110084, 0.4259616, 0.5583684, -0.4651547, 0.8775898, -0.06540896, -0.5270524, -0.22165468, 0.8215444, -0.28, -0.26, -0.22)
+script = ExtResource("11_parr")
+
+[node name="Antebrazo" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16)
+mesh = SubResource("BoxMesh_antebrazo")
+surface_material_override/0 = SubResource("StandardMaterial3D_brazo")
+
+[node name="Guantelete" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
+mesh = SubResource("BoxMesh_guantelete")
+surface_material_override/0 = SubResource("StandardMaterial3D_brazo")
+
+[node name="PlacaEscudo2" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1239536721]
+transform = Transform3D(1, 2.9951334e-06, -1.6391277e-06, 7.450581e-09, 0.9999877, 1.7732382e-06, -2.9802322e-08, -1.846999e-05, 1, 0.04125181, 0.00075781345, -0.3529526)
+mesh = SubResource("BoxMesh_placa_parry")
+skeleton = NodePath("../PlacaEscudo")
+surface_material_override/0 = SubResource("StandardMaterial3D_placa")
+
+[node name="PlacaEscudo2" type="MeshInstance3D" parent="Camera3D/BrazoParry/PlacaEscudo2" unique_id=1252135857]
+transform = Transform3D(1, 2.9876828e-06, -1.7881393e-06, 0, 0.9999878, 1.8328428e-06, -2.9802322e-08, -1.8507242e-05, 1, -0.07197988, 0.0015124083, -0.0069797635)
+mesh = SubResource("BoxMesh_placa_parry")
+skeleton = NodePath("../PlacaEscudo")
+surface_material_override/0 = SubResource("StandardMaterial3D_placa")
+
+[node name="PlacaEscudo" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736453]
+transform = Transform3D(1, 1.013279e-06, -5.364418e-07, 7.450581e-09, 0.9999946, 6.482005e-07, -2.9802322e-08, -7.584691e-06, 1, 0.03121972, 0.0119822025, -0.33953345)
+mesh = SubResource("BoxMesh_placa_parry")
+surface_material_override/0 = SubResource("StandardMaterial3D_placa")
+
+[node name="LuzParry" type="OmniLight3D" parent="Camera3D/BrazoParry" unique_id=1982736454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
+light_color = Color(0.1, 0.85, 1, 1)
+light_energy = 0.0
+omni_range = 2.5
+
+[node name="AudioGolpe" type="AudioStreamPlayer" parent="Camera3D/BrazoParry" unique_id=1982736457]
+stream = ExtResource("12_golp")
+volume_db = 2.5
+
+[node name="ParryArea" type="Area3D" parent="Camera3D/BrazoParry" unique_id=1982736455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+collision_layer = 0
+collision_mask = 18
+
+[node name="Collision" type="CollisionShape3D" parent="Camera3D/BrazoParry/ParryArea" unique_id=1982736456]
+shape = SubResource("BoxShape3D_parry")
 
 [node name="AudioDisparo" type="AudioStreamPlayer" parent="." unique_id=1423169922]
 stream = ExtResource("3_disp")
@@ -95,5 +148,13 @@ stream = ExtResource("6_paso")
 [node name="AudioRespiracion" type="AudioStreamPlayer" parent="." unique_id=1746471085]
 stream = ExtResource("7_resp")
 
+[node name="AudioDano" type="AudioStreamPlayer" parent="." unique_id=987654322]
+stream = ExtResource("10_dan")
+volume_db = 1.5
+
 [node name="AudioJugador" type="Node" parent="." unique_id=987654321]
 script = ExtResource("9_audj")
+
+[node name="AudioRecarga" type="AudioStreamPlayer" parent="." unique_id=987654323]
+stream = ExtResource("14_rec")
+volume_db = 1.0

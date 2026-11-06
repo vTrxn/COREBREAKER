@@ -14,6 +14,7 @@ signal cambio_xp(actual: float, maxima: float, lvl: int)
 @onready var arma: ArmaJugador = $Camera3D/Arma
 @onready var audio_p: AudioJugador = $AudioJugador
 @onready var sis_eventos: SistemaEventos = get_tree().get_first_node_in_group("sistema_eventos") as SistemaEventos
+@onready var parry_b: BrazoParry = $Camera3D/BrazoParry
 var hp: float = 100.0
 var t_quieto: float = 0.0
 var en_slide: bool = false
@@ -72,14 +73,18 @@ func _physics_process(delta: float) -> void:
 	if audio_p: audio_p.actualizar(moviendo, hp, hp_max)
 	if Input.is_action_pressed("disparo_primario") and arma:
 		arma.intentar_disparar(self)
+	if Input.is_action_just_pressed("parry") and parry_b:
+		parry_b.ejecutar_parry()
 	move_and_slide()
-func notificar_impacto(pos_hit: Vector3, dmg: float) -> void:
+func notificar_impacto(_pos_hit: Vector3, _dmg: float) -> void:
 	t_quieto = 0.0
-	if global_position.distance_to(pos_hit) <= 2.0:
-		recibir_dano(-dmg * 0.30)
-		if sis_eventos: sis_eventos.disparar_destello(pos_hit)
+func curar(cantidad: float) -> void:
+	hp = clampf(hp + cantidad, 0.0, hp_max)
+	cambio_salud.emit(hp, hp_max)
+	if sis_eventos: sis_eventos.disparar_destello(global_position)
 func recibir_dano(cantidad: float) -> void:
 	hp = clampf(hp - cantidad, 0.0, hp_max)
+	if cantidad >= 1.0 and audio_p: audio_p.dano()
 	cambio_salud.emit(hp, hp_max)
 func ganar_xp() -> void:
 	xp += xp_max * maxf(0.05, 0.15 - (nivel - 1) * 0.01)

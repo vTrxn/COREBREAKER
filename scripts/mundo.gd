@@ -74,8 +74,8 @@ func _instanciar_enemigo(escena: PackedScene, pos: Vector3) -> void:
 	if not escena:
 		return
 	var bot := escena.instantiate() as Node3D
-	bot.global_position = pos
 	add_child(bot)
+	bot.global_position = pos
 func _contar_enemigos_vivos() -> int:
 	var c := 0
 	for e in get_tree().get_nodes_in_group("enemigos"):
