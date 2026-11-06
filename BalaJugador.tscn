@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://dlpo747vov40t"]
 
-[ext_resource type="Script" path="res://scripts/bala_jugador.gd" id="1_bala"]
+[ext_resource type="Script" uid="uid://ccvwnxn5548l1" path="res://scripts/bala_jugador.gd" id="1_bala"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(0.25, 0.25, 0.25)
@@ -13,18 +13,19 @@ albedo_color = Color(1, 0.717647, 0.0117647, 1)
 material = SubResource("StandardMaterial3D_glow")
 size = Vector3(0.25, 0.25, 0.25)
 
-[node name="BalaJugador" type="Area3D"]
+[node name="BalaJugador" type="Area3D" unique_id=1161678325]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_bala")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=60363942]
 shape = SubResource("BoxShape3D_1")
 
-[node name="MeshCubo" type="MeshInstance3D" parent="."]
+[node name="MeshCubo" type="MeshInstance3D" parent="." unique_id=1494069744]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_cubo")
 
-[node name="LuzBala" type="OmniLight3D" parent="."]
+[node name="LuzBala" type="OmniLight3D" parent="." unique_id=313831966]
 light_color = Color(1, 0.717647, 0.0117647, 1)
 light_energy = 2.0
 omni_range = 3.0

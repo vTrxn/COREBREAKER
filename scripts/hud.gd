@@ -4,6 +4,8 @@ extends CanvasLayer
 @onready var sangrado_aviso: Label = $MarginContainer/VBoxContainer/LabelSangrado
 @onready var label_nivel: Label = $MarginContainer/VBoxContainer/LabelNivel
 @onready var barra_xp: ProgressBar = $MarginContainer/VBoxContainer/BarraXP
+@onready var label_horda: Label = find_child("LabelHorda") as Label
+@onready var label_restantes: Label = find_child("LabelRestantes") as Label
 func _ready() -> void:
 	var p := get_tree().get_first_node_in_group("jugador") as Jugador
 	if p:
@@ -25,3 +27,8 @@ func _on_xp(act: float, max_v: float, lvl: int) -> void:
 	if barra_xp:
 		barra_xp.max_value = max_v
 		barra_xp.value = act
+func actualizar_horda(num: int, restantes: int) -> void:
+	if label_horda:
+		label_horda.text = "HORDA %d" % num
+	if label_restantes:
+		label_restantes.text = "ENEMIGOS: %d" % restantes

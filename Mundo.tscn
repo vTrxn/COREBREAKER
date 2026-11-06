@@ -298,3 +298,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 [node name="MusicaNivel" type="AudioStreamPlayer" parent="." unique_id=2135950184]
 stream = ExtResource("9_mus")
 autoplay = true
+
+[node name="PuntosSpawn" type="Node3D" parent="." unique_id=128919201]
+
+[node name="Punto1" type="Marker3D" parent="PuntosSpawn" unique_id=128919202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, -10.5)
+
+[node name="Punto2" type="Marker3D" parent="PuntosSpawn" unique_id=128919203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -12)
+
+[node name="Punto3" type="Marker3D" parent="PuntosSpawn" unique_id=128919204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, -10.5)
+
+[node name="Punto4" type="Marker3D" parent="PuntosSpawn" unique_id=128919205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, 10.5)
+
+[node name="Punto5" type="Marker3D" parent="PuntosSpawn" unique_id=128919206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 12)
+
+[node name="Punto6" type="Marker3D" parent="PuntosSpawn" unique_id=128919207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, 10.5)
