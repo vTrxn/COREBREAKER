@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://d4iidsxnemsam" path="res://scripts/disparador.gd" id="8_disp"]
 [ext_resource type="AudioStream" uid="uid://c82cp147orkbn" path="res://audio/musica_nivel.mp3" id="9_mus"]
 [ext_resource type="Texture2D" uid="uid://b8wlr28tdkxon" path="res://texturas/cielo_estrellado.png" id="10_cie"]
+[ext_resource type="Texture2D" uid="uid://cj2fiy1217ggt" path="res://texturas/piso_industrial.png" id="11_pis"]
+[ext_resource type="Texture2D" uid="uid://ci5x2eott7rcb" path="res://texturas/pared_industrial.png" id="12_par"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cielo"]
 panorama = ExtResource("10_cie")
@@ -31,8 +33,10 @@ size = Vector3(30, 1, 30)
 size = Vector3(30, 1, 30)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
-roughness = 0.85
+albedo_texture = ExtResource("11_pis")
+roughness = 0.75
+texture_filter = 0
+uv1_scale = Vector3(10, 10, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wall_z"]
 size = Vector3(30, 6, 1)
@@ -46,6 +50,12 @@ size = Vector3(1, 6, 30)
 [sub_resource type="BoxMesh" id="BoxMesh_wall_x"]
 size = Vector3(1, 6, 30)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_texture = ExtResource("12_par")
+roughness = 0.8
+texture_filter = 0
+uv1_scale = Vector3(6, 1, 1)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_disp"]
 height = 0.2
 radius = 1.0
@@ -53,7 +63,6 @@ radius = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_toxico"]
 transparency = 1
 albedo_color = Color(0.18, 0.95, 0.12, 0.88)
-metallic_specular = 0.51
 roughness = 0.05
 emission_enabled = true
 emission = Color(0.223529, 1, 0.0784314, 1)
@@ -62,7 +71,7 @@ emission_energy_multiplier = 2.4
 [sub_resource type="CylinderMesh" id="CylinderMesh_puddle_lg"]
 material = SubResource("StandardMaterial3D_toxico")
 top_radius = 2.2
-bottom_radius = 1.08
+bottom_radius = 2.2
 height = 0.02
 radial_segments = 16
 
@@ -96,225 +105,570 @@ radial_segments = 12
 height = 1.1
 radius = 0.42
 
-[node name="Mundo" type="Node3D" unique_id=1507833606]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pilar"]
+albedo_color = Color(0.24, 0.26, 0.3, 1)
+metallic = 0.5
+roughness = 0.65
+
+[sub_resource type="BoxMesh" id="BoxMesh_pilar"]
+material = SubResource("StandardMaterial3D_pilar")
+size = Vector3(0.8, 6, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pilar"]
+size = Vector3(0.8, 6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tuberia_verde"]
+albedo_color = Color(0.12, 0.85, 0.15, 1)
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.223529, 1, 0.0784314, 1)
+emission_energy_multiplier = 1.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tuberia_v"]
+material = SubResource("StandardMaterial3D_tuberia_verde")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 5.2
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tubo_metal"]
+albedo_color = Color(0.32, 0.34, 0.38, 1)
+metallic = 0.7
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tubo_h"]
+material = SubResource("StandardMaterial3D_tubo_metal")
+top_radius = 0.14
+bottom_radius = 0.14
+height = 29.0
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_centro"]
+albedo_color = Color(0.16, 0.18, 0.2, 1)
+metallic = 0.65
+roughness = 0.5
+emission_enabled = true
+emission = Color(1, 0.717647, 0.0117647, 1)
+emission_energy_multiplier = 0.35
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_centro"]
+material = SubResource("StandardMaterial3D_centro")
+top_radius = 3.6
+bottom_radius = 3.6
+height = 0.04
+radial_segments = 24
+
+[node name="Mundo" type="Node3D" unique_id="1507833606"]
 script = ExtResource("1_mun")
 spawner_scrapper = ExtResource("2_scra")
 spawner_torreta = ExtResource("3_torr")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1764711224]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id="1764711224"]
 environment = SubResource("Environment_1")
 
-[node name="LuzTecho" type="OmniLight3D" parent="." unique_id=1173819833]
+[node name="LuzTecho" type="OmniLight3D" parent="." unique_id="1173819833"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 light_color = Color(0.615686, 0.305882, 0.866667, 1)
 omni_range = 25.0
 omni_attenuation = -0.782
 script = ExtResource("4_luzp")
 
-[node name="LuzEvento" type="OmniLight3D" parent="." unique_id=1626194638]
+[node name="LuzEvento" type="OmniLight3D" parent="." unique_id="1626194638"]
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 0.0
 omni_range = 10.0
 omni_attenuation = 2.0
 
-[node name="SistemaEventos" type="Node" parent="." unique_id=60862574 node_paths=PackedStringArray("luz_evento") groups=["sistema_eventos"]]
+[node name="SistemaEventos" type="Node" parent="." unique_id="60862574" node_paths=PackedStringArray("luz_evento") groups=["sistema_eventos"]]
 script = ExtResource("5_sise")
 luz_evento = NodePath("../LuzEvento")
 
-[node name="Arena" type="Node3D" parent="." unique_id=738136258]
+[node name="Arena" type="Node3D" parent="." unique_id="738136258"]
 
-[node name="Suelo" type="StaticBody3D" parent="Arena" unique_id=845594330]
+[node name="Suelo" type="StaticBody3D" parent="Arena" unique_id="845594330"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Suelo" unique_id=1392225489]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Suelo" unique_id="1392225489"]
 shape = SubResource("BoxShape3D_floor")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Suelo" unique_id=348947046]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Suelo" unique_id="348947046"]
 mesh = SubResource("BoxMesh_floor")
 surface_material_override/0 = SubResource("StandardMaterial3D_floor")
 
-[node name="ParedN" type="StaticBody3D" parent="Arena" unique_id=677882079]
+[node name="PlataformaCentral" type="MeshInstance3D" parent="Arena/Suelo" unique_id="99010101"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+mesh = SubResource("CylinderMesh_centro")
+
+[node name="ParedN" type="StaticBody3D" parent="Arena" unique_id="677882079"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -15)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedN" unique_id=2114973811]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedN" unique_id="2114973811"]
 shape = SubResource("BoxShape3D_wall_z")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedN" unique_id=2084594247]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedN" unique_id="2084594247"]
 mesh = SubResource("BoxMesh_wall_z")
-surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_wall")
 
-[node name="ParedS" type="StaticBody3D" parent="Arena" unique_id=441216029]
+[node name="ParedS" type="StaticBody3D" parent="Arena" unique_id="441216029"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 15)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedS" unique_id=1885860646]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedS" unique_id="1885860646"]
 shape = SubResource("BoxShape3D_wall_z")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedS" unique_id=1410720916]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedS" unique_id="1410720916"]
 mesh = SubResource("BoxMesh_wall_z")
-surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_wall")
 
-[node name="ParedE" type="StaticBody3D" parent="Arena" unique_id=676630844]
+[node name="ParedE" type="StaticBody3D" parent="Arena" unique_id="676630844"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedE" unique_id=1903843607]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedE" unique_id="1903843607"]
 shape = SubResource("BoxShape3D_wall_x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedE" unique_id=1351720910]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedE" unique_id="1351720910"]
 mesh = SubResource("BoxMesh_wall_x")
-surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_wall")
 
-[node name="ParedO" type="StaticBody3D" parent="Arena" unique_id=1230848229]
+[node name="ParedO" type="StaticBody3D" parent="Arena" unique_id="1230848229"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3, 0)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedO" unique_id=838555513]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedO" unique_id="838555513"]
 shape = SubResource("BoxShape3D_wall_x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedO" unique_id=1497124348]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedO" unique_id="1497124348"]
 mesh = SubResource("BoxMesh_wall_x")
-surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_wall")
 
-[node name="DisparadorTaller" type="Area3D" parent="Arena" unique_id=1680270359]
+[node name="DisparadorTaller" type="Area3D" parent="Arena" unique_id="1680270359"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -6)
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("8_disp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/DisparadorTaller" unique_id=2126158460]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/DisparadorTaller" unique_id="2126158460"]
 shape = SubResource("CylinderShape3D_disp")
 
-[node name="Decoraciones" type="Node3D" parent="." unique_id=1849204910]
+[node name="EstructurasPared" type="Node3D" parent="Arena" unique_id="77010101"]
 
-[node name="Charco1_A" type="MeshInstance3D" parent="Decoraciones" unique_id=101010101]
+[node name="PilarN1" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010102"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarN1" unique_id="77010103"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarN1" unique_id="77010104"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarN2" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010105"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, -14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarN2" unique_id="77010106"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarN2" unique_id="77010107"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarN3" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010108"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarN3" unique_id="77010109"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarN3" unique_id="77010110"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarN4" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010111"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarN4" unique_id="77010112"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarN4" unique_id="77010113"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarN5" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010114"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, -14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarN5" unique_id="77010115"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarN5" unique_id="77010116"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarS1" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010117"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, 14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarS1" unique_id="77010118"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarS1" unique_id="77010119"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarS2" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010120"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarS2" unique_id="77010121"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarS2" unique_id="77010122"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarS3" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010123"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarS3" unique_id="77010124"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarS3" unique_id="77010125"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarS4" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010126"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarS4" unique_id="77010127"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarS4" unique_id="77010128"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarS5" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010129"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, 14.7)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarS5" unique_id="77010130"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarS5" unique_id="77010131"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarE1" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010132"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 14.7, 3, -10)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarE1" unique_id="77010133"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarE1" unique_id="77010134"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarE2" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010135"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 14.7, 3, -5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarE2" unique_id="77010136"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarE2" unique_id="77010137"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarE3" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010138"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 14.7, 3, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarE3" unique_id="77010139"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarE3" unique_id="77010140"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarE4" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010141"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 14.7, 3, 5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarE4" unique_id="77010142"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarE4" unique_id="77010143"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarE5" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010144"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 14.7, 3, 10)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarE5" unique_id="77010145"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarE5" unique_id="77010146"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarO1" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010147"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -14.7, 3, -10)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarO1" unique_id="77010148"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarO1" unique_id="77010149"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarO2" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010150"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -14.7, 3, -5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarO2" unique_id="77010151"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarO2" unique_id="77010152"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarO3" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010153"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -14.7, 3, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarO3" unique_id="77010154"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarO3" unique_id="77010155"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarO4" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010156"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -14.7, 3, 5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarO4" unique_id="77010157"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarO4" unique_id="77010158"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="PilarO5" type="StaticBody3D" parent="Arena/EstructurasPared" unique_id="77010159"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -14.7, 3, 10)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/EstructurasPared/PilarO5" unique_id="77010160"]
+mesh = SubResource("BoxMesh_pilar")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/EstructurasPared/PilarO5" unique_id="77010161"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="TuberiaHorizN" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010162"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 5.2, -14.4)
+mesh = SubResource("CylinderMesh_tubo_h")
+
+[node name="TuberiaHorizS" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010163"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 5.2, 14.4)
+mesh = SubResource("CylinderMesh_tubo_h")
+
+[node name="TuberiaHorizE" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010164"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4, 5.2, 0)
+mesh = SubResource("CylinderMesh_tubo_h")
+
+[node name="TuberiaHorizO" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010165"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4, 5.2, 0)
+mesh = SubResource("CylinderMesh_tubo_h")
+
+[node name="TuboVerdeN1" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010166"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.6, -14.5)
+mesh = SubResource("CylinderMesh_tuberia_v")
+
+[node name="TuboVerdeN2" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010167"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2.6, -14.5)
+mesh = SubResource("CylinderMesh_tuberia_v")
+
+[node name="TuboVerdeO" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010168"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2.6, 7.5)
+mesh = SubResource("CylinderMesh_tuberia_v")
+
+[node name="TuboVerdeE" type="MeshInstance3D" parent="Arena/EstructurasPared" unique_id="77010169"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 2.6, 8)
+mesh = SubResource("CylinderMesh_tuberia_v")
+
+[node name="FocosIndustriales" type="Node3D" parent="." unique_id="88010101"]
+
+[node name="FocoNorte" type="OmniLight3D" parent="FocosIndustriales" unique_id="88010102"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -14.1)
+light_color = Color(1, 0.717647, 0.0117647, 1)
+light_energy = 2.0
+omni_range = 9.0
+omni_attenuation = 1.3
+
+[node name="FocoSur" type="OmniLight3D" parent="FocosIndustriales" unique_id="88010103"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 14.1)
+light_color = Color(1, 0.717647, 0.0117647, 1)
+light_energy = 2.0
+omni_range = 9.0
+omni_attenuation = 1.3
+
+[node name="FocoEste" type="OmniLight3D" parent="FocosIndustriales" unique_id="88010104"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 4.5, 0)
+light_color = Color(1, 0.717647, 0.0117647, 1)
+light_energy = 2.0
+omni_range = 9.0
+omni_attenuation = 1.3
+
+[node name="FocoOeste" type="OmniLight3D" parent="FocosIndustriales" unique_id="88010105"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1, 4.5, 0)
+light_color = Color(1, 0.717647, 0.0117647, 1)
+light_energy = 2.0
+omni_range = 9.0
+omni_attenuation = 1.3
+
+[node name="Decoraciones" type="Node3D" parent="." unique_id="1849204910"]
+
+[node name="Charco1_A" type="MeshInstance3D" parent="Decoraciones" unique_id="101010101"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.01, -7)
 mesh = SubResource("CylinderMesh_puddle_lg")
 
-[node name="Charco1_B" type="MeshInstance3D" parent="Decoraciones" unique_id=101010102]
+[node name="Charco1_B" type="MeshInstance3D" parent="Decoraciones" unique_id="101010102"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0.012, -6.3)
 mesh = SubResource("CylinderMesh_puddle_md")
 
-[node name="Charco1_C" type="MeshInstance3D" parent="Decoraciones" unique_id=101010103]
+[node name="Charco1_C" type="MeshInstance3D" parent="Decoraciones" unique_id="101010103"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, 0.013, -8.1)
 mesh = SubResource("CylinderMesh_puddle_sm")
 
-[node name="LuzCharco1" type="OmniLight3D" parent="Decoraciones" unique_id=101010104]
+[node name="LuzCharco1" type="OmniLight3D" parent="Decoraciones" unique_id="101010104"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.35, -7)
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 1.6
+omni_range = 5.0
 omni_attenuation = 1.2
 
-[node name="BarrilParado1" type="StaticBody3D" parent="Decoraciones" unique_id=101010105]
+[node name="BarrilParado1" type="StaticBody3D" parent="Decoraciones" unique_id="101010105"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 0.55, -8.2)
+collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado1" unique_id=101010106]
+[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado1" unique_id="101010106"]
 mesh = SubResource("CylinderMesh_barril")
 
-[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado1" unique_id=101010107]
+[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado1" unique_id="101010107"]
 shape = SubResource("CylinderShape3D_barril")
 
-[node name="BarrilTumbado1" type="MeshInstance3D" parent="Decoraciones" unique_id=101010108]
+[node name="BarrilTumbado1" type="MeshInstance3D" parent="Decoraciones" unique_id="101010108"]
 transform = Transform3D(0.707107, 0, -0.707107, 0.707107, 0, 0.707107, 0, -1, 0, -8.4, 0.22, -6.1)
 mesh = SubResource("CylinderMesh_barril")
 
-[node name="Charco2_A" type="MeshInstance3D" parent="Decoraciones" unique_id=101010109]
+[node name="Charco2_A" type="MeshInstance3D" parent="Decoraciones" unique_id="101010109"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.01, -10.5)
 mesh = SubResource("CylinderMesh_puddle_lg")
 
-[node name="Charco2_B" type="MeshInstance3D" parent="Decoraciones" unique_id=101010110]
+[node name="Charco2_B" type="MeshInstance3D" parent="Decoraciones" unique_id="101010110"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 0.012, -9.8)
 mesh = SubResource("CylinderMesh_puddle_md")
 
-[node name="LuzCharco2" type="OmniLight3D" parent="Decoraciones" unique_id=101010111]
+[node name="LuzCharco2" type="OmniLight3D" parent="Decoraciones" unique_id="101010111"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0.35, -10.2)
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 1.4
 omni_range = 4.5
 omni_attenuation = 1.2
 
-[node name="BarrilParado2" type="StaticBody3D" parent="Decoraciones" unique_id=101010112]
+[node name="BarrilParado2" type="StaticBody3D" parent="Decoraciones" unique_id="101010112"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 0.55, -11.6)
+collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado2" unique_id=101010113]
+[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado2" unique_id="101010113"]
 mesh = SubResource("CylinderMesh_barril")
 
-[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado2" unique_id=101010114]
+[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado2" unique_id="101010114"]
 shape = SubResource("CylinderShape3D_barril")
 
-[node name="Charco3_A" type="MeshInstance3D" parent="Decoraciones" unique_id=101010115]
+[node name="Charco3_A" type="MeshInstance3D" parent="Decoraciones" unique_id="101010115"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.01, 7.5)
 mesh = SubResource("CylinderMesh_puddle_lg")
 
-[node name="Charco3_B" type="MeshInstance3D" parent="Decoraciones" unique_id=101010116]
+[node name="Charco3_B" type="MeshInstance3D" parent="Decoraciones" unique_id="101010116"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6, 0.012, 8.6)
 mesh = SubResource("CylinderMesh_puddle_md")
 
-[node name="Charco3_C" type="MeshInstance3D" parent="Decoraciones" unique_id=101010117]
+[node name="Charco3_C" type="MeshInstance3D" parent="Decoraciones" unique_id="101010117"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4, 0.013, 6.7)
 mesh = SubResource("CylinderMesh_puddle_sm")
 
-[node name="LuzCharco3" type="OmniLight3D" parent="Decoraciones" unique_id=101010118]
+[node name="LuzCharco3" type="OmniLight3D" parent="Decoraciones" unique_id="101010118"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.35, 7.5)
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 1.5
 omni_range = 4.8
 omni_attenuation = 1.2
 
-[node name="BarrilParado3" type="StaticBody3D" parent="Decoraciones" unique_id=101010119]
+[node name="BarrilParado3" type="StaticBody3D" parent="Decoraciones" unique_id="101010119"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2, 0.55, 9.2)
+collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado3" unique_id=101010120]
+[node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado3" unique_id="101010120"]
 mesh = SubResource("CylinderMesh_barril")
 
-[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado3" unique_id=101010121]
+[node name="Collision" type="CollisionShape3D" parent="Decoraciones/BarrilParado3" unique_id="101010121"]
 shape = SubResource("CylinderShape3D_barril")
 
-[node name="Charco4_A" type="MeshInstance3D" parent="Decoraciones" unique_id=101010122]
+[node name="Charco4_A" type="MeshInstance3D" parent="Decoraciones" unique_id="101010122"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0.01, 8)
 mesh = SubResource("CylinderMesh_puddle_md")
 
-[node name="Charco4_B" type="MeshInstance3D" parent="Decoraciones" unique_id=101010123]
+[node name="Charco4_B" type="MeshInstance3D" parent="Decoraciones" unique_id="101010123"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 0.012, 8.8)
 mesh = SubResource("CylinderMesh_puddle_sm")
 
-[node name="LuzCharco4" type="OmniLight3D" parent="Decoraciones" unique_id=101010124]
+[node name="LuzCharco4" type="OmniLight3D" parent="Decoraciones" unique_id="101010124"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, 0.35, 8.2)
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 1.3
 omni_range = 4.0
 omni_attenuation = 1.2
 
-[node name="Jugador" parent="." unique_id=459852649 instance=ExtResource("6_jug")]
+[node name="Jugador" parent="." unique_id="459852649" instance=ExtResource("6_jug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
-[node name="HUD" parent="." unique_id=963064956 instance=ExtResource("7_hud")]
+[node name="HUD" parent="." unique_id="963064956" instance=ExtResource("7_hud")]
 
-[node name="MusicaNivel" type="AudioStreamPlayer" parent="." unique_id=2135950184]
+[node name="MusicaNivel" type="AudioStreamPlayer" parent="." unique_id="2135950184"]
 stream = ExtResource("9_mus")
 autoplay = true
 
-[node name="PuntosSpawn" type="Node3D" parent="." unique_id=128919201]
+[node name="PuntosSpawn" type="Node3D" parent="." unique_id="128919201"]
 
-[node name="Punto1" type="Marker3D" parent="PuntosSpawn" unique_id=128919202]
+[node name="Punto1" type="Marker3D" parent="PuntosSpawn" unique_id="128919202"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, -10.5)
 
-[node name="Punto2" type="Marker3D" parent="PuntosSpawn" unique_id=128919203]
+[node name="Punto2" type="Marker3D" parent="PuntosSpawn" unique_id="128919203"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -12)
 
-[node name="Punto3" type="Marker3D" parent="PuntosSpawn" unique_id=128919204]
+[node name="Punto3" type="Marker3D" parent="PuntosSpawn" unique_id="128919204"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, -10.5)
 
-[node name="Punto4" type="Marker3D" parent="PuntosSpawn" unique_id=128919205]
+[node name="Punto4" type="Marker3D" parent="PuntosSpawn" unique_id="128919205"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, 10.5)
 
-[node name="Punto5" type="Marker3D" parent="PuntosSpawn" unique_id=128919206]
+[node name="Punto5" type="Marker3D" parent="PuntosSpawn" unique_id="128919206"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 12)
 
-[node name="Punto6" type="Marker3D" parent="PuntosSpawn" unique_id=128919207]
+[node name="Punto6" type="Marker3D" parent="PuntosSpawn" unique_id="128919207"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, 10.5)
