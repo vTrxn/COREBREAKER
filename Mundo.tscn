@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://c5ubgahe0ye2d"]
+
+[ext_resource type="Script" uid="uid://dhn5t6unkj7rq" path="res://scripts/mundo.gd" id="1_mun"]
+[ext_resource type="PackedScene" path="res://Scrapper.tscn" id="2_scra"]
+[ext_resource type="PackedScene" path="res://Torreta.tscn" id="3_torr"]
+[ext_resource type="Script" uid="uid://u4ds4wkvpyij" path="res://scripts/luz_parpadeante.gd" id="4_luzp"]
+[ext_resource type="Script" uid="uid://bxvxtiwoo3bwy" path="res://scripts/sistema_eventos.gd" id="5_sise"]
+[ext_resource type="PackedScene" path="res://Jugador.tscn" id="6_jug"]
+[ext_resource type="PackedScene" path="res://HUD.tscn" id="7_hud"]
+[ext_resource type="Script" uid="uid://d4iidsxnemsam" path="res://scripts/disparador.gd" id="8_disp"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.101961, 0.101961, 0.101961, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.15, 0.15, 0.15, 1)
+tonemap_mode = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
+roughness = 0.85
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_z"]
+size = Vector3(30, 6, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_z"]
+size = Vector3(30, 6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_x"]
+size = Vector3(1, 6, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_x"]
+size = Vector3(1, 6, 30)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_disp"]
+height = 0.2
+radius = 1.0
+
+[node name="Mundo" type="Node3D" unique_id=1161699233]
+script = ExtResource("1_mun")
+spawner_scrapper = ExtResource("2_scra")
+spawner_torreta = ExtResource("3_torr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=768940076]
+environment = SubResource("Environment_1")
+
+[node name="LuzTecho" type="OmniLight3D" parent="." unique_id=1656786256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9593515, 0)
+light_color = Color(0.615686, 0.305882, 0.866667, 1)
+omni_range = 19.527
+omni_attenuation = -0.584
+omni_shadow_mode = 0
+script = ExtResource("4_luzp")
+
+[node name="LuzEvento" type="OmniLight3D" parent="." unique_id=39396431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6192303, 0)
+light_color = Color(0.223529, 1, 0.0784314, 1)
+light_energy = 0.0
+omni_range = 10.0
+omni_attenuation = 2.0
+
+[node name="SistemaEventos" type="Node" parent="." unique_id=1188547379 node_paths=PackedStringArray("luz_evento") groups=["sistema_eventos"]]
+script = ExtResource("5_sise")
+luz_evento = NodePath("../LuzEvento")
+
+[node name="Arena" type="Node3D" parent="." unique_id=1947500762]
+
+[node name="Suelo" type="StaticBody3D" parent="Arena" unique_id=148540041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Suelo" unique_id=688649426]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Suelo" unique_id=2113609738]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="ParedN" type="StaticBody3D" parent="Arena" unique_id=291438507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -15)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedN" unique_id=1443295320]
+shape = SubResource("BoxShape3D_wall_z")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedN" unique_id=1421661414]
+mesh = SubResource("BoxMesh_wall_z")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="ParedS" type="StaticBody3D" parent="Arena" unique_id=1405358388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 15)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedS" unique_id=1112965815]
+shape = SubResource("BoxShape3D_wall_z")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedS" unique_id=624463734]
+mesh = SubResource("BoxMesh_wall_z")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="ParedE" type="StaticBody3D" parent="Arena" unique_id=1746470226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedE" unique_id=814571138]
+shape = SubResource("BoxShape3D_wall_x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedE" unique_id=1276608401]
+mesh = SubResource("BoxMesh_wall_x")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="ParedO" type="StaticBody3D" parent="Arena" unique_id=147001714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/ParedO" unique_id=424943819]
+shape = SubResource("BoxShape3D_wall_x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/ParedO" unique_id=1429115078]
+mesh = SubResource("BoxMesh_wall_x")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="DisparadorTaller" type="Area3D" parent="Arena" unique_id=797826979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -6)
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("8_disp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/DisparadorTaller" unique_id=1780767065]
+shape = SubResource("CylinderShape3D_disp")
+
+[node name="Jugador" parent="." unique_id=1263025432 instance=ExtResource("6_jug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="HUD" parent="." unique_id=206211267 instance=ExtResource("7_hud")]
