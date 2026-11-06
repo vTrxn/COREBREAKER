@@ -59,6 +59,10 @@ func _ready() -> void:
 		audio_pasos = find_child("AudioPasos") as AudioStreamPlayer
 	if not audio_respiracion:
 		audio_respiracion = find_child("AudioRespiracion") as AudioStreamPlayer
+	if audio_pasos:
+		if audio_pasos.stream is AudioStreamMP3:
+			(audio_pasos.stream as AudioStreamMP3).loop = true
+		audio_pasos.finished.connect(_on_audio_pasos_finished)
 	if audio_respiracion:
 		if audio_respiracion.stream is AudioStreamMP3:
 			(audio_respiracion.stream as AudioStreamMP3).loop = true
@@ -148,6 +152,9 @@ func _procesar_audio_pasos(dir: Vector3) -> void:
 	else:
 		if audio_pasos.playing:
 			audio_pasos.stop()
+func _on_audio_pasos_finished() -> void:
+	if audio_pasos and is_on_floor() and not en_slide:
+		audio_pasos.play()
 func _procesar_audio_salud() -> void:
 	if not audio_respiracion:
 		return
