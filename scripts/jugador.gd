@@ -15,6 +15,7 @@ signal cambio_xp(actual: float, maxima: float, lvl: int)
 @export var sis_eventos: SistemaEventos
 @export var arma: MeshInstance3D
 @export var luz_disparo: OmniLight3D
+@export var escena_bala: PackedScene = preload("res://BalaJugador.tscn")
 @export var audio_disparo: AudioStreamPlayer
 @export var audio_salto: AudioStreamPlayer
 @export var audio_dash: AudioStreamPlayer
@@ -166,23 +167,30 @@ func disparar() -> void:
 		arma.position.z = -0.36
 	if luz_disparo:
 		luz_disparo.light_energy = 4.0
-	if not raycast:
+	if not escena_bala or not cam:
 		return
-	raycast.target_position = Vector3(0.0, 0.0, -15.0)
-	raycast.force_raycast_update()
-	if raycast.is_colliding():
-		var col := raycast.get_collider()
-		var pt := raycast.get_collision_point()
-		if col and col.is_in_group("enemigos"):
-			if col.has_method("recibir_dano"):
-				col.recibir_dano(15.0)
-			t_quieto = 0.0
-			var dist := global_position.distance_to(pt)
-			if dist <= 2.0:
-				hp = minf(hp_max, hp + 4.5)
-				cambio_salud.emit(hp, hp_max)
-				if sis_eventos:
-					sis_eventos.disparar_destello(pt)
+	var b := escena_bala.instantiate() as BalaJugador
+	var punto_mira := cam.global_position - cam.global_transform.basis.z * 25.0
+	if raycast:
+		raycast.target_position = Vector3(0.0, 0.0, -25.0)
+		raycast.force_raycast_update()
+		if raycast.is_colliding():
+			punto_mira = raycast.get_collision_point()
+	var punto_origen := cam.global_position - cam.global_transform.basis.z * 0.4 + cam.global_transform.basis.x * 0.22 - cam.global_transform.basis.y * 0.18
+	var dir_vuelo := (punto_mira - punto_origen).normalized()
+	b.global_position = punto_origen
+	b.dir = dir_vuelo
+	b.look_at(punto_origen + dir_vuelo, Vector3.UP)
+	b.p = self
+	get_tree().current_scene.add_child(b)
+func notificar_impacto(pos_hit: Vector3, dmg: float) -> void:
+	t_quieto = 0.0
+	var dist := global_position.distance_to(pos_hit)
+	if dist <= 2.0:
+		hp = minf(hp_max, hp + dmg * 0.30)
+		cambio_salud.emit(hp, hp_max)
+		if sis_eventos:
+			sis_eventos.disparar_destello(pos_hit)
 func recibir_dano(cantidad: float) -> void:
 	hp = maxf(0.0, hp - cantidad)
 	cambio_salud.emit(hp, hp_max)

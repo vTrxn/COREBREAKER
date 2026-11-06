@@ -52,13 +52,13 @@ mesh = SubResource("BoxMesh_arma")
 surface_material_override/0 = SubResource("StandardMaterial3D_arma")
 
 [node name="Arma2" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=46061042]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.010767683, 0.020094752, -0.28552628)
+transform = Transform3D(-0.044188097, 0, -0.24606384, 0, 0.25, 0, 0.24606384, 0, -0.044188097, -0.010767683, 0.07263148, -0.08087534)
 mesh = SubResource("BoxMesh_arma")
 skeleton = NodePath("../Arma")
 surface_material_override/0 = SubResource("StandardMaterial3D_arma")
 
 [node name="Arma" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=262039185]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0071784556, 0.013396502, -0.19465584)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.02038303, 0.013396502, -0.23926044)
 mesh = SubResource("BoxMesh_arma")
 surface_material_override/0 = SubResource("StandardMaterial3D_arma")
 metadata/_edit_group_ = true
