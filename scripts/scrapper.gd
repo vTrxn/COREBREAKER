@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var dmg_golpe: float = 12.0
 @export var cd_ataque: float = 1.2
 @export var rango_ataque: float = 1.5
+@onready var audio_hit: AudioStreamPlayer3D = $AudioHit
 var player: CharacterBody3D = null
 var timer_ataque: float = 0.0
 var grav: float = 14.0
@@ -40,8 +41,15 @@ func _physics_process(delta: float) -> void:
 		timer_ataque -= delta
 	move_and_slide()
 func recibir_dano(cantidad: float) -> void:
+	if audio_hit:
+		audio_hit.play()
 	hp -= cantidad
 	if hp <= 0.0:
 		if player and player.has_method("ganar_xp"):
 			player.ganar_xp()
+		if audio_hit:
+			remove_child(audio_hit)
+			get_parent().add_child(audio_hit)
+			audio_hit.global_position = global_position
+			audio_hit.finished.connect(audio_hit.queue_free)
 		queue_free()

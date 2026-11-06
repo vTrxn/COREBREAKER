@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://Torreta.tscn" id="3_torr"]
 [ext_resource type="Script" uid="uid://u4ds4wkvpyij" path="res://scripts/luz_parpadeante.gd" id="4_luzp"]
 [ext_resource type="Script" uid="uid://bxvxtiwoo3bwy" path="res://scripts/sistema_eventos.gd" id="5_sise"]
-[ext_resource type="PackedScene" path="res://Jugador.tscn" id="6_jug"]
+[ext_resource type="PackedScene" uid="uid://b46mg0w723jbl" path="res://Jugador.tscn" id="6_jug"]
 [ext_resource type="PackedScene" path="res://HUD.tscn" id="7_hud"]
 [ext_resource type="Script" uid="uid://d4iidsxnemsam" path="res://scripts/disparador.gd" id="8_disp"]
 [ext_resource type="AudioStream" uid="uid://c82cp147orkbn" path="res://audio/musica_nivel.mp3" id="9_mus"]
@@ -53,6 +53,7 @@ radius = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_toxico"]
 transparency = 1
 albedo_color = Color(0.18, 0.95, 0.12, 0.88)
+metallic_specular = 0.51
 roughness = 0.05
 emission_enabled = true
 emission = Color(0.223529, 1, 0.0784314, 1)
@@ -61,7 +62,7 @@ emission_energy_multiplier = 2.4
 [sub_resource type="CylinderMesh" id="CylinderMesh_puddle_lg"]
 material = SubResource("StandardMaterial3D_toxico")
 top_radius = 2.2
-bottom_radius = 2.2
+bottom_radius = 1.08
 height = 0.02
 radial_segments = 16
 
@@ -204,12 +205,10 @@ mesh = SubResource("CylinderMesh_puddle_sm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.35, -7)
 light_color = Color(0.223529, 1, 0.0784314, 1)
 light_energy = 1.6
-omni_range = 5.0
 omni_attenuation = 1.2
 
 [node name="BarrilParado1" type="StaticBody3D" parent="Decoraciones" unique_id=101010105]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 0.55, -8.2)
-collision_layer = 1
 collision_mask = 0
 
 [node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado1" unique_id=101010106]
@@ -239,7 +238,6 @@ omni_attenuation = 1.2
 
 [node name="BarrilParado2" type="StaticBody3D" parent="Decoraciones" unique_id=101010112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 0.55, -11.6)
-collision_layer = 1
 collision_mask = 0
 
 [node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado2" unique_id=101010113]
@@ -269,7 +267,6 @@ omni_attenuation = 1.2
 
 [node name="BarrilParado3" type="StaticBody3D" parent="Decoraciones" unique_id=101010119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2, 0.55, 9.2)
-collision_layer = 1
 collision_mask = 0
 
 [node name="Mesh" type="MeshInstance3D" parent="Decoraciones/BarrilParado3" unique_id=101010120]

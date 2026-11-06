@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/scrapper.gd" id="1_scrap"]
+[ext_resource type="AudioStream" uid="uid://biaat1eqo0sqv" path="res://audio/impacto_enemigo.mp3" id="2_hit"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -26,3 +27,8 @@ shape = SubResource("CapsuleShape3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 mesh = SubResource("BoxMesh_1")
 surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="AudioHit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_hit")
+unit_size = 10.0
+max_distance = 45.0

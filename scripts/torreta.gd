@@ -3,6 +3,7 @@ extends StaticBody3D
 @export var hp: float = 75.0
 @export var bala_scene: PackedScene
 @export var cd_disparo: float = 2.0
+@onready var audio_hit: AudioStreamPlayer3D = $AudioHit
 var p: CharacterBody3D = null
 var timer_disparo: float = 1.0
 func _ready() -> void:
@@ -29,8 +30,15 @@ func disparar() -> void:
 	b.dir = (p.global_position + Vector3.UP * 1.0 - spawn_pt).normalized()
 	get_parent().add_child(b)
 func recibir_dano(cantidad: float) -> void:
+	if audio_hit:
+		audio_hit.play()
 	hp -= cantidad
 	if hp <= 0.0:
 		if p and p.has_method("ganar_xp"):
 			p.ganar_xp()
+		if audio_hit:
+			remove_child(audio_hit)
+			get_parent().add_child(audio_hit)
+			audio_hit.global_position = global_position
+			audio_hit.finished.connect(audio_hit.queue_free)
 		queue_free()

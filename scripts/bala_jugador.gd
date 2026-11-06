@@ -1,6 +1,6 @@
 class_name BalaJugador
 extends Area3D
-@export var vel: float = 76.0
+@export var vel: float = 135.0
 @export var dmg: float = 15.0
 @export var rango_max: float = 30.0
 var dir: Vector3 = Vector3.FORWARD
