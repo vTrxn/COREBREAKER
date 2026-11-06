@@ -13,6 +13,8 @@ signal cambio_xp(actual: float, maxima: float, lvl: int)
 @export var col_shape: CollisionShape3D
 @export var raycast: RayCast3D
 @export var sis_eventos: SistemaEventos
+@export var arma: MeshInstance3D
+@export var luz_disparo: OmniLight3D
 @export var audio_disparo: AudioStreamPlayer
 @export var audio_salto: AudioStreamPlayer
 @export var audio_dash: AudioStreamPlayer
@@ -42,6 +44,10 @@ func _ready() -> void:
 		raycast = find_child("RayCast3D") as RayCast3D
 	if not sis_eventos:
 		sis_eventos = get_tree().get_first_node_in_group("sistema_eventos") as SistemaEventos
+	if not arma and cam:
+		arma = cam.find_child("Arma") as MeshInstance3D
+	if not luz_disparo and cam:
+		luz_disparo = cam.find_child("LuzDisparo") as OmniLight3D
 	if not audio_disparo:
 		audio_disparo = find_child("AudioDisparo") as AudioStreamPlayer
 	if not audio_salto:
@@ -52,6 +58,10 @@ func _ready() -> void:
 		audio_pasos = find_child("AudioPasos") as AudioStreamPlayer
 	if not audio_respiracion:
 		audio_respiracion = find_child("AudioRespiracion") as AudioStreamPlayer
+	if audio_respiracion:
+		if audio_respiracion.stream is AudioStreamMP3:
+			(audio_respiracion.stream as AudioStreamMP3).loop = true
+		audio_respiracion.finished.connect(_on_audio_respiracion_finished)
 	cambio_xp.emit(xp, xp_max, nivel)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -74,6 +84,10 @@ func _physics_process(delta: float) -> void:
 		hp = maxf(0.0, hp - 2.0 * delta)
 		cambio_salud.emit(hp, hp_max)
 	_procesar_audio_salud()
+	if arma:
+		arma.position.z = move_toward(arma.position.z, -0.45, delta * 1.5)
+	if luz_disparo:
+		luz_disparo.light_energy = move_toward(luz_disparo.light_energy, 0.0, delta * 30.0)
 	if cd_dash > 0.0:
 		cd_dash = maxf(0.0, cd_dash - delta)
 	if timer_disparo > 0.0:
@@ -142,9 +156,16 @@ func _procesar_audio_salud() -> void:
 	else:
 		if audio_respiracion.playing:
 			audio_respiracion.stop()
+func _on_audio_respiracion_finished() -> void:
+	if hp < hp_max * 0.5 and hp > 0.0 and audio_respiracion:
+		audio_respiracion.play()
 func disparar() -> void:
 	if audio_disparo:
 		audio_disparo.play()
+	if arma:
+		arma.position.z = -0.36
+	if luz_disparo:
+		luz_disparo.light_energy = 4.0
 	if not raycast:
 		return
 	raycast.target_position = Vector3(0.0, 0.0, -15.0)

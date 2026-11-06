@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/jugador.gd" id="1_jug"]
 [ext_resource type="Script" path="res://scripts/luz_jugador.gd" id="2_luz"]
@@ -15,6 +15,13 @@ height = 1.8
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
 radius = 0.4
 height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_arma"]
+size = Vector3(0.12, 0.12, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arma"]
+albedo_color = Color(0.22, 0.24, 0.28, 1)
+roughness = 0.6
 
 [node name="Jugador" type="CharacterBody3D" groups=["jugador"]]
 collision_layer = 8
@@ -38,6 +45,17 @@ collision_mask = 17
 
 [node name="LuzJugador" type="SpotLight3D" parent="Camera3D"]
 script = ExtResource("2_luz")
+
+[node name="Arma" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
+mesh = SubResource("BoxMesh_arma")
+surface_material_override/0 = SubResource("StandardMaterial3D_arma")
+
+[node name="LuzDisparo" type="OmniLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.7)
+light_color = Color(1, 0.717647, 0.0117647, 1)
+light_energy = 0.0
+omni_range = 3.0
 
 [node name="AudioDisparo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_disp")
