@@ -4,8 +4,8 @@ signal cambio_salud(actual: float, maxima: float)
 signal alerta_sangrado(activo: bool)
 signal cambio_xp(actual: float, maxima: float, lvl: int)
 @export var hp_max: float = 100.0
-@export var vel_caminar: float = 4.5
-@export var vel_sprint: float = 6.0
+@export var vel_caminar: float = 5.0
+@export var vel_sprint: float = 6.6
 @export var fuerza_salto: float = 6.5
 @export var grav: float = 14.0
 @export var mouse_sens: float = 0.002
@@ -102,8 +102,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and cd_dash <= 0.0:
 		cd_dash = 0.8
 		var dir_d := dir if dir.length_squared() > 0.01 else -transform.basis.z
-		velocity.x = dir_d.x * 14.0
-		velocity.z = dir_d.z * 14.0
+		velocity.x = dir_d.x * 16.8
+		velocity.z = dir_d.z * 16.8
 		if audio_dash:
 			audio_dash.play()
 	var presiona_slide := Input.is_action_pressed("deslizar")
@@ -113,8 +113,8 @@ func _physics_process(delta: float) -> void:
 		dir_slide = dir if dir.length_squared() > 0.01 else -transform.basis.z
 	if en_slide:
 		t_slide += delta
-		velocity.x = dir_slide.x * 9.0
-		velocity.z = dir_slide.z * 9.0
+		velocity.x = dir_slide.x * 10.0
+		velocity.z = dir_slide.z * 10.0
 		if cam:
 			cam.position.y = move_toward(cam.position.y, 0.8, delta * 8.0)
 		if col_shape and col_shape.shape is CapsuleShape3D:
