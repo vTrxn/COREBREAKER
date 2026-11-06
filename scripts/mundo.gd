@@ -3,6 +3,14 @@ extends Node3D
 @export var spawner_scrapper: PackedScene
 @export var spawner_torreta: PackedScene
 @onready var p: Jugador = $Jugador
+@onready var mus: AudioStreamPlayer = $MusicaNivel
+func _ready() -> void:
+	if mus:
+		if mus.stream is AudioStreamMP3:
+			(mus.stream as AudioStreamMP3).loop = true
+		mus.volume_db = -30.0
+		var tw := create_tween()
+		tw.tween_property(mus, "volume_db", 0.0, 2.5)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_1:
