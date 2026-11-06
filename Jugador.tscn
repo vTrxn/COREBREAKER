@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://bhnkdf3o0bkae" path="res://audio/dash.mp3" id="5_dash"]
 [ext_resource type="AudioStream" uid="uid://cngkp1q1ye8wc" path="res://audio/pasos.mp3" id="6_paso"]
 [ext_resource type="AudioStream" uid="uid://bm8p5ggwajljf" path="res://audio/respiracion_baja_vida.mp3" id="7_resp"]
+[ext_resource type="Script" path="res://scripts/arma_jugador.gd" id="8_arma"]
+[ext_resource type="Script" path="res://scripts/audio_jugador.gd" id="9_audj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -52,6 +54,7 @@ script = ExtResource("2_luz")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
 mesh = SubResource("BoxMesh_arma")
 surface_material_override/0 = SubResource("StandardMaterial3D_v1h6a")
+script = ExtResource("8_arma")
 
 [node name="Arma3" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=802650950]
 transform = Transform3D(-0.00089443306, 0, -0.199998, 0, 0.2, 0, 0.199998, 0, -0.00089443306, -0.031807303, 0.0048906803, -0.08712727)
@@ -91,3 +94,6 @@ stream = ExtResource("6_paso")
 
 [node name="AudioRespiracion" type="AudioStreamPlayer" parent="." unique_id=1746471085]
 stream = ExtResource("7_resp")
+
+[node name="AudioJugador" type="Node" parent="." unique_id=987654321]
+script = ExtResource("9_audj")
