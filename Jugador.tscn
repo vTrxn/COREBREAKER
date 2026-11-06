@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene format=3 uid="uid://b46mg0w723jbl"]
 
-[ext_resource type="Script" path="res://scripts/jugador.gd" id="1_jug"]
-[ext_resource type="Script" path="res://scripts/luz_jugador.gd" id="2_luz"]
-[ext_resource type="AudioStream" path="res://audio/disparo.mp3" id="3_disp"]
-[ext_resource type="AudioStream" path="res://audio/salto.mp3" id="4_salt"]
-[ext_resource type="AudioStream" path="res://audio/dash.mp3" id="5_dash"]
-[ext_resource type="AudioStream" path="res://audio/pasos.mp3" id="6_paso"]
-[ext_resource type="AudioStream" path="res://audio/respiracion_baja_vida.mp3" id="7_resp"]
+[ext_resource type="Script" uid="uid://deq188qkpiuam" path="res://scripts/jugador.gd" id="1_jug"]
+[ext_resource type="Script" uid="uid://c34jpct3y7c3q" path="res://scripts/luz_jugador.gd" id="2_luz"]
+[ext_resource type="AudioStream" uid="uid://2tsjniyvn1qk" path="res://audio/disparo.mp3" id="3_disp"]
+[ext_resource type="AudioStream" uid="uid://crs31ddfkgbjd" path="res://audio/salto.mp3" id="4_salt"]
+[ext_resource type="AudioStream" uid="uid://bhnkdf3o0bkae" path="res://audio/dash.mp3" id="5_dash"]
+[ext_resource type="AudioStream" uid="uid://cngkp1q1ye8wc" path="res://audio/pasos.mp3" id="6_paso"]
+[ext_resource type="AudioStream" uid="uid://bm8p5ggwajljf" path="res://audio/respiracion_baja_vida.mp3" id="7_resp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -17,57 +17,69 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_arma"]
-size = Vector3(0.12, 0.12, 0.45)
+size = Vector3(0.12, 0.12, 0.39833984)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arma"]
 albedo_color = Color(0.22, 0.24, 0.28, 1)
-roughness = 0.6
+emission_energy_multiplier = 5.4
 
-[node name="Jugador" type="CharacterBody3D" groups=["jugador"]]
+[node name="Jugador" type="CharacterBody3D" unique_id=469313503 groups=["jugador"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_jug")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2004513751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2114060994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1375714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=14069356]
 target_position = Vector3(0, 0, -15)
 collision_mask = 17
 
-[node name="LuzJugador" type="SpotLight3D" parent="Camera3D"]
+[node name="LuzJugador" type="SpotLight3D" parent="Camera3D" unique_id=1579210230]
 script = ExtResource("2_luz")
 
-[node name="Arma" type="MeshInstance3D" parent="Camera3D"]
+[node name="Arma" type="MeshInstance3D" parent="Camera3D" unique_id=1130254928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
 mesh = SubResource("BoxMesh_arma")
 surface_material_override/0 = SubResource("StandardMaterial3D_arma")
 
-[node name="LuzDisparo" type="OmniLight3D" parent="Camera3D"]
+[node name="Arma2" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=46061042]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.010767683, 0.020094752, -0.28552628)
+mesh = SubResource("BoxMesh_arma")
+skeleton = NodePath("../Arma")
+surface_material_override/0 = SubResource("StandardMaterial3D_arma")
+
+[node name="Arma" type="MeshInstance3D" parent="Camera3D/Arma" unique_id=262039185]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0071784556, 0.013396502, -0.19465584)
+mesh = SubResource("BoxMesh_arma")
+surface_material_override/0 = SubResource("StandardMaterial3D_arma")
+metadata/_edit_group_ = true
+
+[node name="LuzDisparo" type="OmniLight3D" parent="Camera3D" unique_id=1401295889]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.7)
 light_color = Color(1, 0.717647, 0.0117647, 1)
 light_energy = 0.0
 omni_range = 3.0
 
-[node name="AudioDisparo" type="AudioStreamPlayer" parent="."]
+[node name="AudioDisparo" type="AudioStreamPlayer" parent="." unique_id=1423169922]
 stream = ExtResource("3_disp")
 
-[node name="AudioSalto" type="AudioStreamPlayer" parent="."]
+[node name="AudioSalto" type="AudioStreamPlayer" parent="." unique_id=994046614]
 stream = ExtResource("4_salt")
 
-[node name="AudioDash" type="AudioStreamPlayer" parent="."]
+[node name="AudioDash" type="AudioStreamPlayer" parent="." unique_id=406714734]
 stream = ExtResource("5_dash")
 
-[node name="AudioPasos" type="AudioStreamPlayer" parent="."]
+[node name="AudioPasos" type="AudioStreamPlayer" parent="." unique_id=1138614317]
 stream = ExtResource("6_paso")
 
-[node name="AudioRespiracion" type="AudioStreamPlayer" parent="."]
+[node name="AudioRespiracion" type="AudioStreamPlayer" parent="." unique_id=1746471085]
 stream = ExtResource("7_resp")
