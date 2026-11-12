@@ -41,9 +41,10 @@ func _procesar_impacto(cuerpo: Node, pos_hit: Vector3, normal_hit: Vector3) -> v
 			cuerpo.recibir_dano(dmg)
 		if p and p.has_method("notificar_impacto"):
 			p.notificar_impacto(pos_hit, dmg)
-		_crear_particulas(pos_hit, normal_hit)
+		var col := Color(0.68, 0.28, 1.0, 1.0) if cuerpo is Torreta else Color(0.15, 1.0, 0.3, 1.0)
+		_crear_particulas(pos_hit, normal_hit, col)
 	queue_free()
-func _crear_particulas(pos_hit: Vector3, normal_hit: Vector3) -> void:
+func _crear_particulas(pos_hit: Vector3, normal_hit: Vector3, col: Color) -> void:
 	if not escena_particulas:
 		return
 	var part := escena_particulas.instantiate() as ParticulasImpacto
@@ -51,4 +52,4 @@ func _crear_particulas(pos_hit: Vector3, normal_hit: Vector3) -> void:
 	var spawn_pos := pos_hit + n * 0.05
 	part.position = spawn_pos
 	get_tree().current_scene.add_child(part)
-	part.activar(spawn_pos, n)
+	part.activar(spawn_pos, n, col)
