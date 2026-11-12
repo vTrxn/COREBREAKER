@@ -11,6 +11,8 @@ const POS_BASE := Vector3(0.22, -0.22, -0.45)
 @onready var audio_disp: AudioStreamPlayer = get_node_or_null("../../AudioDisparo") as AudioStreamPlayer
 @onready var audio_rec: AudioStreamPlayer = get_node_or_null("../../AudioRecarga") as AudioStreamPlayer
 @onready var p_body: CharacterBody3D = get_node_or_null("../../") as CharacterBody3D
+@onready var modelo_pistola: Node3D = get_node_or_null("Pistola") as Node3D
+var anim_player: AnimationPlayer = null
 var balas: int = 8
 var recargando: bool = false
 var timer_disp: float = 0.0
@@ -18,6 +20,8 @@ var t_wobble: float = 0.0
 var recoil_z: float = 0.0
 func _ready() -> void:
 	balas = balas_max
+	if modelo_pistola:
+		anim_player = modelo_pistola.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	cambio_municion.emit(balas, balas_max, false)
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("recargar") and not recargando and balas < balas_max:
@@ -32,8 +36,7 @@ func _process(delta: float) -> void:
 	var wx := sin(t_wobble) * amp
 	var wy := cos(t_wobble * 2.0) * amp * 0.65
 	recoil_z = move_toward(recoil_z, 0.0, delta * 1.5)
-	var dip_y := -0.04 if recargando else 0.0
-	position = Vector3(POS_BASE.x + wx, POS_BASE.y + wy + dip_y, POS_BASE.z + recoil_z)
+	position = Vector3(POS_BASE.x + wx, POS_BASE.y + wy, POS_BASE.z + recoil_z)
 	rotation.z = -wx * 1.8
 	rotation.x = wy * 1.5
 	rotation.y = -wx * 0.8
@@ -50,7 +53,10 @@ func intentar_disparar(p: CharacterBody3D) -> void:
 	balas -= 1
 	cambio_municion.emit(balas, balas_max, false)
 	timer_disp = cd_disparo
-	recoil_z = 0.09
+	recoil_z = 0.03
+	if anim_player and anim_player.has_animation("Disparo"):
+		anim_player.stop()
+		anim_player.play("Disparo", 0.04)
 	if luz:
 		luz.light_energy = 4.0
 	if audio_disp:
@@ -77,6 +83,9 @@ func recargar() -> void:
 		return
 	recargando = true
 	cambio_municion.emit(balas, balas_max, true)
+	if anim_player and anim_player.has_animation("Recarga"):
+		anim_player.stop()
+		anim_player.play("Recarga", 0.06)
 	if audio_rec:
 		audio_rec.play()
 	var t := get_tree().create_timer(1.25)

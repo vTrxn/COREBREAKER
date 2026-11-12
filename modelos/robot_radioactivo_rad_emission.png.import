@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hn1cm8gchjib"
-path="res://.godot/imported/robot_radioactivo_rad_emission.png-a89f5ca810db49c1dc51515543521c2a.ctex"
+path.s3tc="res://.godot/imported/robot_radioactivo_rad_emission.png-a89f5ca810db49c1dc51515543521c2a.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "65be339e036271b2a0fc72df997cdf24"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://modelos/robot_radioactivo_rad_emission.png"
-dest_files=["res://.godot/imported/robot_radioactivo_rad_emission.png-a89f5ca810db49c1dc51515543521c2a.ctex"]
+dest_files=["res://.godot/imported/robot_radioactivo_rad_emission.png-a89f5ca810db49c1dc51515543521c2a.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

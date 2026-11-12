@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://yw8vwml6bk2x" path="res://audio/dano_jugador.mp3" id="10_dan"]
 [ext_resource type="Script" uid="uid://bwaub8q537xs5" path="res://scripts/brazo_parry.gd" id="11_parr"]
 [ext_resource type="AudioStream" uid="uid://ds0ognd2hrxan" path="res://audio/impacto_golpe.mp3" id="12_golp"]
-[ext_resource type="PackedScene" uid="uid://blf3bv7hpp8e0" path="res://modelos/cyber-x-handgun-alpha.glb" id="13_pist"]
+[ext_resource type="PackedScene" uid="uid://dhk6l33n4uuvx" path="res://modelos/pistola_corebreaker.glb" id="13_pist"]
 [ext_resource type="AudioStream" uid="uid://nu04togyipf3" path="res://audio/recarga.mp3" id="14_rec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
@@ -75,8 +75,7 @@ script = ExtResource("2_luz")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
 script = ExtResource("8_arma")
 
-[node name="cyber-x-handgun-alpha" parent="Camera3D/Arma" unique_id=475263781 instance=ExtResource("13_pist")]
-transform = Transform3D(-0.19966649, 0, -0.011545386, 0, 0.19999999, 0, 0.011545386, 0, -0.19966649, 0, -0.10257363, 0)
+[node name="Pistola" parent="Camera3D/Arma" unique_id=475263781 instance=ExtResource("13_pist")]
 
 [node name="LuzDisparo" type="OmniLight3D" parent="Camera3D" unique_id=1401295889]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.7)

@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnfdodx7teo5l"
-path="res://.godot/imported/robot_radioactivo_lead_olive_rough.png-57d855332537f88cbd19a0722f7f665c.ctex"
+path.s3tc="res://.godot/imported/robot_radioactivo_lead_olive_rough.png-57d855332537f88cbd19a0722f7f665c.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "8bc10ea5387da129939b364d8e42b16c"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://modelos/robot_radioactivo_lead_olive_rough.png"
-dest_files=["res://.godot/imported/robot_radioactivo_lead_olive_rough.png-57d855332537f88cbd19a0722f7f665c.ctex"]
+dest_files=["res://.godot/imported/robot_radioactivo_lead_olive_rough.png-57d855332537f88cbd19a0722f7f665c.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
