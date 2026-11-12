@@ -60,9 +60,9 @@ func disparar() -> void:
 		anim_player.play("Disparo", 0.05)
 	var b := bala_scene.instantiate() as Proyectil
 	var spawn_pt := global_position + Vector3.UP * 1.0
+	get_parent().add_child(b)
 	b.global_position = spawn_pt
 	b.dir = (p.global_position + Vector3.UP * 1.0 - spawn_pt).normalized()
-	get_parent().add_child(b)
 func recibir_dano(cantidad: float) -> void:
 	if audio_hit:
 		audio_hit.play()
