@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ci5x2eott7rcb" path="res://texturas/pared_industrial.png" id="12_par"]
 [ext_resource type="Texture2D" uid="uid://cih3uldcp48sm" path="res://texturas/barril_industrial.png" id="13_bar"]
 [ext_resource type="Texture2D" uid="uid://bfvncb2snhqfy" path="res://texturas/escombros_piso.png" id="14_esc"]
+[ext_resource type="PackedScene" path="res://MenuPausa.tscn" id="15_pau"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cielo"]
 panorama = ExtResource("10_cie")
@@ -812,6 +813,8 @@ mesh = SubResource("BoxMesh_roca1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="HUD" parent="." unique_id=963064956 instance=ExtResource("7_hud")]
+
+[node name="MenuPausa" parent="." unique_id=963064957 instance=ExtResource("15_pau")]
 
 [node name="MusicaNivel" type="AudioStreamPlayer" parent="." unique_id=2135950184]
 stream = ExtResource("9_mus")

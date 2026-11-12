@@ -32,8 +32,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sens)
 		cam.rotation.x = clampf(cam.rotation.x - event.relative.y * mouse_sens, -1.55, 1.55)
-	if event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= grav * delta

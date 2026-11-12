@@ -1,0 +1,176 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/menu_pausa.gd" id="1_paus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.101961, 0.121569, 0.152941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25098, 0.294118, 0.364706, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_n"]
+bg_color = Color(0.14902, 0.176471, 0.227451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.278431, 0.329412, 0.407843, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_h"]
+bg_color = Color(0.219608, 0.258824, 0.329412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.717647, 0.0117647, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_p"]
+bg_color = Color(0.117647, 0.137255, 0.176471, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1, 0.85, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="MenuPausa" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_paus")
+
+[node name="ControlRaiz" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FondoOscuro" type="ColorRect" parent="ControlRaiz"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.054902, 0.062745, 0.082353, 0.85)
+
+[node name="CenterContainer" type="CenterContainer" parent="ControlRaiz"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContenedor" type="PanelContainer" parent="ControlRaiz/CenterContainer"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlRaiz/CenterContainer/PanelContenedor"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="LabelTitulo" type="Label" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.717647, 0.0117647, 1)
+theme_override_font_sizes/font_size = 24
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="Separador1" type="HSeparator" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxVolumen" type="VBoxContainer" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelVolumen" type="Label" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer/VBoxVolumen"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.94902, 1)
+theme_override_font_sizes/font_size = 14
+text = "VOLUMEN MASTER: 100%"
+
+[node name="SliderVolumen" type="HSlider" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer/VBoxVolumen"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Separador2" type="HSeparator" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BotonReanudar" type="Button" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BotonSalir")
+focus_neighbor_bottom = NodePath("../BotonReiniciar")
+focus_next = NodePath("../BotonReiniciar")
+focus_previous = NodePath("../BotonSalir")
+theme_override_colors/font_color = Color(0.921569, 0.941176, 0.960784, 1)
+theme_override_colors/font_hover_color = Color(1, 0.717647, 0.0117647, 1)
+theme_override_colors/font_focus_color = Color(1, 0.717647, 0.0117647, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_p")
+text = "REANUDAR"
+
+[node name="BotonReiniciar" type="Button" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BotonReanudar")
+focus_neighbor_bottom = NodePath("../BotonSalir")
+focus_next = NodePath("../BotonSalir")
+focus_previous = NodePath("../BotonReanudar")
+theme_override_colors/font_color = Color(0.921569, 0.941176, 0.960784, 1)
+theme_override_colors/font_hover_color = Color(1, 0.717647, 0.0117647, 1)
+theme_override_colors/font_focus_color = Color(1, 0.717647, 0.0117647, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_p")
+text = "REINICIAR NIVEL"
+
+[node name="BotonSalir" type="Button" parent="ControlRaiz/CenterContainer/PanelContenedor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BotonReiniciar")
+focus_neighbor_bottom = NodePath("../BotonReanudar")
+focus_next = NodePath("../BotonReanudar")
+focus_previous = NodePath("../BotonReiniciar")
+theme_override_colors/font_color = Color(0.921569, 0.941176, 0.960784, 1)
+theme_override_colors/font_hover_color = Color(1, 0.25, 0.25, 1)
+theme_override_colors/font_focus_color = Color(1, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_p")
+text = "SALIR DEL JUEGO"
