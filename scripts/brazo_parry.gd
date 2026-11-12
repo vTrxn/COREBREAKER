@@ -69,6 +69,8 @@ func golpear_enemigo(enemigo: Node) -> void:
 		a_golpe.play()
 	if p_jugador:
 		p_jugador.curar(20.0)
+		if p_jugador.has_method("notificar_impacto"):
+			p_jugador.notificar_impacto(p_jugador.global_position, 40.0)
 	if luz:
 		luz.light_energy = 4.5
 	_aplicar_hitstop()

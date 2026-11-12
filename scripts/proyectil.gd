@@ -31,6 +31,9 @@ func _on_hit(cuerpo: Node) -> void:
 	if parreado:
 		if cuerpo.is_in_group("enemigos") and cuerpo.has_method("recibir_dano"):
 			cuerpo.recibir_dano(dmg)
+			var jug := get_tree().get_first_node_in_group("jugador")
+			if jug and jug.has_method("notificar_impacto"):
+				jug.notificar_impacto(global_position, dmg)
 			queue_free()
 		elif cuerpo is StaticBody3D:
 			queue_free()

@@ -3,6 +3,7 @@ extends CharacterBody3D
 signal cambio_salud(actual: float, maxima: float)
 signal alerta_sangrado(activo: bool)
 signal cambio_xp(actual: float, maxima: float, lvl: int)
+signal dano_infligido(cantidad: float)
 @export var hp_max: float = 100.0
 @export var vel_caminar: float = 5.0
 @export var vel_sprint: float = 6.6
@@ -10,16 +11,12 @@ signal cambio_xp(actual: float, maxima: float, lvl: int)
 @export var grav: float = 14.0
 @export var mouse_sens: float = 0.002
 @onready var cam: Camera3D = $Camera3D
-@onready var col_shape: CollisionShape3D = $CollisionShape3D
 @onready var arma: ArmaJugador = $Camera3D/Arma
 @onready var audio_p: AudioJugador = $AudioJugador
 @onready var sis_eventos: SistemaEventos = get_tree().get_first_node_in_group("sistema_eventos") as SistemaEventos
 @onready var parry_b: BrazoParry = $Camera3D/BrazoParry
 var hp: float = 100.0
 var t_quieto: float = 0.0
-var en_slide: bool = false
-var t_slide: float = 0.0
-var dir_slide: Vector3 = Vector3.ZERO
 var cd_dash: float = 0.0
 var nivel: int = 1
 var xp: float = 0.0
@@ -46,36 +43,38 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and cd_dash <= 0.0:
 		cd_dash = 0.8
 		var d := dir if dir.length_squared() > 0.01 else -transform.basis.z
-		velocity = Vector3(d.x * 16.8, velocity.y, d.z * 16.8)
+		velocity = Vector3(d.x * 11.0, velocity.y, d.z * 11.0)
 		if audio_p: audio_p.dash()
-	var presiona_slide := Input.is_action_pressed("deslizar")
-	if presiona_slide and is_on_floor() and not en_slide:
-		en_slide = true
-		t_slide = 0.0
-		dir_slide = dir if dir.length_squared() > 0.01 else -transform.basis.z
-	if en_slide:
-		t_slide += delta
-		velocity = Vector3(dir_slide.x * 10.0, velocity.y, dir_slide.z * 10.0)
-		en_slide = presiona_slide and t_slide < 3.0
-	else:
-		var spd := vel_sprint if Input.is_action_pressed("sprint") else vel_caminar
-		velocity.x = move_toward(velocity.x, dir.x * spd, delta * 25.0)
-		velocity.z = move_toward(velocity.z, dir.z * spd, delta * 25.0)
-	cam.position.y = move_toward(cam.position.y, 0.8 if en_slide else 1.6, delta * 8.0)
-	if col_shape.shape is CapsuleShape3D:
-		(col_shape.shape as CapsuleShape3D).height = 0.9 if en_slide else 1.8
+	_mover_horizontal(delta, dir)
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = fuerza_salto
 		if audio_p: audio_p.salto()
-	var moviendo := is_on_floor() and dir.length_squared() > 0.01 and Vector2(velocity.x, velocity.z).length() > 0.5 and not en_slide
+	var moviendo := is_on_floor() and dir.length_squared() > 0.01 and Vector2(velocity.x, velocity.z).length() > 0.5
 	if audio_p: audio_p.actualizar(moviendo, hp, hp_max)
 	if Input.is_action_pressed("disparo_primario") and arma:
 		arma.intentar_disparar(self)
 	if Input.is_action_just_pressed("parry") and parry_b:
 		parry_b.ejecutar_parry()
 	move_and_slide()
-func notificar_impacto(_pos_hit: Vector3, _dmg: float) -> void:
+func _mover_horizontal(delta: float, dir: Vector3) -> void:
+	var spd := vel_sprint if Input.is_action_pressed("sprint") else vel_caminar
+	var vh := Vector2(velocity.x, velocity.z)
+	var d2 := Vector2(dir.x, dir.z)
+	if is_on_floor():
+		var accel := 34.0 if vh.length() <= spd + 0.5 else 16.0
+		vh = vh.move_toward(d2 * spd, delta * accel)
+	elif d2.length_squared() > 0.01:
+		if vh.length() <= spd:
+			vh = vh.move_toward(d2 * spd, delta * 18.0)
+		else:
+			vh = vh.normalized().lerp(d2, clampf(delta * 4.5, 0.0, 1.0)).normalized() * vh.length()
+	if vh.length() > 11.0:
+		vh = vh.normalized() * 11.0
+	velocity.x = vh.x
+	velocity.z = vh.y
+func notificar_impacto(_pos_hit: Vector3, dmg: float) -> void:
 	t_quieto = 0.0
+	dano_infligido.emit(dmg)
 func curar(cantidad: float) -> void:
 	hp = clampf(hp + cantidad, 0.0, hp_max)
 	cambio_salud.emit(hp, hp_max)
