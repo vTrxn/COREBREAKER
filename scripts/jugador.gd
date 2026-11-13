@@ -23,22 +23,23 @@ var xp: float = 0.0
 var xp_max: float = 100.0
 var muerto: bool = false
 func _ready() -> void:
-	hp = hp_max
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	hp = hp_max; Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	cambio_xp.emit(xp, xp_max, nivel)
+	if has_node("ModeloJugador"):
+		for m in $ModeloJugador.find_children("*", "VisualInstance3D", true, false):
+			if m.name in ["Guante_D", "Antebrazo_D", "Brazalete_D"]: m.reparent(arma, true)
+			else: m.layers = 2
 func _unhandled_input(event: InputEvent) -> void:
 	if not muerto and event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sens)
 		cam.rotation.x = clampf(cam.rotation.x - event.relative.y * mouse_sens, -1.55, 1.55)
 func _physics_process(delta: float) -> void:
 	if muerto: return
-	if not is_on_floor():
-		velocity.y -= grav * delta
+	if not is_on_floor(): velocity.y -= grav * delta
 	t_quieto += delta
 	var sangrando := t_quieto > 15.0
 	alerta_sangrado.emit(sangrando)
-	if sangrando:
-		recibir_dano(2.0 * delta)
+	if sangrando: recibir_dano(2.0 * delta)
 	cd_dash = maxf(0.0, cd_dash - delta)
 	var in_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var dir := (transform.basis * Vector3(in_dir.x, 0.0, in_dir.y)).normalized()
@@ -53,10 +54,8 @@ func _physics_process(delta: float) -> void:
 		if audio_p: audio_p.salto()
 	var moviendo := is_on_floor() and dir.length_squared() > 0.01 and Vector2(velocity.x, velocity.z).length() > 0.5
 	if audio_p: audio_p.actualizar(moviendo, hp, hp_max)
-	if Input.is_action_pressed("disparo_primario") and arma:
-		arma.intentar_disparar(self)
-	if Input.is_action_just_pressed("parry") and parry_b:
-		parry_b.ejecutar_parry()
+	if Input.is_action_pressed("disparo_primario") and arma: arma.intentar_disparar(self)
+	if Input.is_action_just_pressed("parry") and parry_b: parry_b.ejecutar_parry()
 	move_and_slide()
 func _mover_horizontal(delta: float, dir: Vector3) -> void:
 	var spd := vel_sprint if Input.is_action_pressed("sprint") else vel_caminar

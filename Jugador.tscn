@@ -14,12 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://ds0ognd2hrxan" path="res://audio/impacto_golpe.mp3" id="12_golp"]
 [ext_resource type="PackedScene" uid="uid://dhk6l33n4uuvx" path="res://modelos/pistola_corebreaker.glb" id="13_pist"]
 [ext_resource type="AudioStream" uid="uid://nu04togyipf3" path="res://audio/recarga.mp3" id="14_rec"]
+[ext_resource type="PackedScene" uid="uid://bhqk365v7dopp" path="res://modelos/jugador_corebreaker.glb" id="15_jugm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
 radius = 0.4
 height = 1.8
 
@@ -35,12 +32,11 @@ script = ExtResource("1_jug")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2114060994]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_1")
+[node name="ModeloJugador" parent="." unique_id=21007001 instance=ExtResource("15_jugm")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1375714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=14069356]
 target_position = Vector3(0, 0, -15)
@@ -62,9 +58,8 @@ light_energy = 0.0
 omni_range = 3.0
 
 [node name="BrazoParry" type="Node3D" parent="Camera3D" unique_id=1982736450]
-transform = Transform3D(0.7110084, 0.4259616, 0.5583684, -0.4651547, 0.8775898, -0.06540896, -0.5270524, -0.22165468, 0.8215444, -0.28, -0.26, -0.22)
-script = ExtResource("11_parr")
 transform = Transform3D(-0.03315513, -0.9994502, 0, 0.9994502, -0.03315513, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("11_parr")
 metadata/_edit_group_ = true
 
 [node name="LuzParry" type="OmniLight3D" parent="Camera3D/BrazoParry" unique_id=1982736454]
