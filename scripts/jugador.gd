@@ -21,15 +21,17 @@ var cd_dash: float = 0.0
 var nivel: int = 1
 var xp: float = 0.0
 var xp_max: float = 100.0
+var muerto: bool = false
 func _ready() -> void:
 	hp = hp_max
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	cambio_xp.emit(xp, xp_max, nivel)
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if not muerto and event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sens)
 		cam.rotation.x = clampf(cam.rotation.x - event.relative.y * mouse_sens, -1.55, 1.55)
 func _physics_process(delta: float) -> void:
+	if muerto: return
 	if not is_on_floor():
 		velocity.y -= grav * delta
 	t_quieto += delta
@@ -80,9 +82,14 @@ func curar(cantidad: float) -> void:
 	cambio_salud.emit(hp, hp_max)
 	if sis_eventos: sis_eventos.disparar_destello(global_position)
 func recibir_dano(cantidad: float) -> void:
+	if muerto: return
 	hp = clampf(hp - cantidad, 0.0, hp_max)
 	if cantidad >= 1.0 and audio_p: audio_p.dano()
 	cambio_salud.emit(hp, hp_max)
+	if hp <= 0.0:
+		muerto = true
+		if audio_p: audio_p.actualizar(false, 0.0, hp_max)
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 func ganar_xp() -> void:
 	xp += xp_max * maxf(0.05, 0.15 - (nivel - 1) * 0.01)
 	if xp >= xp_max:

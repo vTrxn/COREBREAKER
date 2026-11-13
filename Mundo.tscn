@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://ipcbm55uqkn3" path="res://texturas/pared_nave_normal.png" id="20_tpnorm"]
 [ext_resource type="Texture2D" uid="uid://bm1ykwiudb1dd" path="res://texturas/techo_nave.png" id="21_ttech"]
 [ext_resource type="Texture2D" uid="uid://co0ertg5s35ig" path="res://texturas/techo_nave_normal.png" id="22_ttnorm"]
+[ext_resource type="Script" path="res://scripts/intro_godot.gd" id="23_intro"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_espacio"]
 panorama = ExtResource("15_tcielo")
@@ -2308,3 +2309,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 4.25, -10.9)
 
 [node name="P2_9" type="Marker3D" parent="PuntosSpawnPiso2" unique_id=1438871837]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, -1)
+
+[node name="IntroGodot" type="CanvasLayer" parent="." unique_id=21005001]
+script = ExtResource("23_intro")

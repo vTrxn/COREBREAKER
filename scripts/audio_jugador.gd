@@ -7,6 +7,7 @@ extends Node
 @onready var a_dano: AudioStreamPlayer = get_node("../AudioDano") as AudioStreamPlayer
 var p: CharacterBody3D = null
 func _ready() -> void:
+	AudioServer.set_bus_volume_db(0, 0.0)
 	p = get_parent() as CharacterBody3D
 	if a_pasos and a_pasos.stream is AudioStreamMP3:
 		(a_pasos.stream as AudioStreamMP3).loop = true
@@ -26,12 +27,16 @@ func dano() -> void:
 	if a_dano:
 		a_dano.play()
 func actualizar(moviendo: bool, hp: float, hp_max: float) -> void:
+	var r := clampf(hp / maxf(hp_max, 1.0), 0.0, 1.0)
+	var atten_db := lerpf(-24.0, 0.0, r)
+	AudioServer.set_bus_volume_db(0, atten_db)
 	if a_pasos:
 		if moviendo and not a_pasos.playing:
 			a_pasos.play()
 		elif not moviendo and a_pasos.playing:
 			a_pasos.stop()
 	if a_resp:
+		a_resp.volume_db = -atten_db
 		var bajo := hp < hp_max * 0.5 and hp > 0.0
 		if bajo and not a_resp.playing:
 			a_resp.play()

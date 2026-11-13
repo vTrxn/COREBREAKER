@@ -1,15 +1,9 @@
 extends SceneTree
-
 func _init() -> void:
-	print("=======================================================")
-	print("   COREBREAKER - BATERÍA DE PRUEBAS TÉCNICAS TALLER 4  ")
-	print("=======================================================")
-
 	var e_test = LuzParpadeante.energia(2.0, 0.3, 1.0)
 	print("\n[TEST 1] LuzParpadeante.energia(base=2.0, amp=0.3, ruido=1.0):")
 	print("  Resultado calculado: ", e_test)
 	print("  Esperado por guía:   2.600000 -> ", "CORRECTO" if is_equal_approx(e_test, 2.6) else "FALLO")
-
 	var ruido = FastNoiseLite.new()
 	ruido.seed = 7
 	ruido.frequency = 1.0
@@ -18,7 +12,6 @@ func _init() -> void:
 	print("\n[TEST 2] FastNoiseLite (semilla=7, t*v=1.0):")
 	print("  Valor de ruido 1D:   ", val_ruido)
 	print("  Energía calculada:   ", e_ruido)
-
 	var e_inicial = 5.0
 	var e_decaida = SistemaEventos.decaer(e_inicial, 0.0, 6.0, 0.5)
 	var e_teorica = 5.0 * exp(-6.0 * 0.5)
@@ -34,14 +27,12 @@ func _init() -> void:
 	print("  v = 0.0: ", cb.lerp(ca, 0.0))
 	print("  v = 0.5: ", cb.lerp(ca, 0.5), " -> Esperado: Color(0.75, 0.5, 0.6)")
 	print("  v = 1.0: ", cb.lerp(ca, 1.0))
-
 	var e_target = 1.0 + 3.0 * 1.0
 	var e_seg1 = 4.0 - 3.0 * exp(-4.0 * 1.0)
 	var e_seg2 = 4.0 - 3.0 * exp(-4.0 * 2.0)
 	print("\n[TEST 5] Seguimiento dinámico de energía (v=1.0, k=4.0):")
 	print("  t = 1.0 s: E = ", e_seg1, " (Esperado ~3.945)")
 	print("  t = 2.0 s: E = ", e_seg2, " (Esperado ~3.999)")
-
 	print("\n[TEST 6] Atenuación solar sobre piso plano (E_max * sin^2(theta)):")
 	for h in [8, 9, 10]:
 		var theta_deg = (h - 6) * 15.0
@@ -49,8 +40,4 @@ func _init() -> void:
 		var s = sin(theta_rad)
 		var s2 = s * s
 		print("  Hora ", h, "h (theta = ", theta_deg, "°): sin = ", s, ", sin^2 = ", s2)
-
-	print("\n=======================================================")
-	print("            TODAS LAS PRUEBAS VERIFICADAS              ")
-	print("=======================================================")
 	quit()

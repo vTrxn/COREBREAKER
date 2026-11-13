@@ -1,6 +1,5 @@
 class_name HUD
 extends CanvasLayer
-@onready var barra_salud: ProgressBar = $MarginContainer/VBoxContainer/BarraSalud
 @onready var sangrado_aviso: Label = $MarginContainer/VBoxContainer/LabelSangrado
 @onready var label_nivel: Label = $MarginContainer/VBoxContainer/LabelNivel
 @onready var barra_xp: ProgressBar = $MarginContainer/VBoxContainer/BarraXP
@@ -8,8 +7,12 @@ extends CanvasLayer
 @onready var label_restantes: Label = find_child("LabelRestantes") as Label
 @onready var label_municion: Label = find_child("LabelMunicion") as Label
 @onready var flash_dano: ColorRect = $FlashDano
+@onready var filtro_vida: ColorRect = $FiltroVida
+@onready var muerte_box: VBoxContainer = $MuerteBox
+@onready var btn_reiniciar: Button = $MuerteBox/BtnReiniciar
 var hp_ant: float = -1.0
 var tw_dano: Tween = null
+var muerto: bool = false
 func _ready() -> void:
 	var p := get_tree().get_first_node_in_group("jugador") as Jugador
 	if p:
@@ -21,13 +24,31 @@ func _ready() -> void:
 			_on_municion(p.arma.balas, p.arma.balas_max, p.arma.recargando)
 	if sangrado_aviso:
 		sangrado_aviso.visible = false
+	if btn_reiniciar:
+		btn_reiniciar.pressed.connect(func(): get_tree().reload_current_scene())
 func _on_salud(act: float, max_v: float) -> void:
-	if barra_salud:
-		barra_salud.max_value = max_v
-		barra_salud.value = act
+	var ratio := clampf(act / maxf(max_v, 1.0), 0.0, 1.0)
+	if filtro_vida:
+		filtro_vida.visible = ratio < 0.999
+		var mat := filtro_vida.material as ShaderMaterial
+		if mat:
+			mat.set_shader_parameter("ratio", ratio)
 	if hp_ant >= 0.0 and act < hp_ant - 1.0:
 		_mostrar_flash()
 	hp_ant = act
+	if act <= 0.0 and not muerto:
+		_mostrar_game_over()
+func _mostrar_game_over() -> void:
+	muerto = true
+	$CenterContainer.visible = false
+	if muerte_box:
+		muerte_box.visible = true
+	if btn_reiniciar:
+		btn_reiniciar.visible = false
+	get_tree().create_timer(1.0).timeout.connect(func():
+		if is_instance_valid(btn_reiniciar):
+			btn_reiniciar.visible = true
+	)
 func _mostrar_flash() -> void:
 	if not flash_dano:
 		return
