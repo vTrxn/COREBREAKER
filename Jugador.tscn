@@ -23,28 +23,6 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[sub_resource type="BoxMesh" id="BoxMesh_antebrazo"]
-size = Vector3(0.09, 0.09, 0.32)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brazo"]
-albedo_color = Color(0.2, 0.22, 0.25, 1)
-metallic = 0.7
-roughness = 0.4
-
-[sub_resource type="BoxMesh" id="BoxMesh_guantelete"]
-size = Vector3(0.12, 0.12, 0.14)
-
-[sub_resource type="BoxMesh" id="BoxMesh_placa_parry"]
-size = Vector3(0.04, 0.10590942, 0.06444824)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_placa"]
-albedo_color = Color(0.16, 0.18, 0.2, 1)
-metallic = 0.85
-roughness = 0.35
-emission_enabled = true
-emission = Color(0.1, 0.85, 1, 1)
-emission_energy_multiplier = 1.4
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_parry"]
 size = Vector3(0.6, 0.6, 0.5)
 
@@ -86,33 +64,8 @@ omni_range = 3.0
 [node name="BrazoParry" type="Node3D" parent="Camera3D" unique_id=1982736450]
 transform = Transform3D(0.7110084, 0.4259616, 0.5583684, -0.4651547, 0.8775898, -0.06540896, -0.5270524, -0.22165468, 0.8215444, -0.28, -0.26, -0.22)
 script = ExtResource("11_parr")
-
-[node name="Antebrazo" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736451]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16)
-mesh = SubResource("BoxMesh_antebrazo")
-surface_material_override/0 = SubResource("StandardMaterial3D_brazo")
-
-[node name="Guantelete" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736452]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
-mesh = SubResource("BoxMesh_guantelete")
-surface_material_override/0 = SubResource("StandardMaterial3D_brazo")
-
-[node name="PlacaEscudo2" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1239536721]
-transform = Transform3D(1, 2.9951334e-06, -1.6391277e-06, 7.450581e-09, 0.9999877, 1.7732382e-06, -2.9802322e-08, -1.846999e-05, 1, 0.04125181, 0.00075781345, -0.3529526)
-mesh = SubResource("BoxMesh_placa_parry")
-skeleton = NodePath("../PlacaEscudo")
-surface_material_override/0 = SubResource("StandardMaterial3D_placa")
-
-[node name="PlacaEscudo2" type="MeshInstance3D" parent="Camera3D/BrazoParry/PlacaEscudo2" unique_id=1252135857]
-transform = Transform3D(1, 2.9876828e-06, -1.7881393e-06, 0, 0.9999878, 1.8328428e-06, -2.9802322e-08, -1.8507242e-05, 1, -0.07197988, 0.0015124083, -0.0069797635)
-mesh = SubResource("BoxMesh_placa_parry")
-skeleton = NodePath("../PlacaEscudo")
-surface_material_override/0 = SubResource("StandardMaterial3D_placa")
-
-[node name="PlacaEscudo" type="MeshInstance3D" parent="Camera3D/BrazoParry" unique_id=1982736453]
-transform = Transform3D(1, 1.013279e-06, -5.364418e-07, 7.450581e-09, 0.9999946, 6.482005e-07, -2.9802322e-08, -7.584691e-06, 1, 0.03121972, 0.0119822025, -0.33953345)
-mesh = SubResource("BoxMesh_placa_parry")
-surface_material_override/0 = SubResource("StandardMaterial3D_placa")
+transform = Transform3D(-0.03315513, -0.9994502, 0, 0.9994502, -0.03315513, 0, 0, 0, 1, 0, 0, 0)
+metadata/_edit_group_ = true
 
 [node name="LuzParry" type="OmniLight3D" parent="Camera3D/BrazoParry" unique_id=1982736454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
