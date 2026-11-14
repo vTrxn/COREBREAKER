@@ -10,7 +10,7 @@ height = 1.6
 
 [node name="Scrapper" type="CharacterBody3D" groups=["enemigos"]]
 collision_layer = 16
-collision_mask = 9
+collision_mask = 41
 script = ExtResource("1_scrap")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -24,3 +24,9 @@ stream = ExtResource("2_hit")
 volume_db = 2.0
 unit_size = 10.0
 max_distance = 45.0
+
+[node name="LuzEstado" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.35)
+light_color = Color(1, 0.85, 0.12, 1)
+light_energy = 0.0
+omni_range = 4.2

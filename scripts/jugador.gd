@@ -18,6 +18,7 @@ signal dano_infligido(cantidad: float)
 var hp: float = 100.0
 var t_quieto: float = 0.0
 var cd_dash: float = 0.0
+var t_invul_parry: float = 0.0
 var nivel: int = 1
 var xp: float = 0.0
 var xp_max: float = 100.0
@@ -26,6 +27,7 @@ func _ready() -> void:
 	hp = hp_max; Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	cambio_xp.emit(xp, xp_max, nivel)
 	if has_node("ModeloJugador"):
+		if parry_b: parry_b.vincular_puno($ModeloJugador, global_transform)
 		for m in $ModeloJugador.find_children("*", "VisualInstance3D", true, false):
 			if m.name in ["Guante_D", "Antebrazo_D", "Brazalete_D"]: m.reparent(arma, true)
 			else: m.layers = 2
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	alerta_sangrado.emit(sangrando)
 	if sangrando: recibir_dano(2.0 * delta)
 	cd_dash = maxf(0.0, cd_dash - delta)
+	t_invul_parry = maxf(0.0, t_invul_parry - delta)
 	var in_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var dir := (transform.basis * Vector3(in_dir.x, 0.0, in_dir.y)).normalized()
 	if Input.is_action_just_pressed("dash") and cd_dash <= 0.0:
@@ -62,26 +65,25 @@ func _mover_horizontal(delta: float, dir: Vector3) -> void:
 	var vh := Vector2(velocity.x, velocity.z)
 	var d2 := Vector2(dir.x, dir.z)
 	if is_on_floor():
-		var accel := 34.0 if vh.length() <= spd + 0.5 else 16.0
-		vh = vh.move_toward(d2 * spd, delta * accel)
+		vh = vh.move_toward(d2 * spd, delta * (34.0 if vh.length() <= spd + 0.5 else 16.0))
 	elif d2.length_squared() > 0.01:
-		if vh.length() <= spd:
-			vh = vh.move_toward(d2 * spd, delta * 18.0)
-		else:
-			vh = vh.normalized().lerp(d2, clampf(delta * 4.5, 0.0, 1.0)).normalized() * vh.length()
-	if vh.length() > 11.0:
-		vh = vh.normalized() * 11.0
-	velocity.x = vh.x
-	velocity.z = vh.y
+		if vh.length() <= spd: vh = vh.move_toward(d2 * spd, delta * 18.0)
+		else: vh = vh.normalized().lerp(d2, clampf(delta * 4.5, 0.0, 1.0)).normalized() * vh.length()
+	vh = vh.limit_length(11.0)
+	velocity.x = vh.x; velocity.z = vh.y
 func notificar_impacto(_pos_hit: Vector3, dmg: float) -> void:
 	t_quieto = 0.0
 	dano_infligido.emit(dmg)
+func aplicar_parry_jugador(cura: float, dmg: float, pos_hit: Vector3, invul: bool = false) -> void:
+	if invul or cura > 0.0: t_invul_parry = 0.25
+	if cura > 0.0: curar(cura)
+	notificar_impacto(pos_hit, dmg)
 func curar(cantidad: float) -> void:
 	hp = clampf(hp + cantidad, 0.0, hp_max)
 	cambio_salud.emit(hp, hp_max)
 	if sis_eventos: sis_eventos.disparar_destello(global_position)
 func recibir_dano(cantidad: float) -> void:
-	if muerto: return
+	if muerto or t_invul_parry > 0.0: return
 	hp = clampf(hp - cantidad, 0.0, hp_max)
 	if cantidad >= 1.0 and audio_p: audio_p.dano()
 	cambio_salud.emit(hp, hp_max)
@@ -92,7 +94,5 @@ func recibir_dano(cantidad: float) -> void:
 func ganar_xp() -> void:
 	xp += xp_max * maxf(0.05, 0.15 - (nivel - 1) * 0.01)
 	if xp >= xp_max:
-		xp -= xp_max
-		nivel += 1
-		xp_max *= 1.25
+		xp -= xp_max; nivel += 1; xp_max *= 1.25
 	cambio_xp.emit(xp, xp_max, nivel)

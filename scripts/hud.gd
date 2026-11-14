@@ -19,6 +19,8 @@ func _ready() -> void:
 		p.cambio_salud.connect(_on_salud)
 		p.alerta_sangrado.connect(_on_sangrado)
 		p.cambio_xp.connect(_on_xp)
+		if p.parry_b:
+			p.parry_b.parry_conectado.connect(_mostrar_flash_parry)
 		if p.arma:
 			p.arma.cambio_municion.connect(_on_municion)
 			_on_municion(p.arma.balas, p.arma.balas_max, p.arma.recargando)
@@ -49,6 +51,14 @@ func _mostrar_game_over() -> void:
 		if is_instance_valid(btn_reiniciar):
 			btn_reiniciar.visible = true
 	)
+func _mostrar_flash_parry(es_fuerte: bool) -> void:
+	if not flash_dano:
+		return
+	if tw_dano and tw_dano.is_valid():
+		tw_dano.kill()
+	flash_dano.color = Color(0.25, 0.94, 1.0, 0.24 if es_fuerte else 0.12)
+	tw_dano = create_tween()
+	tw_dano.tween_property(flash_dano, "color:a", 0.0, 0.22).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 func _mostrar_flash() -> void:
 	if not flash_dano:
 		return

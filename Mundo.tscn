@@ -2254,6 +2254,7 @@ shape = SubResource("BoxShape_locker")
 [node name="Visual" parent="Nave/Arena/Piso2/locker1" unique_id=22000160 instance=ExtResource("glb_locker_abierto")]
 
 [node name="barandilla" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000161]
+collision_layer = 32
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.24, 4.2, -13.8)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla" unique_id=22000162]
@@ -2263,6 +2264,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla" unique_id=22000163 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla1" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000164]
+collision_layer = 32
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.24, 4.2, 13.3)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla1" unique_id=22000165]
@@ -2272,6 +2274,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla1" unique_id=22000166 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla2" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000167]
+collision_layer = 32
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.24, 4.2, -13.8)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla2" unique_id=22000168]
@@ -2281,6 +2284,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla2" unique_id=22000169 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla3" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000170]
+collision_layer = 32
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.24, 4.2, 13.3)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla3" unique_id=22000171]
@@ -2290,6 +2294,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla3" unique_id=22000172 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla4" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000173]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1, 4.2, -10.24)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla4" unique_id=22000174]
@@ -2299,6 +2304,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla4" unique_id=22000175 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla5" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000176]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1, 4.2, -10.24)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla5" unique_id=22000177]
@@ -2308,6 +2314,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla5" unique_id=22000178 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla6" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000179]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.2, -2.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla6" unique_id=22000180]
@@ -2317,6 +2324,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla6" unique_id=22000181 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla7" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000182]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, -2.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla7" unique_id=22000183]
@@ -2326,6 +2334,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla7" unique_id=22000184 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla8" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000185]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4.2, -2.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla8" unique_id=22000186]
@@ -2335,6 +2344,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla8" unique_id=22000187 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla9" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000188]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.2, 0.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla9" unique_id=22000189]
@@ -2344,6 +2354,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla9" unique_id=22000190 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla10" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000191]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, 0.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla10" unique_id=22000192]
@@ -2353,6 +2364,7 @@ shape = SubResource("BoxShape_barand_4")
 [node name="Visual" parent="Nave/Arena/Piso2/barandilla10" unique_id=22000193 instance=ExtResource("glb_barandilla_4m")]
 
 [node name="barandilla11" type="StaticBody3D" parent="Nave/Arena/Piso2" unique_id=22000194]
+collision_layer = 32
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4.2, 0.74)
 
 [node name="Col" type="CollisionShape3D" parent="Nave/Arena/Piso2/barandilla11" unique_id=22000195]

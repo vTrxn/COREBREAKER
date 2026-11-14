@@ -21,11 +21,11 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_parry"]
-size = Vector3(0.6, 0.6, 0.5)
+size = Vector3(1.5, 1.3, 1.9)
 
 [node name="Jugador" type="CharacterBody3D" unique_id=469313503 groups=["jugador"]]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 35
 script = ExtResource("1_jug")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2004513751]
@@ -58,22 +58,25 @@ light_energy = 0.0
 omni_range = 3.0
 
 [node name="BrazoParry" type="Node3D" parent="Camera3D" unique_id=1982736450]
-transform = Transform3D(-0.03315513, -0.9994502, 0, 0.9994502, -0.03315513, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("11_parr")
 metadata/_edit_group_ = true
 
+[node name="PunoParry" type="Node3D" parent="Camera3D/BrazoParry" unique_id=1982736458]
+visible = false
+
 [node name="LuzParry" type="OmniLight3D" parent="Camera3D/BrazoParry" unique_id=1982736454]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.32)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
 light_color = Color(0.1, 0.85, 1, 1)
 light_energy = 0.0
-omni_range = 2.5
+omni_range = 4.0
 
 [node name="AudioGolpe" type="AudioStreamPlayer" parent="Camera3D/BrazoParry" unique_id=1982736457]
+process_mode = 3
 stream = ExtResource("12_golp")
 volume_db = 2.5
 
 [node name="ParryArea" type="Area3D" parent="Camera3D/BrazoParry" unique_id=1982736455]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -1.15)
 collision_layer = 0
 collision_mask = 18
 

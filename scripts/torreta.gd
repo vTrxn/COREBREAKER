@@ -4,11 +4,14 @@ extends StaticBody3D
 @export var bala_scene: PackedScene
 @export var cd_disparo: float = 2.0
 @onready var audio_hit: AudioStreamPlayer3D = $AudioHit
+@onready var audio_disp: AudioStreamPlayer3D = get_node_or_null("AudioDisparo") as AudioStreamPlayer3D
+@onready var luz_est: OmniLight3D = get_node_or_null("LuzEstado") as OmniLight3D
 @onready var modelo: Node3D = $Modelo
 var anim_player: AnimationPlayer = null
 var p: CharacterBody3D = null
 var timer_disparo: float = 1.0
 var activo: bool = false
+var muerto: bool = false
 func _ready() -> void:
 	add_to_group("enemigos")
 	collision_layer = 16
@@ -19,25 +22,10 @@ func _ready() -> void:
 	_iniciar_spawn()
 func _iniciar_spawn() -> void:
 	activo = false
-	if modelo:
-		modelo.scale = Vector3(0.05, 0.05, 0.05)
-		var luz := OmniLight3D.new()
-		luz.position = Vector3(0.0, 0.8, 0.0)
-		luz.light_color = Color(0.62, 0.31, 0.87, 1.0)
-		luz.light_energy = 2.5
-		luz.omni_range = 3.5
-		add_child(luz)
-		var tw := create_tween().set_parallel(true)
-		tw.tween_property(modelo, "scale", Vector3.ONE, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		tw.tween_property(luz, "light_energy", 0.0, 1.0)
-		tw.chain().tween_callback(func():
-			activo = true
-			if anim_player and anim_player.has_animation("Idle"):
-				anim_player.play("Idle")
-			luz.queue_free()
-		)
-	else:
+	var cb := func():
 		activo = true
+		if anim_player and anim_player.has_animation("Idle"): anim_player.play("Idle")
+	ParticulasImpacto.iniciar_spawn(self, modelo, Color(0.62, 0.31, 0.87, 1.0), cb)
 func _physics_process(delta: float) -> void:
 	if not activo:
 		return
@@ -49,12 +37,16 @@ func _physics_process(delta: float) -> void:
 	if anim_player and anim_player.has_animation("Idle") and not anim_player.is_playing():
 		anim_player.play("Idle", 0.15)
 	timer_disparo -= delta
+	if luz_est:
+		luz_est.light_energy = clampf((0.35 - timer_disparo) / 0.35, 0.0, 1.0) * 4.2 if timer_disparo <= 0.35 else move_toward(luz_est.light_energy, 0.0, delta * 18.0)
 	if timer_disparo <= 0.0:
 		disparar()
 		timer_disparo = cd_disparo
 func disparar() -> void:
 	if not bala_scene or not p:
 		return
+	if luz_est: luz_est.light_energy = 6.5
+	if audio_disp: audio_disp.play()
 	if anim_player and anim_player.has_animation("Disparo"):
 		anim_player.stop()
 		anim_player.play("Disparo", 0.05)
@@ -64,15 +56,11 @@ func disparar() -> void:
 	b.global_position = spawn_pt
 	b.dir = (p.global_position + Vector3.UP * 1.0 - spawn_pt).normalized()
 func recibir_dano(cantidad: float) -> void:
-	if audio_hit:
-		audio_hit.play()
+	if muerto: return
+	if audio_hit: audio_hit.play()
 	hp -= cantidad
-	if hp <= 0.0:
-		if p and p.has_method("ganar_xp"):
-			p.ganar_xp()
-		if audio_hit:
-			remove_child(audio_hit)
-			get_parent().add_child(audio_hit)
-			audio_hit.global_position = global_position
-			audio_hit.finished.connect(audio_hit.queue_free)
-		queue_free()
+	if hp > 0.0:
+		if modelo: ParticulasImpacto.flash_malla(modelo)
+		return
+	muerto = true
+	ParticulasImpacto.morir_enemigo(self, Color(0.72, 0.25, 1.0, 1.0), p, audio_hit)

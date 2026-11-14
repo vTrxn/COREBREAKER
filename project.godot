@@ -88,6 +88,7 @@ recargar={
 3d_physics/layer_3="Sensores"
 3d_physics/layer_4="Jugador"
 3d_physics/layer_5="Enemigos"
+3d_physics/layer_6="Barandas"
 
 [rendering]
 
