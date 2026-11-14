@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=1 format=3]
+
+[resource]
+resource_name = "mat_emissive_cyan"
+albedo_color = Color(0.15, 0.88, 1.0, 1.0)
+metallic = 0.1
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.15, 0.88, 1.0, 1)
+emission_energy_multiplier = 2.6

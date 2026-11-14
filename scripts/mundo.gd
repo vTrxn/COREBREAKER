@@ -25,7 +25,7 @@ func _ready() -> void:
 	puntos_p2 = $PuntosSpawnPiso2.get_children()
 	$Triggers/TriggerArena.body_entered.connect(_on_entrar_arena)
 	$Triggers/TriggerSalida.body_entered.connect(_on_entrar_salida)
-	_hud_txt("CUARTO DE ESPERA", "CRUZA EL PASILLO AL HANGAR")
+	_hud_txt("SECTOR 01: REACTOR", "CRUZA EL PASILLO AL NUCLEO")
 func _on_entrar_arena(body: Node3D) -> void:
 	if not combate_iniciado and body.is_in_group("jugador"):
 		combate_iniciado = true

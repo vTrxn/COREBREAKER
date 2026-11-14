@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3]
+
+[ext_resource type="Texture2D" uid="uid://di7q6pv6gghw7" path="res://modelos/shared/oxidized_copper_pipe_albedo.png" id="1_alb"]
+[ext_resource type="Texture2D" uid="uid://nov53b6s38x" path="res://modelos/shared/oxidized_copper_pipe_rough.png" id="2_rgh"]
+[ext_resource type="Texture2D" uid="uid://cigu8s6ha0qeh" path="res://modelos/shared/oxidized_copper_pipe_normal.png" id="3_nrm"]
+
+[resource]
+resource_name = "mat_copper_worn"
+albedo_texture = ExtResource("1_alb")
+roughness_texture = ExtResource("2_rgh")
+normal_enabled = true
+normal_texture = ExtResource("3_nrm")
+metallic = 0.88
+roughness = 0.31
