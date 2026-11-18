@@ -28,7 +28,7 @@ func _on_body_entered(body: Node3D) -> void:
 	# Si el personaje venía deslizándose, cancelar el estado de fricción terrestre
 	if "deslizando" in cb:
 		cb.deslizando = false
-	cb.velocity.y = maxf(cb.velocity.y, impulso_y)
+	cb.velocity.y = impulso_y
 	if empuje != Vector3.ZERO:
 		if empuje.z < 0.0:
 			cb.velocity.z = minf(cb.velocity.z, empuje.z)
