@@ -25,9 +25,19 @@ func _on_body_entered(body: Node3D) -> void:
 	var id := body.get_instance_id()
 	if cds.has(id): return
 	var cb := body as CharacterBody3D
+	# Si el personaje venía deslizándose, cancelar el estado de fricción terrestre
+	if "deslizando" in cb:
+		cb.deslizando = false
 	cb.velocity.y = maxf(cb.velocity.y, impulso_y)
 	if empuje != Vector3.ZERO:
-		cb.velocity.x += empuje.x; cb.velocity.z += empuje.z
+		if empuje.z < 0.0:
+			cb.velocity.z = minf(cb.velocity.z, empuje.z)
+		elif empuje.z > 0.0:
+			cb.velocity.z = maxf(cb.velocity.z, empuje.z)
+		if empuje.x < 0.0:
+			cb.velocity.x = minf(cb.velocity.x, empuje.x)
+		elif empuje.x > 0.0:
+			cb.velocity.x = maxf(cb.velocity.x, empuje.x)
 	cds[id] = cooldown
 	if audio:
 		audio.play()

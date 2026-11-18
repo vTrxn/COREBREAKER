@@ -1,0 +1,742 @@
+[gd_scene load_steps=38 format=3]
+
+[ext_resource type="Script" path="res://scripts/cooling_corridor.gd" id="1_corridor"]
+[ext_resource type="PackedScene" path="res://Jugador.tscn" id="2_jugador"]
+[ext_resource type="PackedScene" path="res://HUD.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://MenuPausa.tscn" id="4_pausa"]
+[ext_resource type="PackedScene" path="res://Scrapper.tscn" id="5_scrapper"]
+[ext_resource type="PackedScene" path="res://Torreta.tscn" id="6_torreta"]
+[ext_resource type="PackedScene" path="res://TuberiaVapor.tscn" id="7_vapor"]
+[ext_resource type="PackedScene" path="res://EstructuraDeslizamiento.tscn" id="8_slide"]
+[ext_resource type="Script" path="res://scripts/pad_impulso.gd" id="9_pad"]
+[ext_resource type="Script" path="res://scripts/zona_toxica.gd" id="10_toxica"]
+[ext_resource type="AudioStream" path="res://audio/musica_nivel.mp3" id="11_musica"]
+[ext_resource type="AudioStream" path="res://audio/salto.mp3" id="12_salto"]
+[ext_resource type="Texture2D" path="res://texturas/piso_industrial.png" id="13_tpiso"]
+[ext_resource type="Texture2D" path="res://texturas/piso_nave_normal.png" id="14_tpiso_norm"]
+[ext_resource type="Texture2D" path="res://texturas/pared_industrial.png" id="15_tpared"]
+[ext_resource type="Texture2D" path="res://texturas/pared_nave_normal.png" id="16_tpared_norm"]
+[ext_resource type="Texture2D" path="res://texturas/techo_nave.png" id="17_ttecho"]
+[ext_resource type="Texture2D" path="res://texturas/techo_nave_normal.png" id="18_ttecho_norm"]
+[ext_resource type="Texture2D" path="res://texturas/cielo_estrellado.png" id="19_tcielo"]
+[ext_resource type="PackedScene" path="res://modelos/scifi_corridor_arch_01_free.glb" id="glb_arco"]
+[ext_resource type="PackedScene" path="res://modelos/reactor-cooling-tower-tall.glb" id="glb_torre_enfriamiento"]
+[ext_resource type="PackedScene" path="res://modelos/plasma_core_reactor_asset.glb" id="glb_reactor_plasma"]
+[ext_resource type="PackedScene" path="res://modelos/coolant_pylon_short_01.glb" id="glb_pilon_enfriamiento"]
+[ext_resource type="PackedScene" path="res://modelos/jumppad_octagon_scifi.glb" id="glb_pad_mesh"]
+[ext_resource type="PackedScene" path="res://modelos/industrial-railing-2m-lowpoly.glb" id="glb_baranda_2m"]
+[ext_resource type="PackedScene" path="res://modelos/metal_safety_rail_4m_pbr.glb" id="glb_baranda_4m"]
+[ext_resource type="PackedScene" path="res://modelos/heavy-cargo-crate-scifi.glb" id="glb_caja_pesada"]
+[ext_resource type="PackedScene" path="res://modelos/mil_ammo_supply_case_03.glb" id="glb_caja_municion"]
+[ext_resource type="PackedScene" path="res://modelos/cryo_canister_jar_blue.glb" id="glb_frasco_criogenico"]
+[ext_resource type="PackedScene" path="res://modelos/extraction_pad_beacon_v2.glb" id="glb_baliza_extraccion"]
+[ext_resource type="PackedScene" path="res://modelos/modular-server-rack-07.glb" id="glb_rack_servidor"]
+[ext_resource type="PackedScene" path="res://modelos/wall_telemetry_screen_04.glb" id="glb_pantalla_pared"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_espacio"]
+panorama = ExtResource("19_tcielo")
+energy_multiplier = 1.3
+
+[sub_resource type="Sky" id="Sky_espacio"]
+sky_material = SubResource("PanoramaSkyMaterial_espacio")
+
+[sub_resource type="Environment" id="Environment_corredor"]
+background_mode = 2
+sky = SubResource("Sky_espacio")
+ambient_light_source = 2
+ambient_light_color = Color(0.18, 0.24, 0.32, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.55
+glow_bloom = 0.1
+fog_enabled = true
+fog_light_color = Color(0.1, 0.2, 0.28, 1)
+fog_density = 0.012
+
+[sub_resource type="StandardMaterial3D" id="Mat_piso"]
+albedo_texture = ExtResource("13_tpiso")
+metallic = 0.4
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("14_tpiso_norm")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_pared"]
+albedo_texture = ExtResource("15_tpared")
+metallic = 0.5
+roughness = 0.45
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("16_tpared_norm")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_techo"]
+albedo_texture = ExtResource("17_ttecho")
+metallic = 0.5
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("18_ttecho_norm")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_pasarela"]
+albedo_color = Color(0.3, 0.35, 0.42, 1)
+metallic = 0.8
+roughness = 0.35
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_refrigerante_toxico"]
+albedo_color = Color(0.08, 0.65, 0.75, 0.9)
+metallic = 0.2
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.05, 0.72, 0.85, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_barrera_laser"]
+transparency = 1
+albedo_color = Color(1, 0.15, 0.15, 0.65)
+emission_enabled = true
+emission = Color(1, 0.15, 0.15, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="BoxMesh" id="Mesh_suelo_sec1"]
+material = SubResource("Mat_piso")
+size = Vector3(8, 0.5, 20)
+
+[sub_resource type="BoxShape3D" id="Col_suelo_sec1"]
+size = Vector3(8, 0.5, 20)
+
+[sub_resource type="BoxMesh" id="Mesh_techo_sec1"]
+material = SubResource("Mat_techo")
+size = Vector3(8, 0.5, 20)
+
+[sub_resource type="BoxMesh" id="Mesh_pared_lat_sec1"]
+material = SubResource("Mat_pared")
+size = Vector3(0.5, 5, 20)
+
+[sub_resource type="BoxShape3D" id="Col_pared_lat_sec1"]
+size = Vector3(0.5, 5, 20)
+
+[sub_resource type="BoxMesh" id="Mesh_suelo_sec2"]
+material = SubResource("Mat_piso")
+size = Vector3(8, 0.5, 26)
+
+[sub_resource type="BoxShape3D" id="Col_suelo_sec2"]
+size = Vector3(8, 0.5, 26)
+
+[sub_resource type="BoxMesh" id="Mesh_pared_lat_sec2"]
+material = SubResource("Mat_pared")
+size = Vector3(0.5, 6, 26)
+
+[sub_resource type="BoxShape3D" id="Col_pared_lat_sec2"]
+size = Vector3(0.5, 6, 26)
+
+[sub_resource type="BoxMesh" id="Mesh_techo_sec2"]
+material = SubResource("Mat_techo")
+size = Vector3(8, 0.5, 26)
+
+[sub_resource type="BoxMesh" id="Mesh_pasarela_sec2"]
+material = SubResource("Mat_pasarela")
+size = Vector3(2.4, 0.3, 16)
+
+[sub_resource type="BoxShape3D" id="Col_pasarela_sec2"]
+size = Vector3(2.4, 0.3, 16)
+
+[sub_resource type="BoxMesh" id="Mesh_rampa_sec2"]
+material = SubResource("Mat_pasarela")
+size = Vector3(2.4, 0.3, 4.5)
+
+[sub_resource type="BoxShape3D" id="Col_rampa_sec2"]
+size = Vector3(2.4, 0.3, 4.5)
+
+[sub_resource type="BoxMesh" id="Mesh_foso_liquido"]
+material = SubResource("Mat_refrigerante_toxico")
+size = Vector3(16, 0.3, 34)
+
+[sub_resource type="BoxShape3D" id="Col_foso_toxico"]
+size = Vector3(16, 1.2, 34)
+
+[sub_resource type="BoxMesh" id="Mesh_pared_foso_lat"]
+material = SubResource("Mat_pared")
+size = Vector3(0.6, 12, 34)
+
+[sub_resource type="BoxShape3D" id="Col_pared_foso_lat"]
+size = Vector3(0.6, 12, 34)
+
+[sub_resource type="BoxMesh" id="Mesh_pasarela_a"]
+material = SubResource("Mat_pasarela")
+size = Vector3(6, 0.5, 5)
+
+[sub_resource type="BoxShape3D" id="Col_pasarela_a"]
+size = Vector3(6, 0.5, 5)
+
+[sub_resource type="BoxShape3D" id="Col_pad_salto"]
+size = Vector3(2, 0.6, 2)
+
+[sub_resource type="BoxMesh" id="Mesh_catwalk_b"]
+material = SubResource("Mat_pasarela")
+size = Vector3(4.5, 0.4, 7)
+
+[sub_resource type="BoxShape3D" id="Col_catwalk_b"]
+size = Vector3(4.5, 0.4, 7)
+
+[sub_resource type="BoxMesh" id="Mesh_catwalk_c"]
+material = SubResource("Mat_pasarela")
+size = Vector3(5, 0.4, 7)
+
+[sub_resource type="BoxShape3D" id="Col_catwalk_c"]
+size = Vector3(5, 0.4, 7)
+
+[sub_resource type="BoxMesh" id="Mesh_plataforma_rescate"]
+material = SubResource("Mat_pasarela")
+size = Vector3(3.2, 0.4, 3.2)
+
+[sub_resource type="BoxShape3D" id="Col_plataforma_rescate"]
+size = Vector3(3.2, 0.4, 3.2)
+
+[sub_resource type="BoxMesh" id="Mesh_suelo_reactor"]
+material = SubResource("Mat_piso")
+size = Vector3(22, 0.6, 28)
+
+[sub_resource type="BoxShape3D" id="Col_suelo_reactor"]
+size = Vector3(22, 0.6, 28)
+
+[sub_resource type="BoxMesh" id="Mesh_pared_reactor_n"]
+material = SubResource("Mat_pared")
+size = Vector3(22, 8, 0.6)
+
+[sub_resource type="BoxShape3D" id="Col_pared_reactor_n"]
+size = Vector3(22, 8, 0.6)
+
+[sub_resource type="BoxMesh" id="Mesh_barrera_evac"]
+material = SubResource("Mat_barrera_laser")
+size = Vector3(7.5, 3.8, 0.3)
+
+[sub_resource type="BoxShape3D" id="Col_barrera_evac"]
+size = Vector3(7.5, 3.8, 0.3)
+
+[sub_resource type="BoxShape3D" id="Col_trigger_vol"]
+size = Vector3(7, 3, 2.5)
+
+[node name="CoolingCorridor" type="Node3D"]
+script = ExtResource("1_corridor")
+spawner_scrapper = ExtResource("5_scrapper")
+spawner_torreta = ExtResource("6_torreta")
+total_oleadas_reactor = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_corredor")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 15, 0)
+light_color = Color(0.75, 0.88, 1, 1)
+light_energy = 0.55
+shadow_enabled = true
+
+[node name="MusicaNivel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_musica")
+volume_db = -5.0
+
+[node name="Jugador" parent="." instance=ExtResource("2_jugador")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="MenuPausa" parent="." instance=ExtResource("4_pausa")]
+
+[node name="Triggers" type="Node3D" parent="."]
+
+[node name="TriggerEntrada" type="Area3D" parent="Triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+collision_layer = 4
+collision_mask = 8
+
+[node name="Col" type="CollisionShape3D" parent="Triggers/TriggerEntrada"]
+shape = SubResource("Col_trigger_vol")
+
+[node name="TriggerVapor" type="Area3D" parent="Triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -18)
+collision_layer = 4
+collision_mask = 8
+
+[node name="Col" type="CollisionShape3D" parent="Triggers/TriggerVapor"]
+shape = SubResource("Col_trigger_vol")
+
+[node name="TriggerPasarelas" type="Area3D" parent="Triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -45)
+collision_layer = 4
+collision_mask = 8
+
+[node name="Col" type="CollisionShape3D" parent="Triggers/TriggerPasarelas"]
+shape = SubResource("Col_trigger_vol")
+
+[node name="TriggerReactor" type="Area3D" parent="Triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -79)
+collision_layer = 4
+collision_mask = 8
+
+[node name="Col" type="CollisionShape3D" parent="Triggers/TriggerReactor"]
+shape = SubResource("Col_trigger_vol")
+
+[node name="TriggerFinal" type="Area3D" parent="Triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -102.5)
+collision_layer = 4
+collision_mask = 8
+
+[node name="Col" type="CollisionShape3D" parent="Triggers/TriggerFinal"]
+shape = SubResource("Col_trigger_vol")
+
+[node name="Sector1_Ductos" type="Node3D" parent="."]
+
+[node name="Suelo" type="StaticBody3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -6)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector1_Ductos/Suelo"]
+mesh = SubResource("Mesh_suelo_sec1")
+
+[node name="Col" type="CollisionShape3D" parent="Sector1_Ductos/Suelo"]
+shape = SubResource("Col_suelo_sec1")
+
+[node name="Techo" type="StaticBody3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.85, -6)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector1_Ductos/Techo"]
+mesh = SubResource("Mesh_techo_sec1")
+
+[node name="Col" type="CollisionShape3D" parent="Sector1_Ductos/Techo"]
+shape = SubResource("Col_suelo_sec1")
+
+[node name="ParedIzq" type="StaticBody3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 2.3, -6)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector1_Ductos/ParedIzq"]
+mesh = SubResource("Mesh_pared_lat_sec1")
+
+[node name="Col" type="CollisionShape3D" parent="Sector1_Ductos/ParedIzq"]
+shape = SubResource("Col_pared_lat_sec1")
+
+[node name="ParedDer" type="StaticBody3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 2.3, -6)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector1_Ductos/ParedDer"]
+mesh = SubResource("Mesh_pared_lat_sec1")
+
+[node name="Col" type="CollisionShape3D" parent="Sector1_Ductos/ParedDer"]
+shape = SubResource("Col_pared_lat_sec1")
+
+[node name="ArcoEntrada" parent="Sector1_Ductos" instance=ExtResource("glb_arco")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+
+[node name="LuzEntrada" type="OmniLight3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+light_color = Color(0.2, 0.85, 1, 1)
+light_energy = 2.0
+omni_range = 6.0
+
+[node name="ObstaculoDeslizamiento" parent="Sector1_Ductos" instance=ExtResource("8_slide")]
+transform = Transform3D(1.9, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="RackServidor1" parent="Sector1_Ductos" instance=ExtResource("glb_rack_servidor")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.5, 0, -4)
+
+[node name="PantallaPared1" parent="Sector1_Ductos" instance=ExtResource("glb_pantalla_pared")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.8, 2.0, -11)
+
+[node name="LuzDucto" type="OmniLight3D" parent="Sector1_Ductos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -12)
+light_color = Color(0.3, 0.75, 1, 1)
+light_energy = 1.8
+omni_range = 7.0
+
+[node name="Sector2_ValvulasVapor" type="Node3D" parent="."]
+
+[node name="Suelo" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -29)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/Suelo"]
+mesh = SubResource("Mesh_suelo_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/Suelo"]
+shape = SubResource("Col_suelo_sec2")
+
+[node name="Techo" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8, -29)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/Techo"]
+mesh = SubResource("Mesh_techo_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/Techo"]
+shape = SubResource("Col_suelo_sec2")
+
+[node name="ParedIzq" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 2.8, -29)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/ParedIzq"]
+mesh = SubResource("Mesh_pared_lat_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/ParedIzq"]
+shape = SubResource("Col_pared_lat_sec2")
+
+[node name="ParedDer" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 2.8, -29)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/ParedDer"]
+mesh = SubResource("Mesh_pared_lat_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/ParedDer"]
+shape = SubResource("Col_pared_lat_sec2")
+
+[node name="Arco1" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_arco")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, -20)
+
+[node name="Arco2" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_arco")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, -32)
+
+[node name="TuberiaVapor1" parent="Sector2_ValvulasVapor" instance=ExtResource("7_vapor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, -23)
+tiempo_activo = 2.0
+tiempo_inactivo = 2.4
+retraso_inicio = 0.0
+
+[node name="TuberiaVapor2" parent="Sector2_ValvulasVapor" instance=ExtResource("7_vapor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -28)
+tiempo_activo = 2.0
+tiempo_inactivo = 2.4
+retraso_inicio = 1.2
+
+[node name="TuberiaVapor3" parent="Sector2_ValvulasVapor" instance=ExtResource("7_vapor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -35)
+tiempo_activo = 2.5
+tiempo_inactivo = 2.0
+retraso_inicio = 0.5
+
+[node name="PasarelaElevada" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 2.2, -28)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/PasarelaElevada"]
+mesh = SubResource("Mesh_pasarela_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/PasarelaElevada"]
+shape = SubResource("Col_pasarela_sec2")
+
+[node name="RampaAcceso" type="StaticBody3D" parent="Sector2_ValvulasVapor"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, -0.422618, 0, 0.422618, 0.906308, 2.6, 1.0, -18.2)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector2_ValvulasVapor/RampaAcceso"]
+mesh = SubResource("Mesh_rampa_sec2")
+
+[node name="Col" type="CollisionShape3D" parent="Sector2_ValvulasVapor/RampaAcceso"]
+shape = SubResource("Col_rampa_sec2")
+
+[node name="Baranda1" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_baranda_2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 2.35, -24)
+
+[node name="Baranda2" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_baranda_2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 2.35, -28)
+
+[node name="Baranda3" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_baranda_2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 2.35, -32)
+
+[node name="CajaPasarela" parent="Sector2_ValvulasVapor" instance=ExtResource("glb_caja_municion")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 2.4, -30)
+
+[node name="Sector3_FosoPasarelas" type="Node3D" parent="."]
+
+[node name="FosoRefrigerante" type="MeshInstance3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.9, -59)
+mesh = SubResource("Mesh_foso_liquido")
+
+[node name="ZonaToxicaFoso" type="Area3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -59)
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("10_toxica")
+dano_tick = 9.0
+intervalo = 0.4
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/ZonaToxicaFoso"]
+shape = SubResource("Col_foso_toxico")
+
+[node name="LuzFoso" type="OmniLight3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -59)
+light_color = Color(0.08, 0.85, 0.95, 1)
+light_energy = 3.2
+omni_range = 14.0
+
+[node name="ParedFosoIzq" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3, 1.0, -59)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/ParedFosoIzq"]
+mesh = SubResource("Mesh_pared_foso_lat")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/ParedFosoIzq"]
+shape = SubResource("Col_pared_foso_lat")
+
+[node name="ParedFosoDer" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.0, -59)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/ParedFosoDer"]
+mesh = SubResource("Mesh_pared_foso_lat")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/ParedFosoDer"]
+shape = SubResource("Col_pared_foso_lat")
+
+[node name="TorreEnfriamientoIzq" parent="Sector3_FosoPasarelas" instance=ExtResource("glb_torre_enfriamiento")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -6.5, -4.0, -58)
+
+[node name="TorreEnfriamientoDer" parent="Sector3_FosoPasarelas" instance=ExtResource("glb_torre_enfriamiento")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 6.5, -4.0, -58)
+
+[node name="PlataformaSalida" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -44)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/PlataformaSalida"]
+mesh = SubResource("Mesh_pasarela_a")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PlataformaSalida"]
+shape = SubResource("Col_pasarela_a")
+
+[node name="PadImpulsoFoso" type="Area3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -45)
+collision_layer = 4
+collision_mask = 24
+script = ExtResource("9_pad")
+impulso_y = 13.8
+empuje = Vector3(0, 0, -9.2)
+
+[node name="PadMesh" parent="Sector3_FosoPasarelas/PadImpulsoFoso" instance=ExtResource("glb_pad_mesh")]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PadImpulsoFoso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("Col_pad_salto")
+
+[node name="Luz" type="OmniLight3D" parent="Sector3_FosoPasarelas/PadImpulsoFoso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+light_color = Color(0.1, 0.9, 1, 1)
+light_energy = 2.5
+omni_range = 4.0
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="Sector3_FosoPasarelas/PadImpulsoFoso"]
+stream = ExtResource("12_salto")
+
+[node name="PasarelaElevada_B" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -53)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/PasarelaElevada_B"]
+mesh = SubResource("Mesh_catwalk_b")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PasarelaElevada_B"]
+shape = SubResource("Col_catwalk_b")
+
+[node name="BarandaIzq" parent="Sector3_FosoPasarelas/PasarelaElevada_B" instance=ExtResource("glb_baranda_4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.2, 0)
+
+[node name="BarandaDer" parent="Sector3_FosoPasarelas/PasarelaElevada_B" instance=ExtResource("glb_baranda_4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0.2, 0)
+
+[node name="PasarelaElevada_C" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -66.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/PasarelaElevada_C"]
+mesh = SubResource("Mesh_catwalk_c")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PasarelaElevada_C"]
+shape = SubResource("Col_catwalk_c")
+
+[node name="BarandaIzq" parent="Sector3_FosoPasarelas/PasarelaElevada_C" instance=ExtResource("glb_baranda_4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.2, 0)
+
+[node name="BarandaDer" parent="Sector3_FosoPasarelas/PasarelaElevada_C" instance=ExtResource("glb_baranda_4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.2, 0)
+
+[node name="CajaRecompensa" parent="Sector3_FosoPasarelas/PasarelaElevada_C" instance=ExtResource("glb_caja_municion")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.2, -1.8)
+
+[node name="FrascoCriogenico" parent="Sector3_FosoPasarelas/PasarelaElevada_C" instance=ExtResource("glb_frasco_criogenico")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.2, -1.8)
+
+[node name="PlataformaRescate" type="StaticBody3D" parent="Sector3_FosoPasarelas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -60)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="Sector3_FosoPasarelas/PlataformaRescate"]
+mesh = SubResource("Mesh_plataforma_rescate")
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PlataformaRescate"]
+shape = SubResource("Col_plataforma_rescate")
+
+[node name="PadRescate" type="Area3D" parent="Sector3_FosoPasarelas/PlataformaRescate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+collision_layer = 4
+collision_mask = 24
+script = ExtResource("9_pad")
+impulso_y = 14.5
+empuje = Vector3(0, 0, -8.0)
+
+[node name="PadMesh" parent="Sector3_FosoPasarelas/PlataformaRescate/PadRescate" instance=ExtResource("glb_pad_mesh")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+
+[node name="Col" type="CollisionShape3D" parent="Sector3_FosoPasarelas/PlataformaRescate/PadRescate"]
+shape = SubResource("Col_pad_salto")
+
+[node name="Luz" type="OmniLight3D" parent="Sector3_FosoPasarelas/PlataformaRescate/PadRescate"]
+light_color = Color(0.1, 0.9, 1, 1)
+light_energy = 2.2
+omni_range = 3.5
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="Sector3_FosoPasarelas/PlataformaRescate/PadRescate"]
+stream = ExtResource("12_salto")
+
+[node name="SectorReactor" type="Node3D" parent="."]
+
+[node name="Suelo" type="StaticBody3D" parent="SectorReactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, -90)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="SectorReactor/Suelo"]
+mesh = SubResource("Mesh_suelo_reactor")
+
+[node name="Col" type="CollisionShape3D" parent="SectorReactor/Suelo"]
+shape = SubResource("Col_suelo_reactor")
+
+[node name="ParedFondo" type="StaticBody3D" parent="SectorReactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0, -104.2)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="SectorReactor/ParedFondo"]
+mesh = SubResource("Mesh_pared_reactor_n")
+
+[node name="Col" type="CollisionShape3D" parent="SectorReactor/ParedFondo"]
+shape = SubResource("Col_pared_reactor_n")
+
+[node name="ParedIzq" type="StaticBody3D" parent="SectorReactor"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.2, 7.0, -90)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="SectorReactor/ParedIzq"]
+mesh = SubResource("Mesh_pared_reactor_n")
+
+[node name="Col" type="CollisionShape3D" parent="SectorReactor/ParedIzq"]
+shape = SubResource("Col_pared_reactor_n")
+
+[node name="ParedDer" type="StaticBody3D" parent="SectorReactor"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.2, 7.0, -90)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="SectorReactor/ParedDer"]
+mesh = SubResource("Mesh_pared_reactor_n")
+
+[node name="Col" type="CollisionShape3D" parent="SectorReactor/ParedDer"]
+shape = SubResource("Col_pared_reactor_n")
+
+[node name="ReactorPlasma" parent="SectorReactor" instance=ExtResource("glb_reactor_plasma")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 3.2, -90)
+
+[node name="LuzNucleo" type="OmniLight3D" parent="SectorReactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -90)
+light_color = Color(0.85, 0.35, 1, 1)
+light_energy = 4.2
+omni_range = 16.0
+
+[node name="Pilon1" parent="SectorReactor" instance=ExtResource("glb_pilon_enfriamiento")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.2, -85)
+
+[node name="Pilon2" parent="SectorReactor" instance=ExtResource("glb_pilon_enfriamiento")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 3.2, -85)
+
+[node name="Pilon3" parent="SectorReactor" instance=ExtResource("glb_pilon_enfriamiento")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.2, -95)
+
+[node name="Pilon4" parent="SectorReactor" instance=ExtResource("glb_pilon_enfriamiento")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 3.2, -95)
+
+[node name="CajaCobertura1" parent="SectorReactor" instance=ExtResource("glb_caja_pesada")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3.2, -82)
+
+[node name="CajaCobertura2" parent="SectorReactor" instance=ExtResource("glb_caja_pesada")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3.2, -82)
+
+[node name="PuntosSpawn" type="Node3D" parent="SectorReactor"]
+
+[node name="Punto1" type="Node3D" parent="SectorReactor/PuntosSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0, 3.5, -86)
+
+[node name="Punto2" type="Node3D" parent="SectorReactor/PuntosSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0, 3.5, -86)
+
+[node name="Punto3" type="Node3D" parent="SectorReactor/PuntosSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0, 3.5, -94)
+
+[node name="Punto4" type="Node3D" parent="SectorReactor/PuntosSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0, 3.5, -94)
+
+[node name="BarreraEvacuacion" type="StaticBody3D" parent="SectorReactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1, -99.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="SectorReactor/BarreraEvacuacion"]
+mesh = SubResource("Mesh_barrera_evac")
+
+[node name="Col" type="CollisionShape3D" parent="SectorReactor/BarreraEvacuacion"]
+shape = SubResource("Col_barrera_evac")
+
+[node name="LuzBarrera" type="OmniLight3D" parent="SectorReactor/BarreraEvacuacion"]
+light_color = Color(1, 0.2, 0.2, 1)
+light_energy = 2.5
+omni_range = 5.0
+
+[node name="BalizaExtraccion" parent="SectorReactor" instance=ExtResource("glb_baliza_extraccion")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -102.5)
+
+[node name="LuzExtraccion" type="OmniLight3D" parent="SectorReactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, -102.5)
+light_color = Color(0.2, 1, 0.6, 1)
+light_energy = 3.0
+omni_range = 6.0

@@ -153,7 +153,6 @@ text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="BtnReiniciar" type="Button" parent="MuerteBox"]
-visible = false
 custom_minimum_size = Vector2(200, 48)
 layout_mode = 2
 size_flags_horizontal = 4

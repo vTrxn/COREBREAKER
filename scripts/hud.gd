@@ -15,6 +15,9 @@ var tw_dano: Tween = null
 var muerto: bool = false
 func _ready() -> void:
 	var p := get_tree().get_first_node_in_group("jugador") as Jugador
+	if not p:
+		await get_tree().process_frame
+		p = get_tree().get_first_node_in_group("jugador") as Jugador
 	if p:
 		p.cambio_salud.connect(_on_salud)
 		p.alerta_sangrado.connect(_on_sangrado)
@@ -42,15 +45,12 @@ func _on_salud(act: float, max_v: float) -> void:
 		_mostrar_game_over()
 func _mostrar_game_over() -> void:
 	muerto = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$CenterContainer.visible = false
 	if muerte_box:
 		muerte_box.visible = true
 	if btn_reiniciar:
-		btn_reiniciar.visible = false
-	get_tree().create_timer(1.0).timeout.connect(func():
-		if is_instance_valid(btn_reiniciar):
-			btn_reiniciar.visible = true
-	)
+		btn_reiniciar.visible = true
 func _mostrar_flash_parry(es_fuerte: bool) -> void:
 	if not flash_dano:
 		return
