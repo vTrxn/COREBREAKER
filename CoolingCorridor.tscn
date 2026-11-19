@@ -2132,6 +2132,6 @@ omni_range = 8.0
 [node name="PortalTP" type="Area3D" parent="SectorReactor" unique_id=1720315217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, -110.8)
 script = ExtResource("ext_portal")
-escena_destino = "res://Mundo.tscn"
-titulo_sector = "SECTOR 01 // REACTOR PRINCIPAL"
-subtitulo = "EXTRACCION COMPLETADA — SIGUIENTE CICLO"
+escena_destino = "res://CustodioArena.tscn"
+titulo_sector = "SECTOR 03 // CAMARA DEL CUSTODIO"
+subtitulo = "DERROTA AL CENTINELA DE LA REFINERIA TARTARUS"
