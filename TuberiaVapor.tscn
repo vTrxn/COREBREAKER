@@ -1,67 +1,99 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/tuberia_vapor.gd" id="1_tuberia"]
-[ext_resource type="Texture2D" path="res://texturas/pared_industrial.png" id="2_pared_tex"]
+[ext_resource type="PackedScene" path="res://modelos/tuberia_vapor_crio.glb" id="2_modelo"]
+[ext_resource type="AudioStream" path="res://audio/dash.mp3" id="3_sonido"]
+[ext_resource type="Script" path="res://scripts/zona_toxica.gd" id="4_toxica"]
 
-[sub_resource type="StandardMaterial3D" id="Mat_tuberia_metal"]
-albedo_color = Color(0.65, 0.72, 0.8, 1)
-albedo_texture = ExtResource("2_pared_tex")
-metallic = 0.8
-roughness = 0.35
-uv1_scale = Vector3(0.5, 2.0, 0.5)
+[sub_resource type="BoxShape3D" id="BoxShape_tubo_col"]
+size = Vector3(2.9, 0.75, 0.7)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_tubo"]
-material = SubResource("Mat_tuberia_metal")
-top_radius = 0.22
-bottom_radius = 0.22
-height = 2.8
+[sub_resource type="Gradient" id="Grad_tex_vapor"]
+offsets = PackedFloat32Array(0, 0.45, 1)
+colors = PackedColorArray(0.92, 0.99, 1, 0.9, 0.72, 0.92, 1, 0.42, 0.6, 0.85, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradTex_vapor"]
+gradient = SubResource("Grad_tex_vapor")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="StandardMaterial3D" id="Mat_particula_vapor"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.82, 0.94, 1, 0.45)
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.86, 0.96, 1, 0.75)
+albedo_texture = SubResource("GradTex_vapor")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="BoxMesh" id="BoxMesh_vapor"]
+[sub_resource type="QuadMesh" id="QuadMesh_vapor"]
 material = SubResource("Mat_particula_vapor")
-size = Vector3(0.18, 0.18, 0.18)
+size = Vector2(0.62, 0.62)
+
+[sub_resource type="Gradient" id="Grad_vapor"]
+offsets = PackedFloat32Array(0, 0.2, 0.72, 1)
+colors = PackedColorArray(0.75, 0.96, 1, 0.25, 0.9, 0.99, 1, 0.85, 0.72, 0.92, 1, 0.45, 0.6, 0.86, 1, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape_vapor_dano"]
-size = Vector3(1.4, 2.2, 1.4)
+size = Vector3(1.35, 2.6, 1.35)
 
 [node name="TuberiaVapor" type="Node3D"]
 script = ExtResource("1_tuberia")
 
-[node name="MeshTubo" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.6, 0)
-mesh = SubResource("CylinderMesh_tubo")
+[node name="ModeloTuberia" parent="." instance=ExtResource("2_modelo")]
+
+[node name="ColTubo" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape3D" parent="ColTubo"]
+shape = SubResource("BoxShape_tubo_col")
 
 [node name="ParticulasVapor" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62, 0)
 emitting = false
-amount = 36
-lifetime = 0.75
-mesh = SubResource("BoxMesh_vapor")
+amount = 64
+lifetime = 0.62
+mesh = SubResource("QuadMesh_vapor")
 emission_shape = 1
-emission_sphere_radius = 0.25
+emission_sphere_radius = 0.16
 direction = Vector3(0, -1, 0)
-spread = 24.0
-gravity = Vector3(0, 1.5, 0)
-initial_velocity_min = 4.2
+spread = 15.0
+gravity = Vector3(0, -1.2, 0)
+initial_velocity_min = 4.6
 initial_velocity_max = 6.8
-scale_amount_min = 0.4
+scale_amount_min = 0.6
 scale_amount_max = 2.2
+color_ramp = SubResource("Grad_vapor")
 
 [node name="AreaDano" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 collision_layer = 4
 collision_mask = 8
 monitoring = false
+script = ExtResource("4_toxica")
+dano_tick = 12.0
+intervalo = 0.35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaDano"]
 shape = SubResource("BoxShape_vapor_dano")
 
 [node name="LuzAviso" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
-light_color = Color(0.12, 0.35, 0.6, 1)
-light_energy = 0.8
-omni_range = 4.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0)
+light_color = Color(0.12, 0.42, 0.72, 1)
+light_energy = 1.0
+omni_range = 4.8
+
+[node name="AudioVapor" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+stream = ExtResource("3_sonido")
+volume_db = -3.0
+unit_size = 5.0
+pitch_scale = 0.55

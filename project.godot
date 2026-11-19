@@ -18,6 +18,10 @@ config/name="COREBREAKER"
 run/main_scene="res://Mundo.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
+[autoload]
+
+TransicionNivel="*res://scripts/transicion_nivel.gd"
+
 [input]
 
 move_left={

@@ -3,93 +3,36 @@ extends Node3D
 @export var spawner_scrapper: PackedScene
 @export var spawner_torreta: PackedScene
 @export var total_hordas: int = 3
-@onready var p: Jugador = $Jugador
 @onready var mus: AudioStreamPlayer = $MusicaNivel
-@onready var l_h: Label = $HUD/MarginContainer/VBoxHorda/LabelHorda
-@onready var l_r: Label = $HUD/MarginContainer/VBoxHorda/LabelRestantes
+@onready var hud: HUD = get_node_or_null("HUD") as HUD
 @onready var barrera: StaticBody3D = $Nave/SalidaEspacio/BarreraSalida
 @onready var luz_salida: OmniLight3D = $Nave/SalidaEspacio/LuzSalida
-var puntos_p1: Array[Node] = []
-var puntos_p2: Array[Node] = []
-var cola: Array[Dictionary] = []
-var horda_num: int = 0
-var combate_iniciado: bool = false
-var esperando_horda: bool = false
-var zona_despejada: bool = false
-var nivel_completado: bool = false
-var timer: float = 0.0
+@onready var portal: PortalNivel = get_node_or_null("ParkourEspacial/plataforma4/PortalTP") as PortalNivel
+var _oleadas: ControladorOleadas; var _zona_despejada: bool = false; var _nivel_completado: bool = false
 func _ready() -> void:
-	mus.finished.connect(mus.play)
-	mus.play()
-	puntos_p1 = $PuntosSpawnPiso1.get_children()
-	puntos_p2 = $PuntosSpawnPiso2.get_children()
-	$Triggers/TriggerArena.body_entered.connect(_on_entrar_arena)
+	mus.finished.connect(mus.play); mus.play()
+	if portal: portal.activar(false)
+	_oleadas = ControladorOleadas.new(); add_child(_oleadas)
+	_oleadas.configurar(spawner_scrapper, spawner_torreta, $PuntosSpawnPiso1.get_children(), $PuntosSpawnPiso2.get_children(), total_hordas, 1.05, 2.8, 1.8, "HORDA", "ENEMIGOS", _generar_horda)
+	_oleadas.estado_cambiado.connect(_hud_txt)
+	_oleadas.oleada_superada.connect(func(n: int): _hud_txt("HORDA %d SUPERADA" % n, "SIGUIENTE EN BREVE..."))
+	_oleadas.sector_despejado.connect(_on_sector_despejado)
+	$Triggers/TriggerArena.body_entered.connect(func(b: Node3D): if b.is_in_group("jugador"): _oleadas.iniciar())
 	$Triggers/TriggerSalida.body_entered.connect(_on_entrar_salida)
 	_hud_txt("SECTOR 01: REACTOR", "CRUZA EL PASILLO AL NUCLEO")
-func _on_entrar_arena(body: Node3D) -> void:
-	if not combate_iniciado and body.is_in_group("jugador"):
-		combate_iniciado = true
-		_iniciar_horda()
-func _iniciar_horda() -> void:
-	horda_num += 1
-	esperando_horda = false
-	cola.clear()
-	for i in range(2 + horda_num):
-		cola.append({"piso": 1, "torreta": randf() >= 0.8})
-	for i in range(1 + horda_num):
-		cola.append({"piso": 2, "torreta": randf() < 0.8})
-	cola.shuffle()
-	timer = 0.4
-	_hud_txt("HORDA %d / %d" % [horda_num, total_hordas], "ENEMIGOS: %d" % cola.size())
-func _spawnear_uno() -> void:
-	var item: Dictionary = cola.pop_back()
-	var pt := _elegir_punto(puntos_p2 if int(item["piso"]) == 2 else puntos_p1)
-	var esc := spawner_torreta if bool(item["torreta"]) else spawner_scrapper
-	if pt and esc:
-		var en := esc.instantiate()
-		add_child(en)
-		en.global_position = pt.global_position
-func _elegir_punto(lista: Array[Node]) -> Node3D:
-	if lista.is_empty():
-		return null
-	var idx := range(lista.size())
-	idx.shuffle()
-	var activos := get_tree().get_nodes_in_group("enemigos")
-	for i in idx:
-		var cand := lista[i] as Node3D
-		if activos.all(func(e): return not is_instance_valid(e) or e.global_position.distance_to(cand.global_position) >= 1.8):
-			return cand
-	return lista[idx[0]] as Node3D
-func _process(delta: float) -> void:
-	if not combate_iniciado or zona_despejada:
-		return
-	if esperando_horda:
-		timer -= delta
-		if timer <= 0.0:
-			_iniciar_horda()
-		return
-	if not cola.is_empty():
-		timer -= delta
-		if timer <= 0.0:
-			_spawnear_uno()
-			timer = 1.05
-	var vivos := get_tree().get_nodes_in_group("enemigos").size()
-	_hud_txt("HORDA %d / %d" % [horda_num, total_hordas], "ENEMIGOS: %d" % (vivos + cola.size()))
-	if cola.is_empty() and vivos == 0:
-		if horda_num < total_hordas:
-			esperando_horda = true
-			timer = 2.8
-			_hud_txt("HORDA %d SUPERADA" % horda_num, "SIGUIENTE EN BREVE...")
-		else:
-			zona_despejada = true
-			barrera.collision_layer = 0
-			barrera.visible = false
-			luz_salida.light_color = Color(0.15, 0.95, 0.65, 1.0)
-			_hud_txt("ZONA 1 DESPEJADA", "SALIDA AL ESPACIO ABIERTA")
+func _generar_horda(num: int, scrap: PackedScene, torr: PackedScene) -> Array[Dictionary]:
+	var q: Array[Dictionary] = []
+	for i in range(2 + num): q.append({"escena": torr if randf() >= 0.8 else scrap, "piso": 1})
+	for i in range(1 + num): q.append({"escena": torr if randf() < 0.8 else scrap, "piso": 2})
+	return q
+func _on_sector_despejado() -> void:
+	_zona_despejada = true
+	if barrera: barrera.collision_layer = 0; barrera.visible = false
+	if luz_salida: luz_salida.light_color = Color(0.15, 0.95, 0.65, 1.0)
+	if portal: portal.activar(true)
+	_hud_txt("ZONA 1 DESPEJADA", "SALIDA AL ESPACIO ABIERTA")
 func _on_entrar_salida(body: Node3D) -> void:
-	if zona_despejada and not nivel_completado and body.is_in_group("jugador"):
-		nivel_completado = true
-		_hud_txt("ZONA 1 COMPLETADA", "PARKOUR ESPACIAL DESBLOQUEADO")
+	if _zona_despejada and not _nivel_completado and body.is_in_group("jugador"):
+		_nivel_completado = true; _hud_txt("ZONA 1 COMPLETADA", "ATRAVIESA EL PARKOUR AL PORTAL")
 func _hud_txt(titulo: String, detalle: String) -> void:
-	l_h.text = titulo
-	l_r.text = detalle
+	if hud: hud.mostrar_estado(titulo, detalle)

@@ -6,8 +6,8 @@ const VENTANA_PARRY := 0.22
 const CD_FALLO := 1.5; const CD_EXITO := 0.35; const CD_CURA := 2.0
 const RANGO_ENEMIGO := 2.7
 const RANGO_PROYECTIL := 1.65
-const PUNO_IDLE := [Vector3(-0.34, -0.58, -0.14), Vector3(24.0, 10.0, -14.0)]
-const PUNO_GOLPE := [Vector3(-0.18, -0.27, -0.35), Vector3(84.0, -30.0, 22.0)]
+const PUNO_IDLE := [Vector3(-0.34, -0.58, -0.26), Vector3(26.0, 12.0, -18.0)]
+const PUNO_GOLPE := [Vector3(-0.18, -0.23, -0.47), Vector3(12.0, -17.0, -28.0)]
 @onready var parry_area: Area3D = $ParryArea
 @onready var puno: Node3D = get_node_or_null("PunoParry") as Node3D
 @onready var luz: OmniLight3D = $LuzParry
@@ -24,14 +24,8 @@ func _ready() -> void:
 		parry_area.area_entered.connect(func(a: Area3D): if is_parrying and a is Proyectil: desviar(a as Proyectil))
 		parry_area.body_entered.connect(func(c: Node): if is_parrying and c.is_in_group("enemigos"): golpear_enemigo(c))
 	if luz: luz.light_energy = 0.0
+	if puno: puno.position = PUNO_IDLE[0]; puno.rotation_degrees = PUNO_IDLE[1]; puno.visible = false
 func _exit_tree() -> void: Engine.time_scale = 1.0
-func vincular_puno(modelo: Node3D, base_xf: Transform3D) -> void:
-	if not puno or not modelo: return
-	puno.global_transform = Transform3D(base_xf.basis, base_xf.origin + base_xf.basis * Vector3(-0.265, 0.94, -0.04))
-	for nombre in ["Guante_I", "Antebrazo_I", "Brazalete_I"]:
-		var n := modelo.find_child(nombre, true, false) as VisualInstance3D
-		if n: n.layers = 1; n.reparent(puno, true)
-	puno.position = PUNO_IDLE[0]; puno.rotation_degrees = PUNO_IDLE[1]; puno.visible = false
 func _physics_process(delta: float) -> void:
 	if t_cura_cd > 0.0: t_cura_cd = maxf(0.0, t_cura_cd - delta)
 	if luz and luz.light_energy > 0.0: luz.light_energy = move_toward(luz.light_energy, 0.0, delta * 20.0)

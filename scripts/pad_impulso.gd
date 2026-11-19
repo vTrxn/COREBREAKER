@@ -25,9 +25,7 @@ func _on_body_entered(body: Node3D) -> void:
 	var id := body.get_instance_id()
 	if cds.has(id): return
 	var cb := body as CharacterBody3D
-	# Si el personaje venía deslizándose, cancelar el estado de fricción terrestre
-	if "deslizando" in cb:
-		cb.deslizando = false
+	if cb.has_method("cancelar_deslizamiento"): cb.cancelar_deslizamiento()
 	cb.velocity.y = impulso_y
 	if empuje != Vector3.ZERO:
 		if empuje.z < 0.0:

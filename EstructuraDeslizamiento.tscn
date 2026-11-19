@@ -1,69 +1,39 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Texture2D" path="res://texturas/pared_industrial.png" id="1_pared"]
-[ext_resource type="Texture2D" path="res://texturas/pared_nave.png" id="2_viga"]
+[ext_resource type="PackedScene" path="res://modelos/compuerta_deslizamiento.glb" id="1_modelo"]
 
-[sub_resource type="StandardMaterial3D" id="Mat_pilar"]
-albedo_color = Color(0.45, 0.48, 0.55, 1)
-albedo_texture = ExtResource("1_pared")
-metallic = 0.65
-roughness = 0.45
-uv1_scale = Vector3(0.5, 2.0, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="Mat_viga_baja"]
-albedo_color = Color(0.85, 0.5, 0.1, 1)
-albedo_texture = ExtResource("2_viga")
-metallic = 0.7
-roughness = 0.35
-emission_enabled = true
-emission = Color(0.9, 0.4, 0.05, 1)
-emission_energy_multiplier = 0.35
-uv1_scale = Vector3(2.0, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_viga"]
-material = SubResource("Mat_viga_baja")
-size = Vector3(4.0, 1.8, 0.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape_viga"]
-size = Vector3(4.0, 1.8, 0.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pilar"]
-material = SubResource("Mat_pilar")
-size = Vector3(0.4, 3.2, 0.4)
+[sub_resource type="BoxShape3D" id="BoxShape_compuerta"]
+size = Vector3(5.6, 3.44, 0.48)
 
 [sub_resource type="BoxShape3D" id="BoxShape_pilar"]
-size = Vector3(0.4, 3.2, 0.4)
+size = Vector3(0.6, 4.6, 0.7)
 
 [node name="EstructuraDeslizamiento" type="StaticBody3D"]
 collision_layer = 1
 collision_mask = 0
 
-[node name="VigaSuperior" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
-mesh = SubResource("BoxMesh_viga")
+[node name="ModeloCompuerta" parent="." instance=ExtResource("1_modelo")]
 
-[node name="ColViga" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
-shape = SubResource("BoxShape_viga")
-
-[node name="PilarIzq" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 1.4, 0)
-mesh = SubResource("BoxMesh_pilar")
+[node name="ColCompuerta" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0)
+shape = SubResource("BoxShape_compuerta")
 
 [node name="ColPilarIzq" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95, 2.3, 0)
 shape = SubResource("BoxShape_pilar")
-
-[node name="PilarDer" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 1.4, 0)
-mesh = SubResource("BoxMesh_pilar")
 
 [node name="ColPilarDer" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95, 2.3, 0)
 shape = SubResource("BoxShape_pilar")
 
-[node name="LuzPasoBajo" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-light_color = Color(1, 0.6, 0.15, 1)
-light_energy = 1.6
-omni_range = 3.2
+[node name="LuzPasoIzq" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 1.25, 0.65)
+light_color = Color(1, 0.58, 0.12, 1)
+light_energy = 1.4
+omni_range = 3.5
+
+[node name="LuzPasoDer" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.25, 0.65)
+light_color = Color(1, 0.58, 0.12, 1)
+light_energy = 1.4
+omni_range = 3.5

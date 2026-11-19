@@ -46,7 +46,8 @@ func _on_salud(act: float, max_v: float) -> void:
 func _mostrar_game_over() -> void:
 	muerto = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	$CenterContainer.visible = false
+	var cc := get_node_or_null("CenterContainer") as Control
+	if cc: cc.visible = false
 	if muerte_box:
 		muerte_box.visible = true
 	if btn_reiniciar:
@@ -80,10 +81,11 @@ func _on_xp(act: float, max_v: float, lvl: int) -> void:
 		barra_xp.max_value = max_v
 		barra_xp.value = act
 func actualizar_horda(num: int, restantes: int) -> void:
-	if label_horda:
-		label_horda.text = "HORDA %d" % num
-	if label_restantes:
-		label_restantes.text = "ENEMIGOS: %d" % restantes
+	if label_horda: label_horda.text = "HORDA %d" % num
+	if label_restantes: label_restantes.text = "ENEMIGOS: %d" % restantes
+func mostrar_estado(titulo: String, detalle: String) -> void:
+	if label_horda: label_horda.text = titulo
+	if label_restantes: label_restantes.text = detalle
 func _on_municion(act: int, max_v: int, rec: bool) -> void:
 	if label_municion:
 		label_municion.text = "RECARGANDO..." if rec else ("%d / %d" % [act, max_v])
