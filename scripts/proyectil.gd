@@ -2,6 +2,7 @@ class_name Proyectil
 extends Area3D
 @export var vel: float = 17.5
 @export var dmg: float = 18.0
+@export var atraviesa_todo: bool = false
 @export var escena_particulas: PackedScene = preload("res://ParticulasImpacto.tscn")
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 var dir: Vector3 = Vector3.FORWARD
@@ -11,8 +12,11 @@ var impactado: bool = false
 func _ready() -> void:
 	add_to_group("proyectiles")
 	collision_layer = 2
-	collision_mask = 1 | 8
+	collision_mask = 8 if atraviesa_todo else (1 | 8)
 	body_entered.connect(_on_hit)
+func configurar_perforante(activo: bool = true) -> void:
+	atraviesa_todo = activo
+	if not parreado: collision_mask = 8 if activo else (1 | 8)
 func _physics_process(delta: float) -> void:
 	if impactado:
 		return
@@ -71,7 +75,7 @@ func _procesar_impacto(cuerpo: Node, pos_hit: Vector3, normal_hit: Vector3) -> v
 		if cuerpo.has_method("recibir_dano"):
 			cuerpo.recibir_dano(dmg)
 		queue_free()
-	elif cuerpo is StaticBody3D:
+	elif cuerpo is StaticBody3D and not atraviesa_todo:
 		impactado = true
 		queue_free()
 func _crear_particulas(pos_hit: Vector3, normal_hit: Vector3, col: Color) -> void:

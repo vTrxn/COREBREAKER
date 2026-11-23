@@ -9,7 +9,9 @@ extends Node3D
 @onready var barrera_evacuacion: StaticBody3D = get_node_or_null("SectorReactor/BarreraEvacuacion")
 @onready var luz_reactor: OmniLight3D = get_node_or_null("SectorReactor/LuzNucleo")
 @onready var portal: PortalNivel = get_node_or_null("SectorReactor/PortalTP") as PortalNivel
+@onready var jugador: Jugador = get_node_or_null("Jugador") as Jugador
 var _oleadas: ControladorOleadas
+var _pos_respawn: Vector3 = Vector3(0.0, 0.35, 2.0); var _cd_respawn: float = 0.0
 func _ready() -> void:
 	if musica: musica.finished.connect(musica.play); musica.play()
 	if portal: portal.activar(false)
@@ -21,10 +23,22 @@ func _ready() -> void:
 	_oleadas.oleada_superada.connect(func(_n: int): _mostrar_texto_hud("ALERTA: NUCLEO INESTABLE", "REFUERZOS ENEMIGOS EN CAMINO..."))
 	_oleadas.sector_despejado.connect(_despejar_sector_reactor)
 	_conectar_trigger("Triggers/TriggerEntrada", func(): _mostrar_texto_hud("DUCTO DE MANTENIMIENTO", "MANTEN [CTRL] PARA DESLIZARTE BAJO LA COMPUERTA"))
-	_conectar_trigger("Triggers/TriggerVapor", func(): _mostrar_texto_hud("ALERTA: VALVULAS DE VAPOR", "SINCRONIZA TU AVANCE ENTRE LOS CHORROS CRIOGENICOS"))
-	_conectar_trigger("Triggers/TriggerPasarelas", func(): _mostrar_texto_hud("FOSO CRIOGENICO", "USA EL PAD DE IMPULSO Y SALTO EXTENDIDO [CTRL + ESPACIO]"))
-	_conectar_trigger("Triggers/TriggerReactor", func(): _oleadas.iniciar())
+	_conectar_trigger("Triggers/TriggerVapor", func(): _pos_respawn = Vector3(0.0, 0.35, -19.5); _mostrar_texto_hud("ALERTA: VALVULAS DE VAPOR", "SINCRONIZA TU AVANCE ENTRE LOS CHORROS CRIOGENICOS"))
+	_conectar_trigger("Triggers/TriggerPasarelas", func(): _pos_respawn = Vector3(0.0, 0.35, -44.2); _mostrar_texto_hud("FOSO CRIOGENICO", "USA EL PAD DE IMPULSO Y SALTO EXTENDIDO [CTRL + ESPACIO]"))
+	_conectar_trigger("Triggers/TriggerReactor", func(): _pos_respawn = Vector3(0.0, 5.2, -79.5); _oleadas.iniciar())
+	_conectar_trigger("Sector3_FosoPasarelas/ZonaToxicaFoso", func(): _respawnear_jugador(jugador))
 	_mostrar_texto_hud("SECTOR 02: ENFRIAMIENTO", "ATRAVIESA LOS DUCTOS HACIA EL NUCLEO")
+func _physics_process(delta: float) -> void:
+	if _cd_respawn > 0.0: _cd_respawn = maxf(0.0, _cd_respawn - delta)
+	if jugador and not jugador.muerto and jugador.global_position.y < -1.6:
+		_respawnear_jugador(jugador)
+func _respawnear_jugador(j: Jugador) -> void:
+	if _cd_respawn > 0.0 or not j or j.muerto: return
+	_cd_respawn = 0.45
+	j.cancelar_deslizamiento(); j.velocity = Vector3.ZERO
+	j.global_position = _pos_respawn; j.rotation.y = 0.0
+	if j.hp > 15.0: j.recibir_dano(10.0)
+	_mostrar_texto_hud("CAIDA EN EL FOSO CRIOGENICO", "REINICIADO EN EL ULTIMO CHECKPOINT")
 func _generar_oleada(num: int, scrap: PackedScene, torr: PackedScene) -> Array[Dictionary]:
 	var q: Array[Dictionary] = []
 	for i in range(2 + num): q.append({"escena": scrap, "piso": 1})

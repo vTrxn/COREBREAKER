@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/custodio.gd" id="1_custodio"]
+[ext_resource type="PackedScene" path="res://modelos/custodio_corebreaker.glb" id="2_modelo"]
+[ext_resource type="AudioStream" path="res://audio/impacto_enemigo.mp3" id="3_hit"]
+[ext_resource type="AudioStream" path="res://audio/disparo.mp3" id="4_disp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_custodio"]
+radius = 1.4
+height = 4.4
+
+[sub_resource type="Shader" id="Shader_escudo"]
+code = "shader_type spatial;
+render_mode blend_mix, unshaded, cull_back, depth_draw_never;
+uniform vec3 color_escudo : source_color = vec3(0.15, 0.9, 1.0);
+void fragment() {
+	float fres = pow(1.0 - clamp(dot(normalize(NORMAL), normalize(VIEW)), 0.0, 1.0), 2.4);
+	float scan = 0.5 + 0.5 * sin(VERTEX.y * 18.0 - TIME * 5.5);
+	ALBEDO = color_escudo * (1.2 + fres * 1.4);
+	ALPHA = clamp(0.05 + fres * 0.68 + scan * 0.06 * fres, 0.0, 0.78);
+}"
+
+[sub_resource type="ShaderMaterial" id="Mat_escudo"]
+shader = SubResource("Shader_escudo")
+
+[sub_resource type="SphereMesh" id="Mesh_escudo"]
+material = SubResource("Mat_escudo")
+radius = 2.8
+height = 5.6
+
+[node name="Custodio" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 9
+script = ExtResource("1_custodio")
+
+[node name="Modelo" parent="." instance=ExtResource("2_modelo")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+
+[node name="Escudo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0)
+visible = false
+mesh = SubResource("Mesh_escudo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+shape = SubResource("CapsuleShape_custodio")
+
+[node name="LuzEstado" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, -1.2)
+light_color = Color(1, 0.72, 0.02, 1)
+light_energy = 0.0
+omni_range = 6.5
+
+[node name="AudioHit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hit")
+volume_db = 2.0
+pitch_scale = 0.7
+
+[node name="AudioDisparo" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_disp")
+volume_db = 3.0
+pitch_scale = 0.75

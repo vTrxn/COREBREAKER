@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://cp3v7ma1l03oe"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
-[ext_resource type="Script" path="res://scripts/mira_combo.gd" id="2_mira"]
+[ext_resource type="Script" uid="uid://dkaitkcj4eaye" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://cn0oxvjvprmb2" path="res://scripts/mira_combo.gd" id="2_mira"]
 
 [sub_resource type="Shader" id="Shader_vida"]
 code = "shader_type canvas_item;
@@ -32,10 +32,10 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.9, 0.16, 0.16, 1)
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1637006804]
 script = ExtResource("1_hud")
 
-[node name="FiltroVida" type="ColorRect" parent="."]
+[node name="FiltroVida" type="ColorRect" parent="." unique_id=894324110]
 visible = false
 material = SubResource("ShaderMaterial_vida")
 anchors_preset = 15
@@ -45,7 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FlashDano" type="ColorRect" parent="."]
+[node name="FlashDano" type="ColorRect" parent="." unique_id=147981275]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,7 +54,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.85, 0.05, 0.05, 0)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1995296298]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,13 +62,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Mira" type="Control" parent="CenterContainer"]
+[node name="Mira" type="Control" parent="CenterContainer" unique_id=219333142]
 custom_minimum_size = Vector2(180, 96)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_mira")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1108874653]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,54 +80,59 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1148725478]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="LabelNivel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="LabelNivel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1209326449]
 layout_mode = 2
 text = "NIVEL 1"
 
-[node name="BarraXP" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+[node name="BarraXP" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=104172768]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
-value = 0.0
 
-[node name="LabelSangrado" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="LabelSangrado" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1266355918]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
 text = "ALERTA: SANGRADO TERMICO"
 
-[node name="VBoxHorda" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxHorda" type="VBoxContainer" parent="MarginContainer" unique_id=765891167]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="LabelHorda" type="Label" parent="MarginContainer/VBoxHorda"]
+[node name="LabelHorda" type="Label" parent="MarginContainer/VBoxHorda" unique_id=1737559045]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.717647, 0.0117647, 1)
 text = "HORDA 1"
 horizontal_alignment = 2
 
-[node name="LabelRestantes" type="Label" parent="MarginContainer/VBoxHorda"]
+[node name="LabelRestantes" type="Label" parent="MarginContainer/VBoxHorda" unique_id=1080071944]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
 text = "ENEMIGOS: 0"
 horizontal_alignment = 2
 
-[node name="VBoxMunicion" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxMunicion" type="VBoxContainer" parent="MarginContainer" unique_id=504541195]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="LabelMunicion" type="Label" parent="MarginContainer/VBoxMunicion"]
+[node name="LabelEspada" type="Label" parent="MarginContainer/VBoxMunicion" unique_id=1892405263]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.22, 0.28, 1)
+text = "ESPADA [V]: 2 / 2"
+horizontal_alignment = 2
+
+[node name="LabelMunicion" type="Label" parent="MarginContainer/VBoxMunicion" unique_id=1560260289]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.717647, 0.0117647, 1)
 text = "8 / 8"
 horizontal_alignment = 2
 
-[node name="MuerteBox" type="VBoxContainer" parent="."]
+[node name="MuerteBox" type="VBoxContainer" parent="." unique_id=1857987028]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,7 +148,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="LabelGameOver" type="Label" parent="MuerteBox"]
+[node name="LabelGameOver" type="Label" parent="MuerteBox" unique_id=1827524824]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.12, 0.12, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -152,7 +157,7 @@ theme_override_font_sizes/font_size = 64
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="BtnReiniciar" type="Button" parent="MuerteBox"]
+[node name="BtnReiniciar" type="Button" parent="MuerteBox" unique_id=720668682]
 custom_minimum_size = Vector2(200, 48)
 layout_mode = 2
 size_flags_horizontal = 4

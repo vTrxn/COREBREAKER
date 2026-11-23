@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/mortero_fision.gd" id="1_mortero"]
+[ext_resource type="AudioStream" path="res://audio/impacto_golpe.mp3" id="2_audio"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_esfera"]
+shading_mode = 0
+albedo_color = Color(0.68, 0.32, 1, 1)
+
+[sub_resource type="SphereMesh" id="Mesh_esfera"]
+material = SubResource("Mat_esfera")
+radius = 0.55
+height = 1.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_anillo"]
+shading_mode = 0
+albedo_color = Color(0.72, 0.35, 1, 1)
+
+[sub_resource type="TorusMesh" id="Mesh_anillo"]
+material = SubResource("Mat_anillo")
+inner_radius = 0.92
+outer_radius = 1.0
+rings = 24
+ring_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="Mat_disco"]
+transparency = 1
+shading_mode = 0
+cull_mode = 2
+albedo_color = Color(0.62, 0.31, 0.87, 0.36)
+
+[sub_resource type="CylinderMesh" id="Mesh_disco"]
+material = SubResource("Mat_disco")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.04
+radial_segments = 24
+
+[node name="MorteroFision" type="Node3D"]
+script = ExtResource("1_mortero")
+
+[node name="Esfera" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mesh = SubResource("Mesh_esfera")
+
+[node name="AnilloExt" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 0.25, 0, 0, 0, 3, 0, 0.06, 0)
+mesh = SubResource("Mesh_anillo")
+
+[node name="DiscoInt" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 0, 0.05, 0)
+mesh = SubResource("Mesh_disco")
+
+[node name="LuzAviso" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+light_color = Color(0.62, 0.31, 0.87, 1)
+light_energy = 3.5
+omni_range = 6.5
+
+[node name="AudioImpacto" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_audio")
+volume_db = 2.0
+pitch_scale = 0.65

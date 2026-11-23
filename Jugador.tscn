@@ -16,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://nu04togyipf3" path="res://audio/recarga.mp3" id="14_rec"]
 [ext_resource type="PackedScene" uid="uid://bhqk365v7dopp" path="res://modelos/jugador_corebreaker.glb" id="15_jugm"]
 [ext_resource type="PackedScene" uid="uid://bnettptqj2kny" path="res://modelos/puno_corebreaker.glb" id="16_puno"]
+[ext_resource type="PackedScene" path="res://modelos/escopeta_corebreaker.glb" id="17_esco"]
+[ext_resource type="Script" path="res://scripts/espada_jugador.gd" id="18_esps"]
+[ext_resource type="PackedScene" path="res://modelos/espada_corebreaker.glb" id="19_espm"]
+[ext_resource type="AudioStream" uid="uid://cc4mckbldfk14" path="res://audio/disparo_escopeta.mp3" id="20_esca"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.4
@@ -51,6 +55,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.45)
 script = ExtResource("8_arma")
 
 [node name="Pistola" parent="Camera3D/Arma" unique_id=475263781 instance=ExtResource("13_pist")]
+
+[node name="Escopeta" parent="Camera3D/Arma" unique_id=475263782 instance=ExtResource("17_esco")]
+visible = false
+
+[node name="Espada" type="Node3D" parent="Camera3D" unique_id=1982736460]
+script = ExtResource("18_esps")
+
+[node name="ModeloEspada" parent="Camera3D/Espada" unique_id=1982736461 instance=ExtResource("19_espm")]
+visible = false
+
+[node name="LuzEspada" type="OmniLight3D" parent="Camera3D/Espada" unique_id=1982736462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.9)
+light_color = Color(1, 0.14, 0.18, 1)
+light_energy = 0.0
+omni_range = 5.5
+
+[node name="AudioEspada" type="AudioStreamPlayer" parent="Camera3D/Espada" unique_id=1982736463]
+process_mode = 3
+stream = ExtResource("12_golp")
+volume_db = 3.0
+pitch_scale = 0.72
 
 [node name="LuzDisparo" type="OmniLight3D" parent="Camera3D" unique_id=1401295889]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.22, -0.7)
@@ -112,3 +137,7 @@ script = ExtResource("9_audj")
 [node name="AudioRecarga" type="AudioStreamPlayer" parent="." unique_id=987654323]
 stream = ExtResource("14_rec")
 volume_db = 1.0
+
+[node name="AudioEscopeta" type="AudioStreamPlayer" parent="." unique_id=987654324]
+stream = ExtResource("20_esca")
+volume_db = 1.5

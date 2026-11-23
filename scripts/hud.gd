@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var label_horda: Label = find_child("LabelHorda") as Label
 @onready var label_restantes: Label = find_child("LabelRestantes") as Label
 @onready var label_municion: Label = find_child("LabelMunicion") as Label
+@onready var label_espada: Label = find_child("LabelEspada") as Label
 @onready var flash_dano: ColorRect = $FlashDano
 @onready var filtro_vida: ColorRect = $FiltroVida
 @onready var muerte_box: VBoxContainer = $MuerteBox
@@ -27,6 +28,9 @@ func _ready() -> void:
 		if p.arma:
 			p.arma.cambio_municion.connect(_on_municion)
 			_on_municion(p.arma.balas, p.arma.balas_max, p.arma.recargando)
+		if p.espada:
+			p.espada.cambio_cargas_espada.connect(_on_espada)
+			_on_espada(p.espada.cargas, p.espada.cargas_max)
 	if sangrado_aviso:
 		sangrado_aviso.visible = false
 	if btn_reiniciar:
@@ -87,5 +91,8 @@ func mostrar_estado(titulo: String, detalle: String) -> void:
 	if label_horda: label_horda.text = titulo
 	if label_restantes: label_restantes.text = detalle
 func _on_municion(act: int, max_v: int, rec: bool) -> void:
-	if label_municion:
-		label_municion.text = "RECARGANDO..." if rec else ("%d / %d" % [act, max_v])
+	if label_municion: label_municion.text = "RECARGANDO..." if rec else ("%d / %d" % [act, max_v])
+func _on_espada(act: int, max_v: int) -> void:
+	if label_espada:
+		label_espada.text = "ESPADA [V]: %d / %d" % [act, max_v]
+		label_espada.add_theme_color_override("font_color", Color(1.0, 0.22, 0.28) if act > 0 else Color(0.5, 0.5, 0.55))

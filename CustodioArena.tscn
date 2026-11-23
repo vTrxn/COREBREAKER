@@ -1,32 +1,34 @@
-[gd_scene load_steps=86 format=3]
+[gd_scene format=3 uid="uid://b6kk6r2bio4l2"]
 
-[ext_resource type="Script" path="res://scripts/custodio_arena.gd" id="1_arena"]
-[ext_resource type="Script" path="res://scripts/portal_nivel.gd" id="2_portal"]
-[ext_resource type="Script" path="res://scripts/pad_impulso.gd" id="3_pad"]
-[ext_resource type="Script" path="res://scripts/luz_parpadeante.gd" id="4_luz_parp"]
-[ext_resource type="Script" path="res://scripts/sistema_eventos.gd" id="5_sis_ev"]
-[ext_resource type="PackedScene" path="res://Jugador.tscn" id="6_jugador"]
+[ext_resource type="Script" uid="uid://dv0h0j655qehf" path="res://scripts/custodio_arena.gd" id="1_arena"]
+[ext_resource type="Script" uid="uid://c2bkxt0w3qhnh" path="res://scripts/portal_nivel.gd" id="2_portal"]
+[ext_resource type="Script" uid="uid://dn37ioyxx2s2a" path="res://scripts/pad_impulso.gd" id="3_pad"]
+[ext_resource type="Script" uid="uid://u4ds4wkvpyij" path="res://scripts/luz_parpadeante.gd" id="4_luz_parp"]
+[ext_resource type="Script" uid="uid://bxvxtiwoo3bwy" path="res://scripts/sistema_eventos.gd" id="5_sis_ev"]
+[ext_resource type="PackedScene" uid="uid://b46mg0w723jbl" path="res://Jugador.tscn" id="6_jugador"]
 [ext_resource type="PackedScene" path="res://HUD.tscn" id="7_hud"]
 [ext_resource type="PackedScene" path="res://MenuPausa.tscn" id="8_pausa"]
-[ext_resource type="AudioStream" path="res://audio/musica_nivel.mp3" id="10_musica"]
-[ext_resource type="AudioStream" path="res://audio/salto.mp3" id="11_salto"]
-[ext_resource type="Texture2D" path="res://texturas/piso_nave.png" id="12_tpiso"]
-[ext_resource type="Texture2D" path="res://texturas/piso_nave_normal.png" id="13_tpiso_norm"]
-[ext_resource type="Texture2D" path="res://texturas/pared_nave.png" id="14_tpared"]
-[ext_resource type="Texture2D" path="res://texturas/pared_nave_normal.png" id="15_tpared_norm"]
-[ext_resource type="Texture2D" path="res://texturas/techo_nave.png" id="16_ttecho"]
-[ext_resource type="Texture2D" path="res://texturas/techo_nave_normal.png" id="17_ttecho_norm"]
-[ext_resource type="Texture2D" path="res://texturas/cielo_estrellado.png" id="18_tcielo"]
-[ext_resource type="PackedScene" path="res://modelos/pilar_nucleo_tartarus.glb" id="glb_pilar"]
-[ext_resource type="PackedScene" path="res://modelos/altar_custodio.glb" id="glb_altar"]
-[ext_resource type="PackedScene" path="res://modelos/arco_criogenico.glb" id="glb_arco"]
-[ext_resource type="PackedScene" path="res://modelos/marco_extraccion_epico.glb" id="glb_marco"]
-[ext_resource type="PackedScene" path="res://modelos/extraction_pad_beacon_v2.glb" id="glb_baliza"]
-[ext_resource type="PackedScene" path="res://modelos/jumppad_octagon_scifi.glb" id="glb_pad"]
-[ext_resource type="PackedScene" path="res://modelos/metal_safety_rail_4m_pbr.glb" id="glb_baranda_4m"]
-[ext_resource type="PackedScene" path="res://modelos/heavy-cargo-crate-scifi.glb" id="glb_caja"]
-[ext_resource type="PackedScene" path="res://modelos/ceiling_troffer_4tube_pbr.glb" id="glb_lampara_techo"]
-[ext_resource type="PackedScene" path="res://modelos/cage_bulkhead_lamp_9481.glb" id="glb_lampara_pared"]
+[ext_resource type="PackedScene" path="res://Custodio.tscn" id="9_custodio"]
+[ext_resource type="AudioStream" uid="uid://c82cp147orkbn" path="res://audio/musica_nivel.mp3" id="10_musica"]
+[ext_resource type="AudioStream" uid="uid://crs31ddfkgbjd" path="res://audio/salto.mp3" id="11_salto"]
+[ext_resource type="Texture2D" uid="uid://pdhlmfrwvkas" path="res://texturas/piso_nave.png" id="12_tpiso"]
+[ext_resource type="Texture2D" uid="uid://choq4wdsxnuue" path="res://texturas/piso_nave_normal.png" id="13_tpiso_norm"]
+[ext_resource type="Texture2D" uid="uid://c2kobnyx2nwt6" path="res://texturas/pared_nave.png" id="14_tpared"]
+[ext_resource type="Texture2D" uid="uid://ipcbm55uqkn3" path="res://texturas/pared_nave_normal.png" id="15_tpared_norm"]
+[ext_resource type="Texture2D" uid="uid://bm1ykwiudb1dd" path="res://texturas/techo_nave.png" id="16_ttecho"]
+[ext_resource type="Texture2D" uid="uid://co0ertg5s35ig" path="res://texturas/techo_nave_normal.png" id="17_ttecho_norm"]
+[ext_resource type="Texture2D" uid="uid://b8wlr28tdkxon" path="res://texturas/cielo_estrellado.png" id="18_tcielo"]
+[ext_resource type="PackedScene" path="res://ReactorEscudo.tscn" id="ext_reac"]
+[ext_resource type="PackedScene" uid="uid://d1pcbgc1skkaq" path="res://modelos/altar_custodio.glb" id="glb_altar"]
+[ext_resource type="PackedScene" uid="uid://bih06lyhgu1be" path="res://modelos/arco_criogenico.glb" id="glb_arco"]
+[ext_resource type="PackedScene" uid="uid://ofhdedvjlhde" path="res://modelos/extraction_pad_beacon_v2.glb" id="glb_baliza"]
+[ext_resource type="PackedScene" uid="uid://cc24tgih77hig" path="res://modelos/metal_safety_rail_4m_pbr.glb" id="glb_baranda_4m"]
+[ext_resource type="PackedScene" uid="uid://byjhr2fqhn1p2" path="res://modelos/heavy-cargo-crate-scifi.glb" id="glb_caja"]
+[ext_resource type="PackedScene" uid="uid://c1irdloyo15u6" path="res://modelos/cage_bulkhead_lamp_9481.glb" id="glb_lampara_pared"]
+[ext_resource type="PackedScene" uid="uid://cpkuajgvlnur4" path="res://modelos/ceiling_troffer_4tube_pbr.glb" id="glb_lampara_techo"]
+[ext_resource type="PackedScene" uid="uid://2toicsmvlfx1" path="res://modelos/marco_extraccion_epico.glb" id="glb_marco"]
+[ext_resource type="PackedScene" uid="uid://bguffvh8m8pmq" path="res://modelos/jumppad_octagon_scifi.glb" id="glb_pad"]
+[ext_resource type="PackedScene" uid="uid://cccaflqjbusxv" path="res://modelos/pilar_nucleo_tartarus.glb" id="glb_pilar"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tartarus"]
 panorama = ExtResource("18_tcielo")
@@ -61,17 +63,12 @@ uv1_scale = Vector3(0.32, 0.32, 0.32)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="Mat_pared_tartarus"]
-albedo_color = Color(0.26, 0.27, 0.32, 1)
-albedo_texture = ExtResource("14_tpared")
-metallic = 0.58
-roughness = 0.48
-normal_enabled = true
-normal_scale = 0.75
-normal_texture = ExtResource("15_tpared_norm")
-uv1_scale = Vector3(0.3, 0.3, 0.3)
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="BoxMesh" id="BMesh_0"]
+material = SubResource("Mat_piso_antracita")
+size = Vector3(6.8, 0.5, 10.5)
+
+[sub_resource type="BoxShape3D" id="BShape_0"]
+size = Vector3(6.8, 0.5, 10.5)
 
 [sub_resource type="StandardMaterial3D" id="Mat_techo_tartarus"]
 albedo_color = Color(0.2, 0.21, 0.26, 1)
@@ -85,54 +82,21 @@ uv1_scale = Vector3(0.28, 0.28, 0.28)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="Mat_acero_oscuro"]
-albedo_color = Color(0.11, 0.12, 0.15, 1)
-metallic = 0.82
-roughness = 0.36
-
-[sub_resource type="StandardMaterial3D" id="Mat_barrera_laser"]
-transparency = 1
-albedo_color = Color(0.75, 0.14, 0.36, 0.56)
-emission_enabled = true
-emission = Color(0.95, 0.18, 0.45, 1)
-emission_energy_multiplier = 2.4
-
-[sub_resource type="StyleBoxFlat" id="SB_panel_boss"]
-bg_color = Color(0.05, 0.05, 0.08, 0.86)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.72, 0.02, 0.9)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="SB_barra_bg"]
-bg_color = Color(0.1, 0.1, 0.14, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="SB_barra_fill"]
-bg_color = Color(1, 0.72, 0.02, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="BoxMesh" id="BMesh_0"]
-material = SubResource("Mat_piso_antracita")
-size = Vector3(6.8, 0.5, 10.5)
-
-[sub_resource type="BoxShape3D" id="BShape_0"]
-size = Vector3(6.8, 0.5, 10.5)
-
 [sub_resource type="BoxMesh" id="BMesh_1"]
 material = SubResource("Mat_techo_tartarus")
 size = Vector3(6.8, 0.5, 10.5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_pared_tartarus"]
+albedo_color = Color(0.26, 0.27, 0.32, 1)
+albedo_texture = ExtResource("14_tpared")
+metallic = 0.58
+roughness = 0.48
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("15_tpared_norm")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BMesh_2"]
 material = SubResource("Mat_pared_tartarus")
@@ -151,6 +115,13 @@ size = Vector3(7.4, 4.8, 0.5)
 [sub_resource type="BoxShape3D" id="BShape_3"]
 size = Vector3(0.44, 4.6, 0.6)
 
+[sub_resource type="StandardMaterial3D" id="Mat_barrera_laser"]
+transparency = 1
+albedo_color = Color(0.75, 0.14, 0.36, 0.56)
+emission_enabled = true
+emission = Color(0.95, 0.18, 0.45, 1)
+emission_energy_multiplier = 2.4
+
 [sub_resource type="BoxMesh" id="BMesh_4"]
 material = SubResource("Mat_barrera_laser")
 size = Vector3(6.2, 4.6, 0.26)
@@ -159,7 +130,7 @@ size = Vector3(6.2, 4.6, 0.26)
 size = Vector3(6.2, 4.6, 0.26)
 
 [sub_resource type="BoxShape3D" id="BShape_5"]
-size = Vector3(8.0, 4.0, 2.5)
+size = Vector3(8, 4, 2.5)
 
 [sub_resource type="BoxMesh" id="BMesh_5"]
 material = SubResource("Mat_piso_antracita")
@@ -181,34 +152,39 @@ size = Vector3(0.6, 12.4, 32.8)
 
 [sub_resource type="BoxMesh" id="BMesh_8"]
 material = SubResource("Mat_pared_tartarus")
-size = Vector3(13.0, 12.4, 0.6)
+size = Vector3(13, 12.4, 0.6)
 
 [sub_resource type="BoxShape3D" id="BShape_8"]
-size = Vector3(13.0, 12.4, 0.6)
+size = Vector3(13, 12.4, 0.6)
 
 [sub_resource type="BoxMesh" id="BMesh_9"]
 material = SubResource("Mat_pared_tartarus")
-size = Vector3(7.0, 7.6, 0.6)
+size = Vector3(7, 7.6, 0.6)
 
 [sub_resource type="BoxShape3D" id="BShape_9"]
-size = Vector3(7.0, 7.6, 0.6)
+size = Vector3(7, 7.6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_acero_oscuro"]
+albedo_color = Color(0.11, 0.12, 0.15, 1)
+metallic = 0.82
+roughness = 0.36
 
 [sub_resource type="BoxMesh" id="BMesh_10"]
 material = SubResource("Mat_acero_oscuro")
-size = Vector3(32.0, 0.9, 0.9)
+size = Vector3(32, 0.9, 0.9)
 
 [sub_resource type="BoxShape3D" id="BShape_10"]
-size = Vector3(32.0, 0.9, 0.9)
+size = Vector3(32, 0.9, 0.9)
 
 [sub_resource type="BoxShape3D" id="BShape_11"]
 size = Vector3(2.1, 10.5, 2.1)
 
 [sub_resource type="BoxMesh" id="BMesh_11"]
 material = SubResource("Mat_piso_antracita")
-size = Vector3(4.0, 0.4, 18.0)
+size = Vector3(4, 0.4, 18)
 
 [sub_resource type="BoxShape3D" id="BShape_12"]
-size = Vector3(4.0, 0.4, 18.0)
+size = Vector3(4, 0.4, 18)
 
 [sub_resource type="BoxMesh" id="BMesh_12"]
 material = SubResource("Mat_acero_oscuro")
@@ -218,10 +194,10 @@ size = Vector3(0.45, 3.4, 0.45)
 size = Vector3(0.45, 3.4, 0.45)
 
 [sub_resource type="BoxShape3D" id="BShape_14"]
-size = Vector3(0.16, 1.06, 18.0)
+size = Vector3(0.16, 1.06, 18)
 
 [sub_resource type="BoxShape3D" id="BShape_15"]
-size = Vector3(2.0, 0.7, 2.0)
+size = Vector3(2, 0.7, 2)
 
 [sub_resource type="BoxShape3D" id="BShape_16"]
 size = Vector3(2.02, 1.36, 1.22)
@@ -229,9 +205,6 @@ size = Vector3(2.02, 1.36, 1.22)
 [sub_resource type="CylinderShape3D" id="CShape_17"]
 height = 0.46
 radius = 3.3
-
-[sub_resource type="BoxShape3D" id="BShape_18"]
-size = Vector3(1.1, 5.6, 1.3)
 
 [sub_resource type="BoxMesh" id="BMesh_13"]
 material = SubResource("Mat_pared_tartarus")
@@ -272,13 +245,6 @@ size = Vector3(8.8, 6.4, 0.6)
 [sub_resource type="BoxShape3D" id="BShape_23"]
 size = Vector3(8.8, 6.4, 0.6)
 
-[sub_resource type="BoxMesh" id="BMesh_19"]
-material = SubResource("Mat_barrera_laser")
-size = Vector3(6.8, 4.8, 0.28)
-
-[sub_resource type="BoxShape3D" id="BShape_24"]
-size = Vector3(6.8, 4.8, 0.28)
-
 [sub_resource type="BoxMesh" id="BMesh_20"]
 material = SubResource("Mat_acero_oscuro")
 size = Vector3(6.2, 0.32, 5.6)
@@ -286,823 +252,820 @@ size = Vector3(6.2, 0.32, 5.6)
 [sub_resource type="BoxShape3D" id="BShape_25"]
 size = Vector3(6.2, 0.32, 5.6)
 
-[node name="CustodioArena" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BShape_18"]
+size = Vector3(1.1, 5.6, 1.3)
+
+[sub_resource type="BoxMesh" id="BMesh_19"]
+material = SubResource("Mat_barrera_laser")
+size = Vector3(6.8, 4.8, 0.28)
+
+[sub_resource type="BoxShape3D" id="BShape_24"]
+size = Vector3(6.8, 4.8, 0.28)
+
+[sub_resource type="StyleBoxFlat" id="SB_panel_boss"]
+bg_color = Color(0.05, 0.05, 0.08, 0.86)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.72, 0.02, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="SB_barra_bg"]
+bg_color = Color(0.1, 0.1, 0.14, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SB_barra_fill"]
+bg_color = Color(1, 0.72, 0.02, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="CustodioArena" type="Node3D" unique_id=1208747706]
 script = ExtResource("1_arena")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1353046123]
 environment = SubResource("Environment_custodio")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=819863417]
 transform = Transform3D(0.93969, -0.262, 0.21985, 0, 0.64279, 0.76604, -0.34202, -0.71985, 0.60402, 0, 20, -16)
 light_color = Color(0.85, 0.82, 1, 1)
 light_energy = 0.35
 shadow_enabled = true
 
-[node name="MusicaNivel" type="AudioStreamPlayer" parent="."]
+[node name="MusicaNivel" type="AudioStreamPlayer" parent="." unique_id=464226346]
 stream = ExtResource("10_musica")
 volume_db = -4.0
 
-[node name="Jugador" parent="." instance=ExtResource("6_jugador")]
+[node name="Jugador" parent="." unique_id=589882737 instance=ExtResource("6_jugador")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 8.2)
 
-[node name="HUD" parent="." instance=ExtResource("7_hud")]
+[node name="HUD" parent="." unique_id=244422458 instance=ExtResource("7_hud")]
 
-[node name="MenuPausa" parent="." instance=ExtResource("8_pausa")]
+[node name="MenuPausa" parent="." unique_id=1351473787 instance=ExtResource("8_pausa")]
 
-[node name="LuzAlarma" type="OmniLight3D" parent="."]
+[node name="LuzAlarma" type="OmniLight3D" parent="." unique_id=2026149622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2, -16)
 light_color = Color(0.616, 0.306, 0.867, 1)
 light_energy = 3.0
 omni_range = 28.0
 script = ExtResource("4_luz_parp")
 
-[node name="LuzEvento" type="OmniLight3D" parent="."]
+[node name="LuzEvento" type="OmniLight3D" parent="." unique_id=1476283255]
 light_color = Color(0.224, 1, 0.078, 1)
 light_energy = 0.0
 omni_range = 8.0
 
-[node name="SistemaEventos" type="Node" parent="."]
+[node name="SistemaEventos" type="Node" parent="." unique_id=1933278833]
 script = ExtResource("5_sis_ev")
 luz_evento = NodePath("../LuzEvento")
 
-[node name="TunelEntrada" type="Node3D" parent="."]
+[node name="TunelEntrada" type="Node3D" parent="." unique_id=1146199210]
 
-[node name="SueloTunel" type="StaticBody3D" parent="TunelEntrada"]
+[node name="SueloTunel" type="StaticBody3D" parent="TunelEntrada" unique_id=1841688059]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 5.25)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/SueloTunel"]
+[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/SueloTunel" unique_id=1801813702]
 mesh = SubResource("BMesh_0")
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/SueloTunel"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/SueloTunel" unique_id=923750010]
 shape = SubResource("BShape_0")
 
-[node name="TechoTunel" type="StaticBody3D" parent="TunelEntrada"]
+[node name="TechoTunel" type="StaticBody3D" parent="TunelEntrada" unique_id=1102190539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.85, 5.25)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/TechoTunel"]
+[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/TechoTunel" unique_id=1006640661]
 mesh = SubResource("BMesh_1")
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/TechoTunel"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/TechoTunel" unique_id=922830265]
 shape = SubResource("BShape_0")
 
-[node name="ParedTunelIzq" type="StaticBody3D" parent="TunelEntrada"]
+[node name="ParedTunelIzq" type="StaticBody3D" parent="TunelEntrada" unique_id=209414470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45, 2.3, 5.25)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelIzq"]
+[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelIzq" unique_id=422479569]
 mesh = SubResource("BMesh_2")
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelIzq"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelIzq" unique_id=1009422252]
 shape = SubResource("BShape_1")
 
-[node name="ParedTunelDer" type="StaticBody3D" parent="TunelEntrada"]
+[node name="ParedTunelDer" type="StaticBody3D" parent="TunelEntrada" unique_id=107675791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45, 2.3, 5.25)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelDer"]
+[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelDer" unique_id=328444402]
 mesh = SubResource("BMesh_2")
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelDer"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelDer" unique_id=1427219267]
 shape = SubResource("BShape_1")
 
-[node name="ParedTunelAtras" type="StaticBody3D" parent="TunelEntrada"]
+[node name="ParedTunelAtras" type="StaticBody3D" parent="TunelEntrada" unique_id=436844518]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 10.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelAtras"]
+[node name="Mesh" type="MeshInstance3D" parent="TunelEntrada/ParedTunelAtras" unique_id=1590279474]
 mesh = SubResource("BMesh_3")
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelAtras"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ParedTunelAtras" unique_id=562559063]
 shape = SubResource("BShape_2")
 
-[node name="ArcoIngreso" parent="TunelEntrada" instance=ExtResource("glb_arco")]
+[node name="ArcoIngreso" parent="TunelEntrada" unique_id=1762785384 instance=ExtResource("glb_arco")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="ColArcoIngIzq" type="StaticBody3D" parent="TunelEntrada"]
+[node name="ColArcoIngIzq" type="StaticBody3D" parent="TunelEntrada" unique_id=413909301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02, 2.3, 1)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ColArcoIngIzq"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ColArcoIngIzq" unique_id=1811157699]
 shape = SubResource("BShape_3")
 
-[node name="ColArcoIngDer" type="StaticBody3D" parent="TunelEntrada"]
+[node name="ColArcoIngDer" type="StaticBody3D" parent="TunelEntrada" unique_id=352976723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02, 2.3, 1)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ColArcoIngDer"]
+[node name="Col" type="CollisionShape3D" parent="TunelEntrada/ColArcoIngDer" unique_id=81582796]
 shape = SubResource("BShape_3")
 
-[node name="LamparaTunel" parent="TunelEntrada" instance=ExtResource("glb_lampara_techo")]
+[node name="LamparaTunel" parent="TunelEntrada" unique_id=1831248181 instance=ExtResource("glb_lampara_techo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 5.5)
 
-[node name="LuzTunel" type="OmniLight3D" parent="TunelEntrada"]
+[node name="LuzTunel" type="OmniLight3D" parent="TunelEntrada" unique_id=731609759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 5.5)
 light_color = Color(0.28, 0.79, 0.89, 1)
 light_energy = 1.8
 omni_range = 8.0
 
-[node name="CompuertaEntrada" type="StaticBody3D" parent="."]
+[node name="CompuertaEntrada" type="StaticBody3D" parent="." unique_id=1370873539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0.2)
 collision_layer = 0
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="CompuertaEntrada"]
+[node name="Mesh" type="MeshInstance3D" parent="CompuertaEntrada" unique_id=623283406]
 mesh = SubResource("BMesh_4")
 
-[node name="Col" type="CollisionShape3D" parent="CompuertaEntrada"]
+[node name="Col" type="CollisionShape3D" parent="CompuertaEntrada" unique_id=544976272]
 shape = SubResource("BShape_4")
 
-[node name="TriggerCombate" type="Area3D" parent="."]
+[node name="TriggerCombate" type="Area3D" parent="." unique_id=1697075273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.2)
 collision_layer = 4
 collision_mask = 8
 
-[node name="Col" type="CollisionShape3D" parent="TriggerCombate"]
+[node name="Col" type="CollisionShape3D" parent="TriggerCombate" unique_id=751807476]
 shape = SubResource("BShape_5")
 
-[node name="Arena" type="Node3D" parent="."]
+[node name="Arena" type="Node3D" parent="." unique_id=1579982774]
 
-[node name="Suelo" type="StaticBody3D" parent="Arena"]
+[node name="Suelo" type="StaticBody3D" parent="Arena" unique_id=1669415563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/Suelo"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/Suelo" unique_id=326978070]
 mesh = SubResource("BMesh_5")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Suelo"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Suelo" unique_id=332288942]
 shape = SubResource("BShape_6")
 
-[node name="Techo" type="StaticBody3D" parent="Arena"]
+[node name="Techo" type="StaticBody3D" parent="Arena" unique_id=915893258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/Techo"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/Techo" unique_id=100455632]
 mesh = SubResource("BMesh_6")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Techo"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Techo" unique_id=1489572898]
 shape = SubResource("BShape_6")
 
-[node name="ParedIzq" type="StaticBody3D" parent="Arena"]
+[node name="ParedIzq" type="StaticBody3D" parent="Arena" unique_id=447985726]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 6, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedIzq"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedIzq" unique_id=2083758919]
 mesh = SubResource("BMesh_7")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ParedIzq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ParedIzq" unique_id=752914804]
 shape = SubResource("BShape_7")
 
-[node name="ParedDer" type="StaticBody3D" parent="Arena"]
+[node name="ParedDer" type="StaticBody3D" parent="Arena" unique_id=2013469300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3, 6, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedDer"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedDer" unique_id=701716212]
 mesh = SubResource("BMesh_7")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ParedDer"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ParedDer" unique_id=1727356071]
 shape = SubResource("BShape_7")
 
-[node name="MuroSurIzq" type="StaticBody3D" parent="Arena"]
+[node name="MuroSurIzq" type="StaticBody3D" parent="Arena" unique_id=1809279256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7, 6, 0)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurIzq"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurIzq" unique_id=1515460741]
 mesh = SubResource("BMesh_8")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurIzq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurIzq" unique_id=177698410]
 shape = SubResource("BShape_8")
 
-[node name="MuroSurDer" type="StaticBody3D" parent="Arena"]
+[node name="MuroSurDer" type="StaticBody3D" parent="Arena" unique_id=1233798239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 6, 0)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurDer"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurDer" unique_id=1437096030]
 mesh = SubResource("BMesh_8")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurDer"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurDer" unique_id=1453941179]
 shape = SubResource("BShape_8")
 
-[node name="MuroSurSup" type="StaticBody3D" parent="Arena"]
+[node name="MuroSurSup" type="StaticBody3D" parent="Arena" unique_id=1497352428]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.4, 0)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurSup"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroSurSup" unique_id=883332029]
 mesh = SubResource("BMesh_9")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurSup"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroSurSup" unique_id=1186698454]
 shape = SubResource("BShape_9")
 
-[node name="VigaTecho_1" type="StaticBody3D" parent="Arena"]
+[node name="VigaTecho_1" type="StaticBody3D" parent="Arena" unique_id=1566290540]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.4, -6)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_1"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_1" unique_id=156696167]
 mesh = SubResource("BMesh_10")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_1"]
+[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_1" unique_id=1070949391]
 shape = SubResource("BShape_10")
 
-[node name="VigaTecho_2" type="StaticBody3D" parent="Arena"]
+[node name="VigaTecho_2" type="StaticBody3D" parent="Arena" unique_id=848009977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.4, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_2"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_2" unique_id=62872233]
 mesh = SubResource("BMesh_10")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_2"]
+[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_2" unique_id=1518164504]
 shape = SubResource("BShape_10")
 
-[node name="VigaTecho_3" type="StaticBody3D" parent="Arena"]
+[node name="VigaTecho_3" type="StaticBody3D" parent="Arena" unique_id=492266690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.4, -26)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_3"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/VigaTecho_3" unique_id=1447992856]
 mesh = SubResource("BMesh_10")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_3"]
+[node name="Col" type="CollisionShape3D" parent="Arena/VigaTecho_3" unique_id=1864588491]
 shape = SubResource("BShape_10")
 
-[node name="Pilar_1" parent="Arena" instance=ExtResource("glb_pilar")]
+[node name="Pilar_1" parent="Arena" unique_id=736797174 instance=ExtResource("glb_pilar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -9.5)
 
-[node name="ColPilar_1" type="StaticBody3D" parent="Arena"]
+[node name="ColPilar_1" type="StaticBody3D" parent="Arena" unique_id=1025794130]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 5.25, -9.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_1"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_1" unique_id=160515447]
 shape = SubResource("BShape_11")
 
-[node name="LuzPilar_1" type="OmniLight3D" parent="Arena"]
+[node name="LuzPilar_1" type="OmniLight3D" parent="Arena" unique_id=837140209]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 5.8, -10.8)
-light_color = Color(1.0, 0.72, 0.02, 1)
+light_color = Color(1, 0.72, 0.02, 1)
 light_energy = 1.8
 omni_range = 12.0
 
-[node name="Pilar_2" parent="Arena" instance=ExtResource("glb_pilar")]
+[node name="Pilar_2" parent="Arena" unique_id=544843666 instance=ExtResource("glb_pilar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -9.5)
 
-[node name="ColPilar_2" type="StaticBody3D" parent="Arena"]
+[node name="ColPilar_2" type="StaticBody3D" parent="Arena" unique_id=368936895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5.25, -9.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_2"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_2" unique_id=2006835390]
 shape = SubResource("BShape_11")
 
-[node name="LuzPilar_2" type="OmniLight3D" parent="Arena"]
+[node name="LuzPilar_2" type="OmniLight3D" parent="Arena" unique_id=78375258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5.8, -10.8)
-light_color = Color(1.0, 0.72, 0.02, 1)
+light_color = Color(1, 0.72, 0.02, 1)
 light_energy = 1.8
 omni_range = 12.0
 
-[node name="Pilar_3" parent="Arena" instance=ExtResource("glb_pilar")]
+[node name="Pilar_3" parent="Arena" unique_id=950662160 instance=ExtResource("glb_pilar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -22.5)
 
-[node name="ColPilar_3" type="StaticBody3D" parent="Arena"]
+[node name="ColPilar_3" type="StaticBody3D" parent="Arena" unique_id=1111453579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 5.25, -22.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_3"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_3" unique_id=509248215]
 shape = SubResource("BShape_11")
 
-[node name="LuzPilar_3" type="OmniLight3D" parent="Arena"]
+[node name="LuzPilar_3" type="OmniLight3D" parent="Arena" unique_id=50870677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 5.8, -21.2)
-light_color = Color(1.0, 0.72, 0.02, 1)
+light_color = Color(1, 0.72, 0.02, 1)
 light_energy = 1.8
 omni_range = 12.0
 
-[node name="Pilar_4" parent="Arena" instance=ExtResource("glb_pilar")]
+[node name="Pilar_4" parent="Arena" unique_id=278165414 instance=ExtResource("glb_pilar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -22.5)
 
-[node name="ColPilar_4" type="StaticBody3D" parent="Arena"]
+[node name="ColPilar_4" type="StaticBody3D" parent="Arena" unique_id=2047543324]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5.25, -22.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_4"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColPilar_4" unique_id=1069316730]
 shape = SubResource("BShape_11")
 
-[node name="LuzPilar_4" type="OmniLight3D" parent="Arena"]
+[node name="LuzPilar_4" type="OmniLight3D" parent="Arena" unique_id=352160015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5.8, -21.2)
-light_color = Color(1.0, 0.72, 0.02, 1)
+light_color = Color(1, 0.72, 0.02, 1)
 light_energy = 1.8
 omni_range = 12.0
 
-[node name="Balcon_Izq" type="StaticBody3D" parent="Arena"]
+[node name="Balcon_Izq" type="StaticBody3D" parent="Arena" unique_id=343750553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 3.4, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/Balcon_Izq"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/Balcon_Izq" unique_id=1950392185]
 mesh = SubResource("BMesh_11")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Balcon_Izq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Balcon_Izq" unique_id=354925354]
 shape = SubResource("BShape_12")
 
-[node name="SoporteBalcon_Izq_-9.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Izq_-9.0" type="StaticBody3D" parent="Arena" unique_id=1649077116]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.75, 1.7, -9)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-9.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-9.0" unique_id=1489368140]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-9.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-9.0" unique_id=168424259]
 shape = SubResource("BShape_13")
 
-[node name="SoporteBalcon_Izq_-16.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Izq_-16.0" type="StaticBody3D" parent="Arena" unique_id=825505225]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.75, 1.7, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-16.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-16.0" unique_id=15246769]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-16.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-16.0" unique_id=809536620]
 shape = SubResource("BShape_13")
 
-[node name="SoporteBalcon_Izq_-23.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Izq_-23.0" type="StaticBody3D" parent="Arena" unique_id=686849493]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.75, 1.7, -23)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-23.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Izq_-23.0" unique_id=798753560]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-23.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Izq_-23.0" unique_id=499217027]
 shape = SubResource("BShape_13")
 
-[node name="Baranda_Izq_1" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Izq_1" parent="Arena" unique_id=599553069 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.95, 3.6, -9.5)
 
-[node name="Baranda_Izq_2" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Izq_2" parent="Arena" unique_id=482922333 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.95, 3.6, -13.5)
 
-[node name="Baranda_Izq_3" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Izq_3" parent="Arena" unique_id=1330982387 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.95, 3.6, -17.5)
 
-[node name="Baranda_Izq_4" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Izq_4" parent="Arena" unique_id=940969486 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.95, 3.6, -21.5)
 
-[node name="Baranda_Izq_5" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Izq_5" parent="Arena" unique_id=2139055805 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.95, 3.6, -23)
 
-[node name="ColBaranda_Izq" type="StaticBody3D" parent="Arena"]
+[node name="ColBaranda_Izq" type="StaticBody3D" parent="Arena" unique_id=1095032415]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.95, 4.13, -16)
 collision_layer = 32
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColBaranda_Izq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColBaranda_Izq" unique_id=875239661]
 shape = SubResource("BShape_14")
 
-[node name="Pad_Izq_Sur" type="Area3D" parent="Arena"]
+[node name="Pad_Izq_Sur" type="Area3D" parent="Arena" unique_id=1653015400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 0.02, -4.8)
 collision_layer = 4
 collision_mask = 24
 script = ExtResource("3_pad")
 impulso_y = 11.2
-empuje = Vector3(0, 0, 0)
 
-[node name="PadMesh" parent="Arena/Pad_Izq_Sur" instance=ExtResource("glb_pad")]
+[node name="PadMesh" parent="Arena/Pad_Izq_Sur" unique_id=956822562 instance=ExtResource("glb_pad")]
 transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0, 0)
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Izq_Sur"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Izq_Sur" unique_id=996954606]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("BShape_15")
 
-[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Izq_Sur"]
+[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Izq_Sur" unique_id=1013993050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 light_color = Color(0.28, 0.79, 0.89, 1)
 light_energy = 2.5
-omni_range = 5.0
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Izq_Sur"]
+[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Izq_Sur" unique_id=764802323]
 stream = ExtResource("11_salto")
 
-[node name="Pad_Izq_Norte" type="Area3D" parent="Arena"]
+[node name="Pad_Izq_Norte" type="Area3D" parent="Arena" unique_id=583731268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 0.02, -27.2)
 collision_layer = 4
 collision_mask = 24
 script = ExtResource("3_pad")
 impulso_y = 11.2
-empuje = Vector3(0, 0, 0)
 
-[node name="PadMesh" parent="Arena/Pad_Izq_Norte" instance=ExtResource("glb_pad")]
+[node name="PadMesh" parent="Arena/Pad_Izq_Norte" unique_id=1964040515 instance=ExtResource("glb_pad")]
 transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0, 0)
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Izq_Norte"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Izq_Norte" unique_id=1611061181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("BShape_15")
 
-[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Izq_Norte"]
+[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Izq_Norte" unique_id=1785947630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 light_color = Color(0.28, 0.79, 0.89, 1)
 light_energy = 2.5
-omni_range = 5.0
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Izq_Norte"]
+[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Izq_Norte" unique_id=510301286]
 stream = ExtResource("11_salto")
 
-[node name="LuzBalcon_Izq" type="OmniLight3D" parent="Arena"]
+[node name="LuzBalcon_Izq" type="OmniLight3D" parent="Arena" unique_id=164811325]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 6.4, -16)
 light_color = Color(0.32, 0.75, 0.95, 1)
 light_energy = 1.6
 omni_range = 12.0
 
-[node name="Balcon_Der" type="StaticBody3D" parent="Arena"]
+[node name="Balcon_Der" type="StaticBody3D" parent="Arena" unique_id=1654892344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 3.4, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/Balcon_Der"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/Balcon_Der" unique_id=90416104]
 mesh = SubResource("BMesh_11")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Balcon_Der"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Balcon_Der" unique_id=1550502428]
 shape = SubResource("BShape_12")
 
-[node name="SoporteBalcon_Der_-9.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Der_-9.0" type="StaticBody3D" parent="Arena" unique_id=1901569519]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.75, 1.7, -9)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-9.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-9.0" unique_id=994676651]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-9.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-9.0" unique_id=1349241846]
 shape = SubResource("BShape_13")
 
-[node name="SoporteBalcon_Der_-16.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Der_-16.0" type="StaticBody3D" parent="Arena" unique_id=1664221674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.75, 1.7, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-16.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-16.0" unique_id=1840417035]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-16.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-16.0" unique_id=1223714245]
 shape = SubResource("BShape_13")
 
-[node name="SoporteBalcon_Der_-23.0" type="StaticBody3D" parent="Arena"]
+[node name="SoporteBalcon_Der_-23.0" type="StaticBody3D" parent="Arena" unique_id=559663005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.75, 1.7, -23)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-23.0"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SoporteBalcon_Der_-23.0" unique_id=1971835675]
 mesh = SubResource("BMesh_12")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-23.0"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SoporteBalcon_Der_-23.0" unique_id=154082047]
 shape = SubResource("BShape_13")
 
-[node name="Baranda_Der_1" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Der_1" parent="Arena" unique_id=245409200 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.95, 3.6, -9.5)
 
-[node name="Baranda_Der_2" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Der_2" parent="Arena" unique_id=271756449 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.95, 3.6, -13.5)
 
-[node name="Baranda_Der_3" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Der_3" parent="Arena" unique_id=1095295123 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.95, 3.6, -17.5)
 
-[node name="Baranda_Der_4" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Der_4" parent="Arena" unique_id=1259944836 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.95, 3.6, -21.5)
 
-[node name="Baranda_Der_5" parent="Arena" instance=ExtResource("glb_baranda_4m")]
+[node name="Baranda_Der_5" parent="Arena" unique_id=1957101474 instance=ExtResource("glb_baranda_4m")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.95, 3.6, -23)
 
-[node name="ColBaranda_Der" type="StaticBody3D" parent="Arena"]
+[node name="ColBaranda_Der" type="StaticBody3D" parent="Arena" unique_id=1560390147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.95, 4.13, -16)
 collision_layer = 32
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColBaranda_Der"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColBaranda_Der" unique_id=2131526095]
 shape = SubResource("BShape_14")
 
-[node name="Pad_Der_Sur" type="Area3D" parent="Arena"]
+[node name="Pad_Der_Sur" type="Area3D" parent="Arena" unique_id=1573891232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.02, -4.8)
 collision_layer = 4
 collision_mask = 24
 script = ExtResource("3_pad")
 impulso_y = 11.2
-empuje = Vector3(0, 0, 0)
 
-[node name="PadMesh" parent="Arena/Pad_Der_Sur" instance=ExtResource("glb_pad")]
+[node name="PadMesh" parent="Arena/Pad_Der_Sur" unique_id=597661386 instance=ExtResource("glb_pad")]
 transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0, 0)
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Der_Sur"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Der_Sur" unique_id=340628850]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("BShape_15")
 
-[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Der_Sur"]
+[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Der_Sur" unique_id=938407259]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 light_color = Color(0.28, 0.79, 0.89, 1)
 light_energy = 2.5
-omni_range = 5.0
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Der_Sur"]
+[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Der_Sur" unique_id=1649562166]
 stream = ExtResource("11_salto")
 
-[node name="Pad_Der_Norte" type="Area3D" parent="Arena"]
+[node name="Pad_Der_Norte" type="Area3D" parent="Arena" unique_id=1919393736]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.02, -27.2)
 collision_layer = 4
 collision_mask = 24
 script = ExtResource("3_pad")
 impulso_y = 11.2
-empuje = Vector3(0, 0, 0)
 
-[node name="PadMesh" parent="Arena/Pad_Der_Norte" instance=ExtResource("glb_pad")]
+[node name="PadMesh" parent="Arena/Pad_Der_Norte" unique_id=609523278 instance=ExtResource("glb_pad")]
 transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0, 0)
 
-[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Der_Norte"]
+[node name="Col" type="CollisionShape3D" parent="Arena/Pad_Der_Norte" unique_id=1721555211]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("BShape_15")
 
-[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Der_Norte"]
+[node name="Luz" type="OmniLight3D" parent="Arena/Pad_Der_Norte" unique_id=851341484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 light_color = Color(0.28, 0.79, 0.89, 1)
 light_energy = 2.5
-omni_range = 5.0
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Der_Norte"]
+[node name="Audio" type="AudioStreamPlayer3D" parent="Arena/Pad_Der_Norte" unique_id=768795]
 stream = ExtResource("11_salto")
 
-[node name="LuzBalcon_Der" type="OmniLight3D" parent="Arena"]
+[node name="LuzBalcon_Der" type="OmniLight3D" parent="Arena" unique_id=1315962198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 6.4, -16)
 light_color = Color(0.32, 0.75, 0.95, 1)
 light_energy = 1.6
 omni_range = 12.0
 
-[node name="CajaCobertura_1" parent="Arena" instance=ExtResource("glb_caja")]
+[node name="CajaCobertura_1" parent="Arena" unique_id=1664388775 instance=ExtResource("glb_caja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -7)
 
-[node name="ColCaja_1" type="StaticBody3D" parent="Arena"]
+[node name="ColCaja_1" type="StaticBody3D" parent="Arena" unique_id=1123974639]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.68, -7)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_1"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_1" unique_id=836072330]
 shape = SubResource("BShape_16")
 
-[node name="CajaCobertura_2" parent="Arena" instance=ExtResource("glb_caja")]
+[node name="CajaCobertura_2" parent="Arena" unique_id=1847546336 instance=ExtResource("glb_caja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0, -7)
 
-[node name="ColCaja_2" type="StaticBody3D" parent="Arena"]
+[node name="ColCaja_2" type="StaticBody3D" parent="Arena" unique_id=1616648961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0.68, -7)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_2"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_2" unique_id=888933353]
 shape = SubResource("BShape_16")
 
-[node name="CajaCobertura_3" parent="Arena" instance=ExtResource("glb_caja")]
+[node name="CajaCobertura_3" parent="Arena" unique_id=1907566596 instance=ExtResource("glb_caja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, -16)
 
-[node name="ColCaja_3" type="StaticBody3D" parent="Arena"]
+[node name="ColCaja_3" type="StaticBody3D" parent="Arena" unique_id=1084277293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0.68, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_3"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_3" unique_id=1139592267]
 shape = SubResource("BShape_16")
 
-[node name="CajaCobertura_4" parent="Arena" instance=ExtResource("glb_caja")]
+[node name="CajaCobertura_4" parent="Arena" unique_id=725830098 instance=ExtResource("glb_caja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 0, -16)
 
-[node name="ColCaja_4" type="StaticBody3D" parent="Arena"]
+[node name="ColCaja_4" type="StaticBody3D" parent="Arena" unique_id=1521637314]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 0.68, -16)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_4"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColCaja_4" unique_id=1692604898]
 shape = SubResource("BShape_16")
 
-[node name="LamparaPared_1" parent="Arena" instance=ExtResource("glb_lampara_pared")]
+[node name="LamparaPared_1" parent="Arena" unique_id=1529228199 instance=ExtResource("glb_lampara_pared")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.9, 4.8, -4)
 
-[node name="LamparaPared_2" parent="Arena" instance=ExtResource("glb_lampara_pared")]
+[node name="LamparaPared_2" parent="Arena" unique_id=44624630 instance=ExtResource("glb_lampara_pared")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 15.9, 4.8, -4)
 
-[node name="LamparaPared_3" parent="Arena" instance=ExtResource("glb_lampara_pared")]
+[node name="LamparaPared_3" parent="Arena" unique_id=1583786478 instance=ExtResource("glb_lampara_pared")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.9, 4.8, -28)
 
-[node name="LamparaPared_4" parent="Arena" instance=ExtResource("glb_lampara_pared")]
+[node name="LamparaPared_4" parent="Arena" unique_id=1165926448 instance=ExtResource("glb_lampara_pared")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 15.9, 4.8, -28)
 
-[node name="AltarCustodio" parent="Arena" instance=ExtResource("glb_altar")]
+[node name="AltarCustodio" parent="Arena" unique_id=1747579331 instance=ExtResource("glb_altar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24.5)
 
-[node name="ColAltarCustodio" type="StaticBody3D" parent="Arena"]
+[node name="ColAltarCustodio" type="StaticBody3D" parent="Arena" unique_id=748927601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23, -24.5)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ColAltarCustodio"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ColAltarCustodio" unique_id=401097635]
 shape = SubResource("CShape_17")
 
-[node name="MarcoEvacuacion" parent="." instance=ExtResource("glb_marco")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
-
-[node name="ColMarcoIzq" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.85, 2.8, -32)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Col" type="CollisionShape3D" parent="ColMarcoIzq"]
-shape = SubResource("BShape_18")
-
-[node name="ColMarcoDer" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 2.8, -32)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Col" type="CollisionShape3D" parent="ColMarcoDer"]
-shape = SubResource("BShape_18")
-
-[node name="MuroNorteIzq" type="StaticBody3D" parent="Arena"]
+[node name="MuroNorteIzq" type="StaticBody3D" parent="Arena" unique_id=1222671414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1, 6, -32)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteIzq"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteIzq" unique_id=1471742103]
 mesh = SubResource("BMesh_13")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteIzq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteIzq" unique_id=1792619395]
 shape = SubResource("BShape_19")
 
-[node name="MuroNorteDer" type="StaticBody3D" parent="Arena"]
+[node name="MuroNorteDer" type="StaticBody3D" parent="Arena" unique_id=941148477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 6, -32)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteDer"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteDer" unique_id=1078554007]
 mesh = SubResource("BMesh_13")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteDer"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteDer" unique_id=1202611287]
 shape = SubResource("BShape_19")
 
-[node name="MuroNorteSup" type="StaticBody3D" parent="Arena"]
+[node name="MuroNorteSup" type="StaticBody3D" parent="Arena" unique_id=387786256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.8, -32)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteSup"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/MuroNorteSup" unique_id=1404676482]
 mesh = SubResource("BMesh_14")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteSup"]
+[node name="Col" type="CollisionShape3D" parent="Arena/MuroNorteSup" unique_id=936701337]
 shape = SubResource("BShape_20")
 
-[node name="SueloBahia" type="StaticBody3D" parent="Arena"]
+[node name="SueloBahia" type="StaticBody3D" parent="Arena" unique_id=1529337679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -35.8)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/SueloBahia"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/SueloBahia" unique_id=496295798]
 mesh = SubResource("BMesh_15")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/SueloBahia"]
+[node name="Col" type="CollisionShape3D" parent="Arena/SueloBahia" unique_id=98147324]
 shape = SubResource("BShape_21")
 
-[node name="TechoBahia" type="StaticBody3D" parent="Arena"]
+[node name="TechoBahia" type="StaticBody3D" parent="Arena" unique_id=583344207]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -35.8)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/TechoBahia"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/TechoBahia" unique_id=2010137295]
 mesh = SubResource("BMesh_16")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/TechoBahia"]
+[node name="Col" type="CollisionShape3D" parent="Arena/TechoBahia" unique_id=1748735734]
 shape = SubResource("BShape_21")
 
-[node name="ParedBahiaIzq" type="StaticBody3D" parent="Arena"]
+[node name="ParedBahiaIzq" type="StaticBody3D" parent="Arena" unique_id=1356931268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 3, -35.8)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaIzq"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaIzq" unique_id=1746074677]
 mesh = SubResource("BMesh_17")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaIzq"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaIzq" unique_id=1248193735]
 shape = SubResource("BShape_22")
 
-[node name="ParedBahiaDer" type="StaticBody3D" parent="Arena"]
+[node name="ParedBahiaDer" type="StaticBody3D" parent="Arena" unique_id=327824247]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 3, -35.8)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaDer"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaDer" unique_id=1994958381]
 mesh = SubResource("BMesh_17")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaDer"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaDer" unique_id=1201858183]
 shape = SubResource("BShape_22")
 
-[node name="ParedBahiaFondo" type="StaticBody3D" parent="Arena"]
+[node name="ParedBahiaFondo" type="StaticBody3D" parent="Arena" unique_id=686758589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -39.4)
-collision_layer = 1
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaFondo"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/ParedBahiaFondo" unique_id=532187795]
 mesh = SubResource("BMesh_18")
 
-[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaFondo"]
+[node name="Col" type="CollisionShape3D" parent="Arena/ParedBahiaFondo" unique_id=914428232]
 shape = SubResource("BShape_23")
 
-[node name="BarreraEvacuacion" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, -32)
-collision_layer = 1
+[node name="DaisSectorCero" type="StaticBody3D" parent="Arena" unique_id=1908991149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, -35.8)
 collision_mask = 0
 
-[node name="Mesh" type="MeshInstance3D" parent="BarreraEvacuacion"]
+[node name="Mesh" type="MeshInstance3D" parent="Arena/DaisSectorCero" unique_id=734090735]
+mesh = SubResource("BMesh_20")
+
+[node name="Col" type="CollisionShape3D" parent="Arena/DaisSectorCero" unique_id=1506337803]
+shape = SubResource("BShape_25")
+
+[node name="Custodio" parent="." unique_id=1681672407 instance=ExtResource("9_custodio")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.48, -24.5)
+
+[node name="ReactorEscudo1" parent="." unique_id=108174801 instance=ExtResource("ext_reac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6, 3.6, -16)
+
+[node name="ReactorEscudo2" parent="." unique_id=564466571 instance=ExtResource("ext_reac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6, 3.6, -16)
+indice = 2
+hp_max = 280.0
+
+[node name="MarcoEvacuacion" parent="." unique_id=1968289379 instance=ExtResource("glb_marco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+
+[node name="ColMarcoIzq" type="StaticBody3D" parent="." unique_id=1692489897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.85, 2.8, -32)
+collision_mask = 0
+
+[node name="Col" type="CollisionShape3D" parent="ColMarcoIzq" unique_id=1525920607]
+shape = SubResource("BShape_18")
+
+[node name="ColMarcoDer" type="StaticBody3D" parent="." unique_id=60670195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 2.8, -32)
+collision_mask = 0
+
+[node name="Col" type="CollisionShape3D" parent="ColMarcoDer" unique_id=486474830]
+shape = SubResource("BShape_18")
+
+[node name="BarreraEvacuacion" type="StaticBody3D" parent="." unique_id=1996444334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, -32)
+collision_mask = 0
+
+[node name="Mesh" type="MeshInstance3D" parent="BarreraEvacuacion" unique_id=1542953841]
 mesh = SubResource("BMesh_19")
 
-[node name="Col" type="CollisionShape3D" parent="BarreraEvacuacion"]
+[node name="Col" type="CollisionShape3D" parent="BarreraEvacuacion" unique_id=609871567]
 shape = SubResource("BShape_24")
 
-[node name="LuzBarrera" type="OmniLight3D" parent="BarreraEvacuacion"]
+[node name="LuzBarrera" type="OmniLight3D" parent="BarreraEvacuacion" unique_id=554768533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 light_color = Color(0.95, 0.18, 0.45, 1)
 light_energy = 2.8
 omni_range = 7.0
 
-[node name="DaisSectorCero" type="StaticBody3D" parent="Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, -35.8)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Mesh" type="MeshInstance3D" parent="Arena/DaisSectorCero"]
-mesh = SubResource("BMesh_20")
-
-[node name="Col" type="CollisionShape3D" parent="Arena/DaisSectorCero"]
-shape = SubResource("BShape_25")
-
-[node name="BalizaSectorCero" parent="." instance=ExtResource("glb_baliza")]
+[node name="BalizaSectorCero" parent="." unique_id=574143501 instance=ExtResource("glb_baliza")]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0.98, -35.8)
 
-[node name="LuzSectorCero" type="OmniLight3D" parent="."]
+[node name="LuzSectorCero" type="OmniLight3D" parent="." unique_id=1547089614]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, -35.8)
-light_color = Color(0.22, 1.0, 0.45, 1)
+light_color = Color(0.22, 1, 0.45, 1)
 light_energy = 3.0
 omni_range = 8.0
 
-[node name="PortalTP" type="Area3D" parent="."]
+[node name="PortalTP" type="Area3D" parent="." unique_id=1297838890]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -35.8)
 script = ExtResource("2_portal")
 escena_destino = "res://Mundo.tscn"
 titulo_sector = "SECTOR CERO // VICTORIA"
 subtitulo = "PURGA DETENIDA — REINICIANDO CICLO EN SECTOR 01"
-radio_portal = 1.9
 
-[node name="BossHUD" type="CanvasLayer" parent="."]
+[node name="BossHUD" type="CanvasLayer" parent="." unique_id=165477604]
 layer = 10
 
-[node name="Panel" type="PanelContainer" parent="BossHUD"]
-anchors_preset = 0
+[node name="Panel" type="PanelContainer" parent="BossHUD" unique_id=411089772]
+anchors_preset = -1
 anchor_left = 0.36
 anchor_right = 0.36
+anchor_bottom = 0.025
 offset_left = -210.0
 offset_top = 16.0
 offset_right = 210.0
-offset_bottom = 84.0
+offset_bottom = 67.8
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("SB_panel_boss")
 
-[node name="VBox" type="VBoxContainer" parent="BossHUD/Panel"]
+[node name="VBox" type="VBoxContainer" parent="BossHUD/Panel" unique_id=1833426720]
+layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="LabelNombre" type="Label" parent="BossHUD/Panel/VBox"]
+[node name="LabelNombre" type="Label" parent="BossHUD/Panel/VBox" unique_id=1215466280]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.96, 0.98, 1)
+theme_override_font_sizes/font_size = 15
 text = "CUSTODIO ALPHA — CENTINELA DEL NUCLEO"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 15
-theme_override_colors/font_color = Color(0.96, 0.96, 0.98, 1)
 
-[node name="LabelFase" type="Label" parent="BossHUD/Panel/VBox"]
+[node name="LabelFase" type="Label" parent="BossHUD/Panel/VBox" unique_id=1027299419]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.02, 1)
+theme_override_font_sizes/font_size = 12
 text = "FASE I — CENTINELA BALISTICO"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(1, 0.72, 0.02, 1)
 
-[node name="BarraVida" type="ProgressBar" parent="BossHUD/Panel/VBox"]
+[node name="BarraVida" type="ProgressBar" parent="BossHUD/Panel/VBox" unique_id=2145592551]
 custom_minimum_size = Vector2(400, 16)
-max_value = 1800.0
-value = 1800.0
-show_percentage = false
+layout_mode = 2
 theme_override_styles/background = SubResource("SB_barra_bg")
 theme_override_styles/fill = SubResource("SB_barra_fill")
+max_value = 4500.0
+value = 4500.0
+show_percentage = false
